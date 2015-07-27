@@ -1,5 +1,4 @@
-/// <reference path="../../typings/angularjs/angular.d.ts" />
-/// <reference path="../../typings/angularjs/angular-route.d.ts" />
+/// <reference path="../../typings/tsd.d.ts" />
 
 'use strict';
 
@@ -7,22 +6,14 @@ angular.module('labsFrontendApp', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
-    'ngRoute',
     'ngSanitize',
-    'ngTouch'
-  ])
-  .config(($routeProvider:ng.route.IRouteProvider) => {
-    $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
-      })
-      .when('/about', {
-        templateUrl: 'views/about.html',
-        controller: 'AboutCtrl',
-        controllerAs: 'about'
-      })
-      .otherwise({
-        redirectTo: '/'
-      });
-  });
+    'ngTouch',
+    'ui.router'
+  ]).config(
+    ($stateProvider:angular.ui.IStateProvider, $urlRouterProvider:angular.ui.IUrlRouterProvider) => {
+        $urlRouterProvider.otherwise("/dashboard");
+        $stateProvider.state( 'dashboard', {
+            url: "/dashboard",
+            templateUrl: "views/dashboard.html"
+        });
+    });
