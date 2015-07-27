@@ -4,3 +4,7 @@
 /.sass-cache
 /bower_components
 .idea
+app/scripts/**/*.js
+test/spec/**/*.js
+*.map
+typings/
