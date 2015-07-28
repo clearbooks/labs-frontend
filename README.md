@@ -1,4 +1,4 @@
-# Labs Frontend [![Build Status](https://travis-ci.org/clearbooks/labs-frontend.svg)](https://travis-ci.org/clearbooks/labs-frontend)
+# Labs Frontend [![Build Status](https://travis-ci.org/clearbooks/labs-frontend.svg)](https://travis-ci.org/clearbooks/labs-frontend) [![bitHound Score](https://www.bithound.io/github/clearbooks/labs-frontend/badges/score.svg)](https://www.bithound.io/github/clearbooks/labs-frontend/master)
 
 ## Yeoman generators
 https://www.npmjs.com/package/generator-angular-typescript#generators
