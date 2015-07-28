@@ -3,6 +3,19 @@
 ## Yeoman generators
 https://www.npmjs.com/package/generator-angular-typescript#generators
 
+## Tooling
+
+* You need npm (brew install npm)
+* npm -g install grunt-cli
+* npm -g install bower
+* npm -g install yo
+* gem install compass
+ 
+## Dependencies
+
+* npm install
+* bower install
+
 ## Build & development
 
 Run `grunt` for building and `grunt serve` for preview.
