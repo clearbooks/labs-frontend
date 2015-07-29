@@ -3,8 +3,22 @@
   @extend .cf;
   img {
     height: $baseline * 3;
+
   }
   h1 {
+    display: inline-block;
     line-height: $baseline * 3;
+  }
+}
+
+@media only screen and (min-width:769px) {
+  .preview-brand {
+    img {
+      height: $baseline * 5;
+    }
+    h1 {
+
+      margin-bottom: 0;
+    }
   }
 }

@@ -1,5 +1,5 @@
 .preview-toggle {
-  margin-bottom: $baseline * 2;
+  margin-bottom: $baseline * 5;
   h3 {
     font-size: $body;
     font-family: $stack-b;
@@ -7,6 +7,10 @@
     line-height: $baseline * 1.5;    margin-bottom: $baseline * 0.5;
     border-bottom: 1px solid $gray;
 
+  }
+
+  p {
+    width: 100% - $gutter;
   }
 
   a {

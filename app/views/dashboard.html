@@ -1,29 +1,38 @@
-<div ng-controller="DashboardCtrl" >
+<div ng-controller="DashboardCtrl" class="wrapper">
 
-    <div class="t-all preview-brand">
-        <img class="t3-t4" src="images/preview.svg" />
-        <h1 class="t5-t8">Preview</h1>
+
+
+    <div class="t3-t8 d1-d9 preview-brand">
+        <img class="d1-d3 t3-t4" src="images/preview.svg" />
+        <div class="d4-d8">
+            <h1 class="t5-t7">Preview</h1>
+            <p class="t-all">
+                Welcome to Clear Books First
+                Look where you can try out our
+                latest features before anyone
+                else. With new things added up
+                to a month before general
+                release you're gauranteed to
+                get the latest updates.
+            </p>
+        </div>
     </div>
-    <p class="t3-t8 vpushbottom-3">Welcome to Clear Books First
-        Look where you can try out our
-        latest features before anyone
-        else. With new things added up
-        to a month before general
-        release you're gauranteed to
-        get the latest updates.
-    </p>
-    <div class="content-area gray t3-t8 t-padfull">
+    <div class="content-area gray t3-t8 t-padfull d10-d13 d-pad d-overlap">
         <h2>Stay up to date</h2>
         <p>Auto-subscribe to all new
             features when they become
             available to benefit from the
             latest Clear Books.
         </p>
-        <a href="" class="button blue t-all">Auto subscribe</a>
+        <a href="" class="button blue t-all d-all">Auto subscribe</a>
     </div>
-    <div class="content-area white t2-t9 t-padfull">
-        <h2 class="t-all">Release due: 40th December 2099</h2>
-        <div class="preview-toggle cf t-all" ng-repeat="n in [1,2]">
+
+    <div class="content-area white t2-t9 t-padfull d-all d-padfull">
+        <div class="release-info d2-d13">
+            <h2 class="t-all">Release due: 40th December 2099</h2>
+        </div>
+
+        <div class="preview-toggle cf t-all" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'">
             <h3>European VAT</h3>
             <p>
                 Benefit from VAT schemes with
@@ -36,9 +45,11 @@
                 automatically appear when
                 creating invoices.
             </p>
-            <a class="t-all" href="">Read more</a>
-            <a class="t-all" href="">Give feedback</a>
-            <a href="" class="button blue t-floatright">Preview</a>
+            <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
+                <a class="t-all d-all" href="">Read more</a>
+                <a class="t-all d-all" href="">Give feedback</a>
+            </div>
+            <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
         </div>
 
     </div>
