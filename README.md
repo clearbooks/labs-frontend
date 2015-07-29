@@ -3,17 +3,17 @@
 ## Yeoman generators
 https://www.npmjs.com/package/generator-angular-typescript#generators
 
-angular-typescript:controller
-angular-typescript:directive
-angular-typescript:filter
-angular-typescript:route
-angular-typescript:service
-angular-typescript:provider
-angular-typescript:factory
-angular-typescript:value
-angular-typescript:constant
-angular-typescript:decorator
-angular-typescript:view
+* angular-typescript:controller
+* angular-typescript:directive
+* angular-typescript:filter
+* angular-typescript:route
+* angular-typescript:service
+* angular-typescript:provider
+* angular-typescript:factory
+* angular-typescript:value
+* angular-typescript:constant
+* angular-typescript:decorator
+* angular-typescript:view
 
 ### Example
 ```bash
