@@ -3,6 +3,23 @@
 ## Yeoman generators
 https://www.npmjs.com/package/generator-angular-typescript#generators
 
+angular-typescript:controller
+angular-typescript:directive
+angular-typescript:filter
+angular-typescript:route
+angular-typescript:service
+angular-typescript:provider
+angular-typescript:factory
+angular-typescript:value
+angular-typescript:constant
+angular-typescript:decorator
+angular-typescript:view
+
+### Example
+```bash
+yo angular-typescript:controller login
+```
+
 ## Tooling
 
 * You need npm (brew install npm)
@@ -23,3 +40,4 @@ Run `grunt` for building and `grunt serve` for preview.
 ## Testing
 
 Running `grunt test` will run the unit tests with karma.
+
