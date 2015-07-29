@@ -1,0 +1,43 @@
+/*
+MRT 2014 - typography
+*/
+
+@import url('//fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,300italic,400italic,600italic,700italic&subset=latin-ext');
+@import url('//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300italic,700');
+
+.vpushbottom-3 {
+  margin-bottom: $baseline * 3;
+}
+
+body, h1, h2, h3, p {
+  font-family: $stack;
+  text-align: left;
+  color: $black;
+}
+
+p {
+  font-size: $body;
+  line-height: $baseline;
+  margin-bottom: $baseline;
+  color: $black-body;
+}
+
+h1 {
+  font-size: 36px;
+  line-height: $baseline + 16;
+  text-align: left;
+  font-weight: 400;
+  margin-bottom: $baseline;
+  span {
+    font-weight: 600;
+  }
+}
+
+h2 {
+  font-family: $stack-b;
+  font-size: 30px;
+  line-height: 36px;
+  letter-spacing: -1px;
+  font-weight: 300;
+  margin-bottom: $baseline*0.75;
+}

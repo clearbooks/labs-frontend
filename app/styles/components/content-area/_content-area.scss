@@ -1,0 +1,11 @@
+.content-area {
+  padding-top: $baseline * 0.5;
+  margin-bottom: $baseline * 2;
+  @include card(1);
+  &.white {
+    background-color: white;
+  }
+  &.gray {
+    background: $gray;
+  }
+}

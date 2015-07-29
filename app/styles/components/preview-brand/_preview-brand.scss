@@ -1,0 +1,10 @@
+.preview-brand {
+  vertical-align: middle;
+  @extend .cf;
+  img {
+    height: $baseline * 3;
+  }
+  h1 {
+    line-height: $baseline * 3;
+  }
+}

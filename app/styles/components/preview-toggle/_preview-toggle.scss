@@ -1,0 +1,16 @@
+.preview-toggle {
+  margin-bottom: $baseline * 2;
+  h3 {
+    font-size: $body;
+    font-family: $stack-b;
+    font-weight: 600;
+    line-height: $baseline * 1.5;    margin-bottom: $baseline * 0.5;
+    border-bottom: 1px solid $gray;
+
+  }
+
+  a {
+    text-decoration: none;
+    margin-bottom: $baseline * 0.5;
+  }
+}
