@@ -1,0 +1,17 @@
+.over-pop-box {
+    /*overflow-y: scroll;*/
+    border: 1px solid black;
+    /*border-top: $baseline solid $green-light;*/
+    position:fixed;
+    background: white;
+    @include card(5);
+    height: 85%;
+    bottom: 10px;
+    z-index: 99999999999999;
+    @include rounded;
+}
+
+
+.bg{
+    background: grey;
+}
