@@ -8,8 +8,8 @@ select {
     font-size: $body;
     height: $baseline*2;
     width: 100%;
-
     background: $background;
+    @include remove-outline;
 
     -webkit-appearance: menulist;
     -moz-appearance: menulist;
@@ -17,7 +17,7 @@ select {
     margin-right: 0;
 }
 
-input, textarea {
+/*input, textarea {
     @include box-model;
     color: $black-body;
     font-family: $stack;
@@ -26,20 +26,73 @@ input, textarea {
     height: $baseline*1.5;
     padding: $baseline*0.5 $gutter-b*0.25;
     width: 100%;
-}
+}*/
 
 textarea {
     height: $baseline*6;
     border: 1px solid $background;
+    outline: none;
+    @include remove-outline;
+    font-size: $body;
 }
 
-.feedback-radio-btns{
+.feedback-radio-btns {
+
+    div {
+        display: inline-block !important;
+        height: $baseline*5;
+    }
+
+    input[type="radio"] {
+        opacity: 0.011;
+        z-index: 100;
+    }
+
+    label {
+        cursor: pointer;
+        z-index: 90;
+        height: 100%;
+        opacity: 0.5;
+        width: 90%;
+        background: $white;
+    }
 
     input[type="radio"] + label {
         display: inline-block;
-        background: red;
+        width: 90%;
+        height: 100%;
+
+        span{
+            display: inline-block;
+            vertical-align: middle;
+
+            &.icon {
+
+                &:before {
+                    content: "\f00c";
+                    font-family: FontAwesome;
+                    color: $brand;
+                    margin-right: 8px;
+                    font-size: $baseline*5;
+                    /* position: absolute;*/
+
+                }
+            }
+        }
+
+
     }
 
+    input[type="radio"]:checked + label {
+        opacity: 1;
+        background: $green-light;
+    }
+
+    .positive-feedback {
+    }
+
+    .negative-feedback {
+    }
 
 }
 

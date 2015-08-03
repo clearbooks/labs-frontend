@@ -2,6 +2,7 @@
   @include box-model;
   @include fade;
   @include rounded;
+  border: none;
   font-size: $body;
   font-family: $stack;
   font-weight: 400;

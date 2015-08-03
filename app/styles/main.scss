@@ -1,4 +1,5 @@
 // bower:scss
+@import "font-awesome/scss/font-awesome.scss";
 // endbower
 
 @import "_variables";
@@ -8,6 +9,9 @@
 @import "core/spacing";
 
 @import "components/components";
+
+$fa-font-path: "/bower_components/font-awesome/font";
+$FontAwesomePath: "/bower_components/font-awesome/font";
 
 .browsehappy {
   margin: 0.2em 0;
