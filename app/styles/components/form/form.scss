@@ -11,9 +11,10 @@ select {
     background: $background;
     @include remove-outline;
 
-    -webkit-appearance: menulist;
+   /* -webkit-appearance: menulist;
     -moz-appearance: menulist;
-    appearance: menulist;
+    appearance: menulist;*/
+    -webkit-appearance: none;
     margin-right: 0;
 }
 
@@ -34,6 +35,37 @@ textarea {
     outline: none;
     @include remove-outline;
     font-size: $body;
+}
+
+label[for="features-dropdown"] {
+
+    position: relative;
+
+    &:after {
+        content: "\f078";
+        font-family: "FontAwesome";
+        font-size: 11px;
+        color: #aaa;
+        right: 8px;
+        top: 4px;
+        padding: 0 0 2px;
+        position: absolute;
+        pointer-events: none;
+
+    }
+    &:before {
+        content: '';
+        right: 4px;
+        top: 0px;
+        width: 23px;
+        height: 18px;
+        background: #fff;
+        position: absolute;
+        pointer-events: none;
+        display: block;
+
+    }
+
 }
 
 .feedback-radio-btns {
@@ -69,7 +101,7 @@ textarea {
             &.icon {
 
                 &:before {
-                    content: "\f00c";
+                    content: "\f118";
                     font-family: FontAwesome;
                     color: $brand;
                     margin-right: 8px;

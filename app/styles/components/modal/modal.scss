@@ -1,18 +1,26 @@
 .over-pop-box {
     /*overflow-y: scroll;*/
-    /*border: 1px solid black;*/
+    border: 1px solid black;
     /*border-top: $baseline solid $green-light;*/
     position:fixed;
+  /*  ask: fixed breaks the gridset?*/
     background: $white;
-    @include card(5);
+    @include card(4);
     height: 85%;
-    bottom: 10px;
+    bottom: 20px;
     z-index: 99999999999999;
     @include rounded;
+  /*  box-shadow: top-shadow(5);*/
+
+    a.close-modal{
+        position: absolute;
+        font-size: $body;
+        text-decoration: none;
+        color: $black;
+        right: 4%;
+    }
 }
 
 
-.bg{
-    background: grey;
-}
+
 
