@@ -1,20 +1,27 @@
 .over-pop-box {
     /*overflow-y: scroll;*/
-    border: 1px solid black;
     background: $white;
+    border-top: 1px solid $gray;
     @include card(4);
-    height: 85%;
-    bottom: 20px;
-    z-index: 99999999999999;
+    height: 95%;
+    bottom: 0;
+    z-index: 99999;
     @include rounded;
-  /*  box-shadow: top-shadow(5);*/
+    box-shadow: bottom-shadow(5);
 
-    a.close-modal{
+    a.close-modal {
         position: absolute;
         font-size: $body;
         text-decoration: none;
         color: $black-body;
         right: $gutter*2;
+
+        span.close-text {
+            //check where t break in gridset is:
+            @media screen and (max-width: 960px) {
+                display: none;
+            }
+        }
     }
 }
 

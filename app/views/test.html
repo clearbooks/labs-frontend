@@ -1,33 +1,32 @@
+<div class="d-all t-all m-all d-padinfull vpushup-2">
 
-    <div class="d-all t-all m-all d-padinfull vpushup-2">
-
-        <div class="d-all t-all m-all vpushdown-1">
-            <h1 class="d1-d8 t1-t8 d-floatleft">Submit feedback</h1>
-        </div>
+    <div class="d-all t-all m-all vpushdown-1">
+        <h1 class="d1-d8 t1-t8 d-floatleft">Submit feedback</h1>
+    </div>
 
 
-        <form class="form">
+    <form class="form">
 
-            <fieldset>
+        <fieldset>
 
-               <label for="features-dropdown" >
+            <label for="features-dropdown">
                 <select class="vpushdown-1">
                     <option value="0">testing feature one</option>
                     <option value="1">testing feature one</option>
                     <option value="2">testing feature one</option>
                 </select>
-                </label>
+            </label>
 
-                <div class="feedback-radio-btns d-all t-all m-all vpushdown-1">
-                    <div class="d3-d7 t1-t5 positive-feedback">
-                        <input type="radio" name="a" id="posfeedback"/>
-                        <label for="posfeedback"><span class="icon happy"></span><span>I'm giving praise</span></label>
-                    </div>
-                    <div class="d8-d12 t6-t9 d-overlap t-overlap negative-feedback">
-                        <input type="radio" name="a" id="negfeedback"/>
-                        <label for="negfeedback"><span class="icon sad"></span><span>I'm reporting an issue</span></label>
-                    </div>
+            <div class="feedback-radio-btns d-all t-all m-all vpushdown-1">
+                <div class="d3-d7 t1-t5 positive-feedback">
+                    <input type="radio" name="a" id="posfeedback" checked="checked"/>
+                    <label for="posfeedback"><span class="icon happy"></span><span>I'm giving praise</span></label>
                 </div>
+                <div class="d8-d12 t6-t9 d-overlap t-overlap negative-feedback">
+                    <input type="radio" name="a" id="negfeedback"/>
+                    <label for="negfeedback"><span class="icon sad"></span><span>I'm reporting an issue</span></label>
+                </div>
+            </div>
 
                 <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-3"
                           ng-model="string"
@@ -43,12 +42,13 @@
                      </textarea>
 
 
-            </fieldset>
+        </fieldset>
 
 
-            <button type="submit" name="" class="button d8-d9 d-floatright "><span>Submit</span></button>
+        <button type="submit" name="" class="button click-effect d8-d9 t6-t8 d-floatright t-floatright ">
+            <span>Submit</span></button>
 
 
-        </form>
+    </form>
 
-    </div>
+</div>

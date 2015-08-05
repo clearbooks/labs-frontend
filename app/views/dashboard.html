@@ -1,6 +1,4 @@
 <div ng-controller="DashboardCtrl" class="wrapper">
-    <a class="t-all d-all m-all" href="" ng-click="overPopBoxShow = !overPopBoxShow">Give feedback</a>
-
 
     <div class="t3-t8 d1-d9 preview-brand">
         <img class="d1-d3 t3-t4" src="images/preview.svg" />
@@ -53,7 +51,7 @@
             </p>
             <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
                 <a class="t-all d-all" href="">Read more</a>
-                <a class="t-all d-all" href="" ng-click="overPopBoxShow = !overPopBoxShow">Give feedback</a>
+                <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.overPopBoxShow">Give feedback</a>
             </div>
             <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
 
@@ -64,7 +62,7 @@
 
     <div class="wrapper fixed">
         <div class="over-pop-box d3-d12 t-all d-pad t-padinfull" ng-show="overPopBoxShow">
-            <a href="" ng-click="overPopBoxShow = !overPopBoxShow" class="vpushup-2 close-modal">CLOSE <i class="fa fa-times"></i></a>
+            <a href="" ng-click="overPopBoxShow = !overPopBoxShow" class="vpushup-2 close-modal"><span class="close-text">CLOSE</span> <i class="fa fa-times"></i></a>
             <ng-include src="'views/test.html'"></ng-include>
         </div>
     </div>
