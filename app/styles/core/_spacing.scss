@@ -46,3 +46,11 @@
     @include push-up(2);
 }
 
+.vpushup-3 {
+    @include push-up(3);
+}
+
+.vpushup-4 {
+    @include push-up(4);
+}
+

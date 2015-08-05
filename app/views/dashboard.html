@@ -1,8 +1,5 @@
 <div ng-controller="DashboardCtrl" class="wrapper">
-    <a class="t-all d-all" href="" ng-click="overPopBoxShow = !overPopBoxShow">Give feedback</a>
-
-
-
+    <a class="t-all d-all m-all" href="" ng-click="overPopBoxShow = !overPopBoxShow">Give feedback</a>
 
 
     <div class="t3-t8 d1-d9 preview-brand">
@@ -33,16 +30,7 @@
     </div>
 
 
-    <!--this is the white content area-->
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
-
-
-
-        <div class="over-pop-box d3-d12 d-padin t-padin" ng-show="overPopBoxShow">
-            <a href="" ng-click="overPopBoxShow = !overPopBoxShow" class="vpushup-2 close-modal">CLOSE X</a>
-            <ng-include src="'views/test.html'"></ng-include>
-        </div>
-
 
         <div class="release-info d2-d13">
             <h2 class="t-all">Release due: 40<sup>th</sup> dec 2099</h2>
@@ -50,11 +38,6 @@
 
 
         <div class="preview-toggle cf t-all" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'">
-
-          <!--  <div class="over-pop-box d3-d10 d-padin t-padin" ng-show="overPopBoxShow">
-                <a href="" ng-click="overPopBoxShow = !overPopBoxShow" class="d-floatright">X</a>
-                <ng-include src="'views/test.html'"></ng-include>
-            </div>-->
 
             <h3>European VAT</h3>
             <p>
@@ -71,8 +54,6 @@
             <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
                 <a class="t-all d-all" href="">Read more</a>
                 <a class="t-all d-all" href="" ng-click="overPopBoxShow = !overPopBoxShow">Give feedback</a>
-
-
             </div>
             <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
 
@@ -80,5 +61,13 @@
 
 
     </div>
+
+    <div class="wrapper fixed">
+        <div class="over-pop-box d3-d12 t-all d-pad t-padinfull" ng-show="overPopBoxShow">
+            <a href="" ng-click="overPopBoxShow = !overPopBoxShow" class="vpushup-2 close-modal">CLOSE <i class="fa fa-times"></i></a>
+            <ng-include src="'views/test.html'"></ng-include>
+        </div>
+    </div>
+
 </div>
 

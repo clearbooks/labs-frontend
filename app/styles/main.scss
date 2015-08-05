@@ -1,3 +1,7 @@
+
+$fa-font-path: "/bower_components/font-awesome/fonts";
+$FontAwesomePath: "/bower_components/font-awesome/fonts";
+
 // bower:scss
 @import "font-awesome/scss/font-awesome.scss";
 // endbower
@@ -10,8 +14,6 @@
 
 @import "components/components";
 
-$fa-font-path: "/bower_components/font-awesome/font";
-$FontAwesomePath: "/bower_components/font-awesome/font";
 
 .browsehappy {
   margin: 0.2em 0;
@@ -82,3 +84,4 @@ body {
 @media screen and (min-width: 768px) {
 
 }
+

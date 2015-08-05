@@ -1,9 +1,6 @@
 .over-pop-box {
     /*overflow-y: scroll;*/
     border: 1px solid black;
-    /*border-top: $baseline solid $green-light;*/
-    position:fixed;
-  /*  ask: fixed breaks the gridset?*/
     background: $white;
     @include card(4);
     height: 85%;
@@ -16,8 +13,8 @@
         position: absolute;
         font-size: $body;
         text-decoration: none;
-        color: $black;
-        right: 4%;
+        color: $black-body;
+        right: $gutter*2;
     }
 }
 
