@@ -8,6 +8,7 @@
     z-index: 99999;
     @include rounded;
     box-shadow: bottom-shadow(5);
+    z-index: 10000;
 
     a.close-modal {
         position: absolute;
@@ -17,12 +18,27 @@
         right: $gutter*2;
 
         span.close-text {
+            font-size: 16px;
             //check where t break in gridset is:
             @media screen and (max-width: 960px) {
                 display: none;
             }
         }
     }
+}
+
+.black_overlay {
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $black-body;
+    z-index: 0;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=80);
 }
 
 

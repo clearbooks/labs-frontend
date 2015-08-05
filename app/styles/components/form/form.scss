@@ -9,11 +9,23 @@ select {
     font-size: $body;
     height: $baseline*2;
     width: 100%;
-    background: $background;
+    background: $gray;
     @include remove-outline;
-    -webkit-appearance: none;
+
     margin-right: 0;
     padding-left: $gutter-b;
+
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    option{
+        background: red;
+
+        &:hover {
+            background: grey;
+        }
+    }
 }
 
 input, textarea {
@@ -33,7 +45,13 @@ textarea {
     border: 1px solid $background;
     outline: none;
     @include remove-outline;
+    resize:vertical;
+
+
 }
+
+
+
 
 label[for="features-dropdown"] {
 
@@ -42,14 +60,14 @@ label[for="features-dropdown"] {
     &:after {
         content: "\f078";
         font-family: FontAwesome;
-        font-size: $baseline;
+        font-size: $body;
         color: $black-body;
         right: 8px;
-        top: 0;
+        top: 20%;
         padding: 0 0 2px;
         position: absolute;
         pointer-events: none;
-        background: $background;
+        background: $gray;
 
     }
 
@@ -69,7 +87,6 @@ label[for="features-dropdown"] {
     label {
         cursor: pointer;
         z-index: 90;
-        opacity: 0.3;
         width: 100%;
         background: $white;
     }
@@ -87,7 +104,7 @@ label[for="features-dropdown"] {
                 &:before {
                     content: "\f118";
                     font-family: FontAwesome;
-                    color: $green-light;
+                    color: $background;
                     margin-right: 8px;
                     font-size: $body*4;
                     //check where t break in gridset is:
@@ -116,8 +133,21 @@ label[for="features-dropdown"] {
     }
 
     input[type="radio"]:checked + label {
-        opacity: 1;
-    }
 
+        span {
+
+            &.icon.happy {
+                &:before {
+                    color: $green-light;
+                }
+            }
+
+            &.icon.sad {
+                &:before {
+                    color: $red;
+                }
+            }
+        }
+    }
 }
 
