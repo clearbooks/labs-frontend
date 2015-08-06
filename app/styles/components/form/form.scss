@@ -4,7 +4,8 @@
     margin-bottom: $baseline*2;
 }
 
-select {
+//remove this if we are to use the mui dropdown
+/*select {
     border: none;
     color: $black-body;
     font-size: $body;
@@ -27,7 +28,7 @@ select {
             background: grey;
         }
     }
-}
+}*/
 
 input, textarea {
     @include box-model;
@@ -38,8 +39,6 @@ input, textarea {
     width: 100%;
 }
 
-input, select option {
-}
 
 textarea {
     height: $baseline*6;
@@ -47,13 +46,9 @@ textarea {
     outline: none;
     @include remove-outline;
     resize:vertical;
-
-
 }
 
-
-
-
+//remove this if we are to use the mui dropdown
 label[for="features-dropdown"] {
 
     position: relative;
@@ -156,7 +151,7 @@ label[for="features-dropdown"] {
 // SELECT-COMPONENT
 // ============================================================================
 
-.mui-select {
+.labs-select {
 
     position: relative;
 
@@ -175,34 +170,30 @@ label[for="features-dropdown"] {
         display: block;
         height: $baseline*2;
         width: 100%;
-
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        outline: none;
+        @include remove-outline;
         border: none;
         border-bottom: 1px solid $gray;
         border-radius: 0px;
-        box-shadow: none;
         background-color: $gray;
         background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNiIgd2lkdGg9IjEwIj48cG9seWdvbiBwb2ludHM9IjAsMCAxMCwwIDUsNiIgc3R5bGU9ImZpbGw6cmdiYSgwLDAsMCwuMjQpOyIvPjwvc3ZnPg==");
         background-repeat: no-repeat;
-        background-position: right center;
+        background-position: 96% center;
         cursor: pointer;
         color: $black-body;
         font-size: $body;
-        padding: 0 25px 0 0;
+        padding: 0 $gutter-b;
 
         &::-ms-expand {
             display: none;  // For IE
         }
 
         &:focus {
-            outline: 0;
+            @include remove-outline;
             height: $baseline*2 + 1px;
             margin-bottom: -1px;
-            border-color: $brand;
-            border-width: 2px;
         }
 
         &:disabled {
@@ -214,62 +205,45 @@ label[for="features-dropdown"] {
     }
 }
 
-.mui-select-menu {
-    @extend .mui-z1;
-
+.labs-select-menu {
     position: absolute;
     z-index: 1;
-    top: $baseline*2 !important;
-
+   /* top: $baseline*2 !important;*/// sit below select
+    top: 0px !important;//cover select field
     min-width: 100%;
     height: auto! important;
     overflow-y: hidden;
-    padding: 0 0 8px 0;
-
-    background-color: $white;
+    padding: 0;
+    background-color: $gray;
     font-size: $body;
 
     > div {
-        padding: 0 22px;
+        padding: 0 $gutter-b;
         height: $baseline *2;
         line-height: $body + $baseline;
         cursor: pointer;
         white-space: nowrap;
+        color: $black-body;
+        border-bottom: 1px solid $white;
 
         &:hover {
-            background-color: $gray;
+            background-color: $gray-base;
         }
 
         &[selected] {
-            background-color: $gray-dark;
+            background-color: $gray-base;
         }
     }
 }
 
-.mui-form-group {
+.labs-form-select-group {
     display: block;
     width: 100%;
     position: relative;
 
-    > .mui-form-control {
+    > .labs-form-select-group {
         display: block;
     }
 
 }
 
-.mui-z1 {
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
-    0 1px 2px rgba(0, 0, 0, 0.24);
-}
-
-/*
-@keyframes mui-node-inserted {
-    from {opacity: 0.99;}
-    to {opacity: 1;}
-}
-
-@mixin mui-node-inserted() {
-    animation-duration: 0.0001s;
-    animation-name: mui-node-inserted;
-}
-*/
