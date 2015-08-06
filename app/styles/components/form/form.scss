@@ -1,4 +1,5 @@
 
+
 .form {
     margin-bottom: $baseline*2;
 }
@@ -151,3 +152,124 @@ label[for="features-dropdown"] {
     }
 }
 
+// ============================================================================
+// SELECT-COMPONENT
+// ============================================================================
+
+.mui-select {
+
+    position: relative;
+
+    &:focus {
+        outline: 0;
+
+        > select {
+            height: $baseline*2 + 1px;
+            margin-bottom: -1px;
+        }
+    }
+
+    > select {
+        @include mui-node-inserted();
+
+        display: block;
+        height: $baseline*2;
+        width: 100%;
+
+        appearance: none;
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        outline: none;
+        border: none;
+        border-bottom: 1px solid $gray;
+        border-radius: 0px;
+        box-shadow: none;
+        background-color: $gray;
+        background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iNiIgd2lkdGg9IjEwIj48cG9seWdvbiBwb2ludHM9IjAsMCAxMCwwIDUsNiIgc3R5bGU9ImZpbGw6cmdiYSgwLDAsMCwuMjQpOyIvPjwvc3ZnPg==");
+        background-repeat: no-repeat;
+        background-position: right center;
+        cursor: pointer;
+        color: $black-body;
+        font-size: $body;
+        padding: 0 25px 0 0;
+
+        &::-ms-expand {
+            display: none;  // For IE
+        }
+
+        &:focus {
+            outline: 0;
+            height: $baseline*2 + 1px;
+            margin-bottom: -1px;
+            border-color: $brand;
+            border-width: 2px;
+        }
+
+        &:disabled {
+            color: $green-light;
+            cursor: $cursor-disabled;
+            background-color: $transparent;
+            opacity: 1;  // iOS fix for unreadable disabled content
+        }
+    }
+}
+
+.mui-select-menu {
+    @extend .mui-z1;
+
+    position: absolute;
+    z-index: 1;
+    top: $baseline*2 !important;
+
+    min-width: 100%;
+    height: auto! important;
+    overflow-y: hidden;
+    padding: 0 0 8px 0;
+
+    background-color: $white;
+    font-size: $body;
+
+    > div {
+        padding: 0 22px;
+        height: $baseline *2;
+        line-height: $body + $baseline;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: $gray;
+        }
+
+        &[selected] {
+            background-color: $gray-dark;
+        }
+    }
+}
+
+.mui-form-group {
+    display: block;
+    width: 100%;
+    position: relative;
+
+    > .mui-form-control {
+        display: block;
+    }
+
+}
+
+.mui-z1 {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12),
+    0 1px 2px rgba(0, 0, 0, 0.24);
+}
+
+/*
+@keyframes mui-node-inserted {
+    from {opacity: 0.99;}
+    to {opacity: 1;}
+}
+
+@mixin mui-node-inserted() {
+    animation-duration: 0.0001s;
+    animation-name: mui-node-inserted;
+}
+*/

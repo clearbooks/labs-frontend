@@ -23,9 +23,12 @@ $white:             #ffffff;
 $black:             #000;
 $black-body:        #555555;
 $gray:              #eeeeee;
+$gray-dark:         #888888;
 $green-light:       #aad593;
 $cyan:              #00acd7;
 $red:               #ff5859;
+$transparent:      transparent !default;
+$cursor-disabled: not-allowed !default;
 
 $card-shadow:       $gray;
 
@@ -99,6 +102,17 @@ $card-shadow:       $gray;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;
   box-shadow: none;
+}
+
+
+@mixin mui-node-inserted() {
+  animation-duration: 0.0001s;
+  animation-name: mui-node-inserted;
+}
+
+@keyframes mui-node-inserted {
+  from {opacity: 0.99;}
+  to {opacity: 1;}
 }
 
 
