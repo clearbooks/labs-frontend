@@ -1,3 +1,5 @@
+
+
 <div class="d-all t-all m-all d-padinfull t-padinfull m-padinfull vpushup-2">
 
     <div class="d-all t-all m-all vpushdown-1">
@@ -9,21 +11,13 @@
 
         <fieldset>
                 <div class="labs-form-select-group">
-                    <div class="labs-select">
+                    <div class="labs-select" ng-controller="MainSelectCtrl">
 
-                        <select>
-                            <option>Option 1</option>
-                            <option selected>Option 2</option>
-                            <option>Option 3</option>
-                            <option>Option 4</option>
-                            <option>Option 5</option>
-                            <option>Option 6</option>
-                            <option>Option 4</option>
-
-                        </select>
+                        <select ng-model="myFeature" ng-options="feature.name for feature in features"></select>
 
                     </div>
                 </div>
+
 
             <div class="feedback-radio-btns d-all t-all m-all vpushdown-1">
                 <div class="d3-d7 t1-t5 m-all positive-feedback">
