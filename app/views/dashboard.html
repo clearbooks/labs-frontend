@@ -1,7 +1,6 @@
 
 <div ng-controller="DashboardCtrl" class="wrapper">
 
-
     <div class="t3-t8 d1-d9 preview-brand">
         <img class="d1-d3 t3-t4" src="images/preview.svg" />
         <div class="d4-d8">
@@ -36,34 +35,21 @@
             <h2 class="t-all">Release due: 40<sup>th</sup> dec 2099</h2>
         </div>
 
-
-     <div class="preview-toggle cf t-all" ng-repeat="n in [1,2,3,4,5,6,7,8]" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'">
-  <!--      <div class="preview-toggle cf t-all" ng-repeat="section in sections by section.id" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'">-->
-
-            <h3>European VAT</h3>
-
-            <p>
-                Benefit from VAT schemes with
-                pre-populated VAT rates for all
-                EU countries. This means if you
-                are registered for VAT in any EU
-                country, you can simply set up a
-                VAT scheme for this country
-                and the correct rates will
-                automatically appear when
-                creating invoices.
-            </p>
-            <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
-                <a class="t-all d-all" href="">Read more</a>
-                <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay;">Give feedback</a>
+        <div class="preview-toggle cf t-all" ng-repeat="div in divs | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+            <div class={{div.id}}>
+               <h3>{{div.title}}</h3>
+                <p>{{div.summary}}</p>
+                <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
+                    <a class="t-all d-all" href="">Read more</a>
+                    <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div.title);">Give feedback</a>
+                </div>
+                <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
             </div>
-            <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
 
         </div>
 
 
     </div>
-
     <div id="fade" class="black_overlay" ng-show="black_overlay"></div>
     <div class="wrapper fixed">
         <div class="over-pop-box d3-d12 t-all m-all d-pad t-padinfull m-padinfull" ng-show="overPopBoxShow">
