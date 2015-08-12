@@ -35,7 +35,8 @@ angular.module('labsFrontendApp')
         $scope.parenttestfeatures = $scope.$parent.$parent.testfeatures;
 
         $scope.myFeature = $scope.$parent.$parent.myFeature;
-        //console.log($scope.myFeature.name);
+
+        console.log($scope.myFeature);
 
     }
 

@@ -66,7 +66,7 @@ angular.module('labsFrontendApp')
 
       ]
 
-      //$scope.myFeature = $scope.testfeatures[5];
+      $scope.myFeature = $scope.testfeatures[5];
 
     }
     );
