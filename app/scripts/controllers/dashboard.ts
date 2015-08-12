@@ -47,10 +47,26 @@ angular.module('labsFrontendApp')
 
       ]
 
-      //need pass this top selectCtrl scope to add into myFeature
-      $scope.pickedFeature = function (test) {
-        console.log(test);
-      };
+      //need pass this top selectCtrl scope through the myFeature below
+      $scope.test = $scope.pickedFeature = function (pickeddiv) {
+        //this needs to be passed to myFeature below
+        console.log(pickeddiv);
+        return pickeddiv;
+      }
+
+      //console.log($scope.test1);
+
+      $scope.testfeatures = [
+             {title: 'test feature - test'},
+        {title: 'test  feature two'},
+        {title: 'test feature three'},
+        {title: 'test feature four'},
+        {title: 'test feature five'},
+        {title: 'test feature six'}
+
+      ]
+
+      //$scope.myFeature = $scope.testfeatures[5];
 
     }
     );

@@ -7,50 +7,50 @@
     </div>
 
 
-    <form class="form">
+   <form class="form" ng-controller="PreviewFeedbackFormCtrl" ng-submit ="processForm()">
 
         <fieldset>
-                <div class="labs-form-select-group">
-                    <div class="labs-select" ng-controller="SelectCtrl">
+            <div class="labs-form-select-group">
+                <div class="labs-select" ng-controller="SelectCtrl">
+                    {{myFeature}}
+                    <!--<select ng-model="myFeature" ng-options="feature.name for feature in features"></select>-->
+                  <!--  below we can add the initial select value form the dashbaoard-->
+               <!--     <select ng-model="myFeature" ng-options="feature.name for feature in parenttestfeatures"></select>-->
+                    <select ng-model="formData.selectmenu" ng-init="myFeature" ng-options="feature.title for feature in parenttestfeatures"></select>
 
-                        <select ng-model="myFeature" ng-options="feature.name for feature in features"></select>
 
-                    </div>
+
                 </div>
+            </div>
 
 
             <div class="feedback-radio-btns d-all t-all m-all vpushdown-1">
                 <div class="d3-d7 t1-t5 m-all positive-feedback">
-                    <input type="radio" name="a" id="posfeedback"/>
+                    <input type="radio" name="moodIcon" id="posfeedback" ng-model="formData.mood" required value="1" />
                     <label for="posfeedback"><span class="icon happy"></span><span>I'm giving praise</span></label>
                 </div>
                 <div class="d8-d12 t6-t9 m-all d-overlap t-overlap negative-feedback">
-                    <input type="radio" name="a" id="negfeedback"/>
+                    <input type="radio" name="moodIcon" id="negfeedback" ng-model="formData.mood" required value="0" />
                     <label for="negfeedback"><span class="icon sad"></span><span>I'm reporting an issue</span></label>
                 </div>
             </div>
 
-                <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-3"
-                          ng-model="string"
-                          [name="string" ]
-                          [required="string" ]
-                          [ng-required="string" ]
-                          [ng-minlength="number" ]
-                          [ng-maxlength="number" ]
-                          [ng-pattern="string" ]
-                          [ng-change="string" ]
-                          [ng-trim="boolean" ]>
-
-                     </textarea>
+            <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-3" required="required" ng-model="formData.message"></textarea>
 
 
         </fieldset>
 
 
-        <button type="submit" name="" class="button click-effect d8-d9 t6-t8 d-floatright t-floatright ">
+        <button type="submit" class="button click-effect d8-d9 t6-t8 d-floatright t-floatright" >
             <span>Submit</span></button>
 
+         <pre>
+		{{ formData }}
+	</pre>
 
-    </form>
+
+
+   </form>
+
 
 </div>

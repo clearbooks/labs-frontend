@@ -17,7 +17,7 @@ module labsFrontendApp {
 
 angular.module('labsFrontendApp')
     .controller('SelectCtrl', ['$scope', function ($scope) {
-        $scope.features = [
+        /*$scope.features = [
             {name: 'feature one - test'},
             {name: 'feature two', notAnOption: true},
             {name: 'feature three'},
@@ -25,12 +25,18 @@ angular.module('labsFrontendApp')
             {name: 'feature five'},
             {name: 'feature six'}
 
-        ]
-        //this needs to be passed in form DashBoard Ctrl
-        $scope.myFeature = $scope.features[2];
-        /* $scope.pickedFeature = function(test) {
-         //alert(test);
-         };*/
+        ]*/
+
+
+
+       // $scope.myFeature = $scope.features[1];
+
+
+        $scope.parenttestfeatures = $scope.$parent.$parent.testfeatures;
+
+        $scope.myFeature = $scope.$parent.$parent.myFeature;
+        //console.log($scope.myFeature.name);
+
     }
 
 
