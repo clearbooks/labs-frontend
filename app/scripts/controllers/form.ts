@@ -15,6 +15,7 @@ module labsFrontendApp {
     }
 }
 
+//in progress
 angular.module('labsFrontendApp')
     .controller('PreviewFeedbackFormCtrl', ['$scope', function ($scope, $http) {
 
@@ -22,7 +23,7 @@ angular.module('labsFrontendApp')
 
 
         $scope.processForm = function() {
-            alert('test');
+
             console.log($scope.formData);
 
             $http({

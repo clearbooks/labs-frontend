@@ -16,8 +16,9 @@ module labsFrontendApp {
 }
 
 angular.module('labsFrontendApp')
-   // .controller('DashboardCtrl', labsFrontendApp.DashboardCtrl);
+
     .controller('DashboardCtrl', function($scope){
+
       $scope.divs = [
 
         {id: 1, title:"european VAT",
@@ -47,17 +48,20 @@ angular.module('labsFrontendApp')
 
       ]
 
-      //need pass this top selectCtrl scope through the myFeature below
+      //need pass this 'pickeddiv' object to selectCtrl scope through the myFeature below
       $scope.test = $scope.pickedFeature = function (pickeddiv) {
-        //this needs to be passed to myFeature below
-        console.log(pickeddiv);
-        return pickeddiv;
+
+      $scope.testing = pickeddiv;
+        //return $scope.testing;
+        console.log( $scope.testing);
+        console.log( $scope.testing.title);
+
       }
 
-      //console.log($scope.test1);
 
+      //need to pass the above returned object into the scope below which gets passed into the drop down menu..
       $scope.testfeatures = [
-             {title: 'test feature - test'},
+         {title: 'test feature - test'},
         {title: 'test  feature two'},
         {title: 'test feature three'},
         {title: 'test feature four'},
@@ -66,7 +70,15 @@ angular.module('labsFrontendApp')
 
       ]
 
+      /*how to get this to work?*/
+     // $scope.testfeatures = pickeddiv;
+
+      //need to select the initial value of the slected item
       $scope.myFeature = $scope.testfeatures[5];
+      //$scope.myFeature = $scope.testObj.title;
+
+
+
 
     }
     );

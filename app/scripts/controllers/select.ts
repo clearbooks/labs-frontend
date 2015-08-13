@@ -17,6 +17,7 @@ module labsFrontendApp {
 
 angular.module('labsFrontendApp')
     .controller('SelectCtrl', ['$scope', function ($scope) {
+        //the following was moved to the dashboard and is inherited from there..
         /*$scope.features = [
             {name: 'feature one - test'},
             {name: 'feature two', notAnOption: true},
@@ -28,15 +29,13 @@ angular.module('labsFrontendApp')
         ]*/
 
 
-
        // $scope.myFeature = $scope.features[1];
-
-
         $scope.parenttestfeatures = $scope.$parent.$parent.testfeatures;
-
         $scope.myFeature = $scope.$parent.$parent.myFeature;
 
-        console.log($scope.myFeature);
+        //this works but does not successfully pass to the ng-init value on teh select dropdown
+        console.log($scope.myFeature.title);
+
 
     }
 
