@@ -35,13 +35,12 @@
             <h2 class="t-all">Release due: 40<sup>th</sup> dec 2099</h2>
         </div>
 
-        <div class="preview-toggle cf t-all" ng-repeat="div in divs | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+        <div class="preview-toggle cf t-all" ng-repeat="div in feature_sections | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
             <div class={{div.id}}>
                <h3>{{div.title}}</h3>
                 <p>{{div.summary}}</p>
                 <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
                     <a class="t-all d-all" href="">Read more</a>
-                    <!--pass in the div object to child 'select controller-->
                     <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div);">Give feedback</a>
                 </div>
                 <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
@@ -55,7 +54,7 @@
     <div class="wrapper fixed">
         <div class="over-pop-box d3-d12 t-all m-all d-pad t-padinfull m-padinfull" ng-show="overPopBoxShow">
             <a href="" ng-click="overPopBoxShow = !overPopBoxShow; black_overlay = !black_overlay; " class="vpushup-2 close-modal"><span class="close-text">CLOSE</span> <i class="fa fa-times"></i></a>
-            <ng-include src="'views/test.html'"></ng-include>
+            <ng-include src="'views/modal.html'"></ng-include>
         </div>
     </div>
 

@@ -21,10 +21,21 @@ angular.module('labsFrontendApp')
 
         $scope.formData = {};
 
+        /*$scope.reset = function() {
+            $scope.formData.message = "";
+            $scope.featuresFeedback.$setPristine();
+        }*/
+
+        /*var defaultForm = {
+        message : ""
+        };*/
+
 
         $scope.processForm = function( chosenFeature, formData ) {
 
-            console.log(chosenFeature, formData);
+           // console.log(chosenFeature, formData);
+
+           // console.log("feature is: " + chosenFeature.title + " mood: " +  formData.mood + " message: " + formData.message);
 
             $http({
                 method  : '',
@@ -32,11 +43,23 @@ angular.module('labsFrontendApp')
                 data    : $.param( formData ),
                 headers : { 'Content-Type': '' }
             })
+                //data not getting here
                 .success(function(data) {
                     console.log(data);
 
+                    $scope.formData = {};//this should empty form fields
+                    $scope.submission = true; //cerate a
+
+
+
                 });
+
+            /*$scope.featuresFeedback.$setPristine();
+            formData.message = "";*/
         };
+
+
+       // $scope.featuresFeedback.$setPristine();
 
     }
 

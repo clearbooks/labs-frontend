@@ -105,7 +105,7 @@ label[for="features-dropdown"] {
                     margin-right: 8px;
                     font-size: $body*4;
                     //check where t break in gridset is:
-                    @media screen and (max-width: 960px) {
+                    @media screen and (max-width: 768px) {
                         font-size: $body*3;
                     }
                 }

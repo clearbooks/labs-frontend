@@ -23,7 +23,7 @@ angular.module('labsFrontendApp')
         chosen: undefined
       };
 
-      $scope.divs = [
+      $scope.feature_sections = [
 
         {id: 1, title:"european VAT",
           summary: "Ice cream liquorice biscuit candy canes candy biscuit caramels toffee. Wafer toffee gummies gummi bears muffin lollipop cake croissant gingerbread. Macaroon carrot cake croissant wafer sweet pie sweet roll biscuit chocolate bar. Caramels soufflé bonbon carrot cake. Halvah tiramisu wafer. " +
