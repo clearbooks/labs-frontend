@@ -7,7 +7,7 @@
     </div>
 
 
-   <form class="form" ng-controller="PreviewFeedbackFormCtrl" ng-submit ="processForm()">
+   <form class="form" ng-controller="PreviewFeedbackFormCtrl" ng-submit ="processForm(feature.chosen, formData)">
 
         <fieldset>
             <div class="labs-form-select-group">
@@ -15,7 +15,7 @@
                     <!--<select ng-model="myFeature" ng-options="feature.name for feature in features"></select>-->
                   <!--  below we can add the initial select value form the dashbaoard-->
                <!--     <select ng-model="myFeature" ng-options="feature.name for feature in parenttestfeatures"></select>-->
-                    <select ng-model="formData.selectmenu" ng-init="myFeature.title" ng-options="feature.title for feature in parenttestfeatures"></select>
+                    <select ng-model="feature.chosen" ng-options="feature.title for feature in divs track by feature.id"></select>
 
 
 

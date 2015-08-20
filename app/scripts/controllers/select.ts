@@ -30,11 +30,11 @@ angular.module('labsFrontendApp')
 
 
        // $scope.myFeature = $scope.features[1];
-        $scope.parenttestfeatures = $scope.$parent.$parent.testfeatures;
-        $scope.myFeature = $scope.$parent.$parent.myFeature;
+        //$scope.parenttestfeatures = $scope.$parent.$parent.testfeatures;
+       // $scope.myFeature = $scope.$parent.$parent.myFeature;
 
         //this works but does not successfully pass to the ng-init value on teh select dropdown
-        console.log($scope.myFeature.title);
+        //console.log($scope.myFeature.title);
 
 
     }

@@ -22,14 +22,14 @@ angular.module('labsFrontendApp')
         $scope.formData = {};
 
 
-        $scope.processForm = function() {
+        $scope.processForm = function( chosenFeature, formData ) {
 
-            console.log($scope.formData);
+            console.log(chosenFeature, formData);
 
             $http({
                 method  : '',
                 url     : '',
-                data    : $.param($scope.formData),
+                data    : $.param( formData ),
                 headers : { 'Content-Type': '' }
             })
                 .success(function(data) {
