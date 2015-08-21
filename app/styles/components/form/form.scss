@@ -247,3 +247,24 @@ label[for="features-dropdown"] {
 
 }
 
+form {
+    &.ng-submitted.ng-invalid {
+    border-color: $red;
+    border-width: 2px;
+    }
+
+    .error_container{
+       /* background: grey;*/
+    }
+
+    .errors {
+        color: $red;
+    }
+
+
+}
+
+
+
+
+

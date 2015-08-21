@@ -65,6 +65,12 @@ angular.module('labsFrontendApp')
       $scope.pickedFeature = ( pickedFeature ) => {
         $scope.feature.chosen = pickedFeature;
       };
+
+
+      $scope.clearData = function(){
+        $scope.formData = {};
+      }
+
     }
   );
 

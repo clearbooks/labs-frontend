@@ -5,7 +5,7 @@
     </div>
 
 
-    <form class="form" name ="featuresFeedback" ng-controller="PreviewFeedbackFormCtrl" ng-submit="processForm(feature.chosen, formData)">
+    <form class="form" name ="featuresFeedback" ng-controller="PreviewFeedbackFormCtrl" ng-submit="processForm(feature.chosen, formData, featuresFeedback.$valid)" novalidate >
 
         <div class="d-all t-all m-all vpushdown-1 success_message" ng-show="successMessage">Thank you for your feedback!</div>
 
@@ -28,21 +28,36 @@
                     <input type="radio" name="moodIcon" id="negfeedback" ng-model="formData.mood" ng-focus="hideSuccessMessageOnFocus()" required value="0"/>
                     <label for="negfeedback"><span class="icon sad"></span><span>I'm reporting an issue</span></label>
                 </div>
+                <div class="d-all t-all m-all d-padin t-padin m-padin error_container" ng-show="showValidationMessages && featuresFeedback.$submitted">
+                    <div ng-show="featuresFeedback.moodIcon.$error.required" class="errors">Please fill in a message.</div>
+                </div>
             </div>
 
-            <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-3" ng-focus="hideSuccessMessageOnFocus()" required="required"
-                      ng-model="formData.message"></textarea>
+            <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-1" ng-focus="hideSuccessMessageOnFocus()" required="required"
+                      ng-model="formData.message" name="message"></textarea>
+         <div class="d-all t-all m-all d-padin t-padin m-padin error_container" ng-show="showValidationMessages && featuresFeedback.$submitted">
+                <div ng-show="featuresFeedback.message.$error.required" class="errors">Please fill in a message.</div>
+          </div>
+
+
 
 
         </fieldset>
 
 
-        <button type="submit" class="button click-effect d8-d9 t6-t8 d-floatright t-floatright">
+        <button type="submit" class="button click-effect d8-d9 t6-t8 d-floatright t-floatright vpushup-2" ng-click="submitform()">
             <span>Submit</span></button>
 
          <pre>
              {{feature.chosen.title}}
              {{formData}}
+
+
+            Pristine: {{form.$pristine}}
+
+            Submitted: {{form.$submitted}}
+
+
 	</pre>
 
 
