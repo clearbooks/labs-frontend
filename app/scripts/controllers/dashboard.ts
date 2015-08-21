@@ -19,9 +19,14 @@ angular.module('labsFrontendApp')
 
     .controller('DashboardCtrl', function($scope){
 
+
+
       $scope.feature = {
         chosen: undefined
       };
+
+      $scope.successMessage = false;//don't show message on page load
+      console.log($scope.successMessage);
 
       $scope.feature_sections = [
 
@@ -51,8 +56,14 @@ angular.module('labsFrontendApp')
         },
       ];
 
-      $scope.pickedFeature = ( pickeddiv ) => {
-        $scope.feature.chosen = pickeddiv;
+      //this isn't working
+      $scope.hideSuccessMessage = function(){
+        $scope.successMessage = false;//hide message if user wants to write/submit more feedback
+        console.log($scope.successMessage);
+      }
+
+      $scope.pickedFeature = ( pickedFeature ) => {
+        $scope.feature.chosen = pickedFeature;
       };
     }
   );

@@ -7,27 +7,30 @@
 
     <form class="form" name ="featuresFeedback" ng-controller="PreviewFeedbackFormCtrl" ng-submit="processForm(feature.chosen, formData)">
 
+        <div class="d-all t-all m-all vpushdown-1 success_message" ng-show="successMessage">Thank you for your feedback!</div>
+
         <fieldset>
             <div class="labs-form-select-group">
                 <div class="labs-select" ng-controller="SelectCtrl">
                     <select ng-model="feature.chosen"
-                            ng-options="feature.title for feature in feature_sections track by feature.id"></select>
+                            ng-options="feature.title for feature in feature_sections track by feature.id"
+                            ng-focus="hideSuccessMessageOnFocus()"></select>
                 </div>
             </div>
 
 
             <div class="feedback-radio-btns d-all t-all m-all vpushdown-1">
                 <div class="d3-d7 t1-t5 m-all positive-feedback">
-                    <input type="radio" name="moodIcon" id="posfeedback" ng-model="formData.mood" required value="1"/>
+                    <input type="radio" name="moodIcon" id="posfeedback" ng-model="formData.mood" ng-focus="hideSuccessMessageOnFocus()" required value="1"/>
                     <label for="posfeedback"><span class="icon happy"></span><span>I'm giving praise</span></label>
                 </div>
                 <div class="d8-d12 t6-t9 m-all d-overlap t-overlap negative-feedback">
-                    <input type="radio" name="moodIcon" id="negfeedback" ng-model="formData.mood" required value="0"/>
+                    <input type="radio" name="moodIcon" id="negfeedback" ng-model="formData.mood" ng-focus="hideSuccessMessageOnFocus()" required value="0"/>
                     <label for="negfeedback"><span class="icon sad"></span><span>I'm reporting an issue</span></label>
                 </div>
             </div>
 
-            <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-3" required="required"
+            <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-3" ng-focus="hideSuccessMessageOnFocus()" required="required"
                       ng-model="formData.message"></textarea>
 
 

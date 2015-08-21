@@ -46,7 +46,6 @@ textarea {
     outline: none;
     @include remove-outline;
     resize:vertical;
-    min-height: 300px;
 }
 
 //remove this if we are to use the mui dropdown

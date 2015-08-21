@@ -3,8 +3,8 @@
     background: $white;
     border-top: 1px solid $gray;
     @include card(4);
-    height: 95%;
-    bottom: 90px;
+    height: 55%;
+    bottom: 10px;
     z-index: 99999;
     @include rounded;
     box-shadow: bottom-shadow(5);
@@ -24,6 +24,10 @@
                 display: none;
             }
         }
+    }
+//todo style this after referring to design team wireframes
+    .success_message {
+        color: green;
     }
 }
 
