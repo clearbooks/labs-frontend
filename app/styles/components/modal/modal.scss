@@ -25,9 +25,16 @@
             }
         }
     }
-//todo style this after referring to design team wireframes
+
     .success_message {
-        color: green;
+        background: #eef8e9;
+        padding: 10px 0;
+        border-radius: 5px;
+        > span {
+            color: $green-base;
+            padding: 0 $gutter-b;
+
+        }
     }
 }
 

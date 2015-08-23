@@ -22,33 +22,31 @@ angular.module('labsFrontendApp')
         //empty object and empty array to hold the form data
         $scope.formData = {};
         $scope.formDataArray = [];
-        $scope.$parent.successMessage = false;//don't show message on page load
+        $scope.$parent.successMessage = false;//don't show message on form load//not working
         $scope.showValidationMessages = false;
 
 
         $scope.processForm = function( chosenFeature, formData, isValid ) {
 
-
-
+            $scope.$parent.successMessage = false;//dont show message
             console.log(chosenFeature, formData);
             console.log("feature is: " + chosenFeature.title + " mood: " +  formData.mood + " message: " + formData.message);
 
 
             $scope.submitted = true;
-            //$scope.$parent.successMessage = true;//show message
-            //$scope.formData = {};//this should empty form fields
 
             if (isValid) {
-                 // alert('our form is amazing');
-                 $scope.showValidationMessages = false;
+
+                $scope.showValidationMessages = false;
+                $scope.$parent.successMessage = true;//show success message
                 $scope.formData = {};//this should empty form fields
-                $scope.$parent.successMessage = true;//show message
                 }
 
             else {
 
                 $scope.showValidationMessages = true;
                 $scope.$parent.successMessage = false;//show message
+
 
             }
 
@@ -75,23 +73,10 @@ angular.module('labsFrontendApp')
 
         };
 
+        //this needs to be called form the dashboard controller?
         $scope.hideSuccessMessageOnFocus = function(){
             $scope.$parent.successMessage = false;//hide message if user wants to write/submit more feedback
         }
-
-       /* $scope.submitform = function () {*/
-       /*     $scope.submitted = true;*/
-       /*     //$scope.showValidationMessages = true;*/
-       /*     $scope.featuresFeedback.$setPristine();*/
-       /*     $scope.formData = {};*/
-       /*     $scope.form.$setValidity();*/
-/*
-*/
-
-       /*     return false;*/
-       /* }*/
-/*
-*/
 
 
     }]);

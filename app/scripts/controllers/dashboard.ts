@@ -56,10 +56,10 @@ angular.module('labsFrontendApp')
         },
       ];
 
-      //this isn't working
-      $scope.hideSuccessMessage = function(){
+      //this isn't working. Needs to clear message on 'close' action
+      $scope.hideSuccessMessageOnFocus = function(){
         $scope.successMessage = false;//hide message if user wants to write/submit more feedback
-        console.log($scope.successMessage);
+        console.log("from close" + $scope.successMessage);
       }
 
       $scope.pickedFeature = ( pickedFeature ) => {

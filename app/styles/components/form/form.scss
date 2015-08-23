@@ -248,19 +248,34 @@ label[for="features-dropdown"] {
 }
 
 form {
-    &.ng-submitted.ng-invalid {
-    border-color: $red;
-    border-width: 2px;
-    }
 
-    .error_container{
-       /* background: grey;*/
+    .error_container {
+        background: $red-light;
+        padding: 10px 0;
+        border-radius: 5px;
+        position: relative;
+        //add arrows
+        &:after {
+            bottom: 100%;
+            left: 50%;
+            border: solid transparent;
+            content: " ";
+            height: 0;
+            width: 0;
+            position: absolute;
+            pointer-events: none;
+            border-color: rgba(255, 222, 222, 0);
+            border-bottom-color: #ffdede;
+            border-width: 10px;
+            margin-left: -10px;
+            margin-left: -30px;
+        }
     }
 
     .errors {
         color: $red;
+        font-weight: 600;
     }
-
 
 }
 
