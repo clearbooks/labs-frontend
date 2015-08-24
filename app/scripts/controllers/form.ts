@@ -15,20 +15,19 @@ module labsFrontendApp {
     }
 }
 
-//in progress
+//in progress as need to set up the sending of the data once back end is set up..
 angular.module('labsFrontendApp')
     .controller('PreviewFeedbackFormCtrl', ['$scope', function ($scope, $http) {
 
         //empty object and empty array to hold the form data
         $scope.formData = {};
         $scope.formDataArray = [];
-        $scope.$parent.successMessage = false;//don't show message on form load//not working
+        $scope.message.success = false;//don't show message on form load//not working
         $scope.showValidationMessages = false;
 
 
         $scope.processForm = function( chosenFeature, formData, isValid ) {
 
-            $scope.$parent.successMessage = false;//dont show message
             console.log(chosenFeature, formData);
             console.log("feature is: " + chosenFeature.title + " mood: " +  formData.mood + " message: " + formData.message);
 
@@ -38,15 +37,14 @@ angular.module('labsFrontendApp')
             if (isValid) {
 
                 $scope.showValidationMessages = false;
-                $scope.$parent.successMessage = true;//show success message
-                $scope.formData = {};//this should empty form fields
+                $scope.message.success = true;//show success message
+                $scope.formData = {};//empty form fields
                 }
 
             else {
 
                 $scope.showValidationMessages = true;
-                $scope.$parent.successMessage = false;//show message
-
+                $scope.message.success = false;//show success message
 
             }
 
@@ -72,11 +70,6 @@ angular.module('labsFrontendApp')
                 });*/
 
         };
-
-        //this needs to be called form the dashboard controller?
-        $scope.hideSuccessMessageOnFocus = function(){
-            $scope.$parent.successMessage = false;//hide message if user wants to write/submit more feedback
-        }
 
 
     }]);

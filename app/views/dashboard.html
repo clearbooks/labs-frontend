@@ -41,7 +41,7 @@
                 <p>{{div.summary}}</p>
                 <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
                     <a class="t-all d-all" href="">Read more</a>
-                    <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessageOnFocus();">Give feedback</a>
+                    <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback</a>
                 </div>
                 <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
             </div>
@@ -53,7 +53,7 @@
     <div id="fade" class="black_overlay" ng-show="black_overlay"></div>
     <div class="wrapper fixed">
         <div class="over-pop-box d3-d12 t-all m-all d-pad t-padinfull m-padinfull" ng-show="overPopBoxShow">
-            <a href="" ng-click="overPopBoxShow = !overPopBoxShow; black_overlay = !black_overlay; hideSuccessMessageOnFocus(); clearData(); " class="vpushup-2 close-modal"><span class="close-text">CLOSE</span> <i class="fa fa-times"></i></a>
+            <a href="" ng-click="overPopBoxShow = !overPopBoxShow; black_overlay = !black_overlay;" class="vpushup-2 close-modal"><span class="close-text">CLOSE</span> <i class="fa fa-times"></i></a>
             <ng-include src="'views/modal.html'"></ng-include>
         </div>
     </div>

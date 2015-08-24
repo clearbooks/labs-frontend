@@ -19,14 +19,14 @@ angular.module('labsFrontendApp')
 
     .controller('DashboardCtrl', function($scope){
 
-
-
       $scope.feature = {
         chosen: undefined
       };
 
-      $scope.successMessage = false;//don't show message on page load
-      console.log($scope.successMessage);
+      $scope.message = {
+        success: undefined
+      };
+
 
       $scope.feature_sections = [
 
@@ -56,10 +56,10 @@ angular.module('labsFrontendApp')
         },
       ];
 
-      //this isn't working. Needs to clear message on 'close' action
-      $scope.hideSuccessMessageOnFocus = function(){
-        $scope.successMessage = false;//hide message if user wants to write/submit more feedback
-        console.log("from close" + $scope.successMessage);
+
+      $scope.hideSuccessMessage = ()  =>  {
+        $scope.message.success = false;//hide message if user wants to write/submit more feedback
+        console.log("from close function " + $scope.message.success);
       }
 
       $scope.pickedFeature = ( pickedFeature ) => {
@@ -67,9 +67,7 @@ angular.module('labsFrontendApp')
       };
 
 
-      $scope.clearData = function(){
-        $scope.formData = {};
-      }
+
 
     }
   );
