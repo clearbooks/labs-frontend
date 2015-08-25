@@ -23,8 +23,10 @@ module labsFrontendApp
 
         it( 'should call the API to get public releases', () =>
         {
-            $httpBackend.expectGET( apiUrl + 'public-releases/list' ).respond( 200, '' );
-            service.execute();
+            $httpBackend.expectGET( apiUrl + 'public-releases/list' ).respond( 200, '[]' );
+            service.execute().then( ( data ) => {
+                expect( data ).toEqual( [] );
+            } );
             $httpBackend.flush();
         } );
 

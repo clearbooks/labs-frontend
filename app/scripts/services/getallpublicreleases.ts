@@ -31,8 +31,8 @@ module labsFrontendApp
          */
         execute():ng.IPromise<Array<Release>>
         {
-            return this.$http.get( this.apiUrl + 'public-releases/list' ).then( ( stuff: Array<Release> ) => {
-                return stuff
+            return this.$http.get( this.apiUrl + 'public-releases/list' ).then( ( stuff: any ) => {
+                return stuff.data;
             } );
         }
     }
