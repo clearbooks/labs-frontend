@@ -16,4 +16,7 @@ angular.module('labsFrontendApp', [
             url: "/dashboard",
             templateUrl: "views/dashboard.html"
         });
-    });
+    })
+    .config( ( $provide: any ) => {
+        $provide.value('apiUrl', '{{LABS_API_URL}}' )
+    } ) ;
