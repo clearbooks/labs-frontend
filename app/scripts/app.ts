@@ -1,6 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="controllers/dashboard.ts" />
-/// <reference path="services/getallpublicreleases.ts" />
+/// <reference path="services/get-all-public-releases.ts" />
 'use strict';
 
 module labsFrontendApp

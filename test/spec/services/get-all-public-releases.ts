@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
-/// <reference path="../../../app/scripts/services/getallpublicreleases.ts" />
+/// <reference path="../../../app/scripts/services/get-all-public-releases.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
 module labsFrontendApp

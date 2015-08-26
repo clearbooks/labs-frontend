@@ -1,4 +1,4 @@
-/// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
+/// <reference path="../../../typings/tsd.d.ts" />
 
 module labsFrontendApp
 {
