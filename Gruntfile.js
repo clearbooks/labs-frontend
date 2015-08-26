@@ -197,7 +197,7 @@ module.exports = function (grunt) {
     typescript: {
       base: {
         src: ['<%= yeoman.app %>/scripts/{,*/}*.ts'],
-        dest: '.tmp/scripts',
+        dest: '.tmp/compiled.js',
         options: {
           module: 'amd', //or commonjs
           target: 'es5', //or es3
@@ -392,9 +392,8 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
+          src: '.tmp/compiled.js',
+          ext: '.annotated.js'
         }]
       }
     },
@@ -501,10 +500,10 @@ module.exports = function (grunt) {
     'tsd:refresh',
     'useminPrepare',
     'concurrent:dist',
+    'ngAnnotate',
     'autoprefixer',
     'ngtemplates',
     'concat',
-    'ngAnnotate',
     'copy:dist',
     'cdnify',
     'cssmin',

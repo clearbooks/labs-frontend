@@ -20,6 +20,7 @@ module labsFrontendApp
          * @param $http
          * @param $q
          * @param apiUrl
+         * @ngInject
          */
         constructor( private $http: ng.IHttpService, private $q: ng.IQService, private apiUrl: string )
         {
