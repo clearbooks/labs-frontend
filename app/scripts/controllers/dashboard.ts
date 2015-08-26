@@ -1,19 +1,22 @@
-/// <reference path="../app.ts" />
+/// <reference path="../services/get-all-public-releases.ts" />
 
 'use strict';
 
-module labsFrontendApp {
-  export interface IDashboardScope extends ng.IScope {
-
+module labsFrontendApp
+{
+  export interface IDashboardScope
+  {
+    releases: any;
   }
 
-  export class DashboardCtrl {
+  export class DashboardCtrl
+  {
     // @ngInject
-    constructor (private $scope: IDashboardScope) {
-
+    constructor (private $scope: IDashboardScope, private releases: GetAllPublicReleases) {
+      releases.execute().then( ( releases ) => {
+        $scope.releases = releases;
+      } );
     }
   }
 }
 
-angular.module('labsFrontendApp')
-  .controller('DashboardCtrl', labsFrontendApp.DashboardCtrl);
