@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       typescript: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.ts'],
-        tasks: ['typescript:base']
+        tasks: ['typescript:base', 'ngAnnotate']
       },
       typescriptTest: {
         files: ['test/spec/{,*/}*.ts'],
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
       options: {
         port: 9057,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -75,6 +75,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
+              connect.static('.tmp/compiled.annotated.js'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
@@ -469,10 +470,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'clean:server',
-      'wiredep',
-      'tsd:refresh',
-      'concurrent:server',
+      'build',
+      'compass:server',
       'autoprefixer:server',
       'connect:livereload',
       'watch'
