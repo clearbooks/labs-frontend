@@ -1,6 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
+/// <reference path="directives/next-release.ts" />
 'use strict';
 
 module labsFrontendApp
@@ -21,10 +22,12 @@ module labsFrontendApp
             });
     })
     .config( ( $provide: any ) => {
-        $provide.value('apiUrl', '{{LABS_API_URL}}/' )
+        $provide.value('apiUrl', 'api/' )
     } )
     .controller( 'DashboardCtrl', DashboardCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
+    .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
+
 
     ;
 }
