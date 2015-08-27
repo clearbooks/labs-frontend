@@ -6,7 +6,7 @@ module labsFrontendApp
 {
     export interface INextReleaseScope
     {
-        nextRelease: string;
+        nextRelease: Date;
     }
 
     export class NextReleaseCtrl
@@ -15,7 +15,7 @@ module labsFrontendApp
         constructor (private $scope: INextReleaseScope, private releases: GetAllPublicReleases)
         {
             releases.execute().then( ( releases ) => {
-                $scope.nextRelease = releases.shift().date;
+                $scope.nextRelease = new Date( releases.shift().date );
             } );
         }
     }

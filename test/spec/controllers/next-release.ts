@@ -12,8 +12,9 @@ module labsFrontendApp
         var root: ng.IRootScopeService;
 
         // Initialize the controller and a mock scope
-        beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
-            scope = { nextRelease: "" };
+        beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) =>
+        {
+            scope = { nextRelease: undefined };
             dashboardCtrl = new NextReleaseCtrl( scope, new GetAllPublicReleasesStub( $q ) );
             root = $rootScope;
         } ) );
@@ -21,8 +22,7 @@ module labsFrontendApp
         it( 'should put the first release date from the API onto the scope', () =>
         {
             root.$apply();
-            scope.nextRelease.should.equal( '2015-01-01' );
-
+            expect( scope.nextRelease).toEqual( new Date( '2015-01-01' ) );
         } );
     });
 
