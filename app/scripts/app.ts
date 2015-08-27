@@ -1,6 +1,7 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
+/// <reference path="directives/next-release.ts" />
 'use strict';
 
 module labsFrontendApp
@@ -25,6 +26,8 @@ module labsFrontendApp
     } )
     .controller( 'DashboardCtrl', DashboardCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
+    .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
+
 
     ;
 }

@@ -16,7 +16,11 @@ module labsFrontendApp
         execute():ng.IPromise<Array<Release>>
         {
             var promise = this.$q.defer();
-            promise.resolve( [] );
+            promise.resolve( [{
+                name: 'Cat Release',
+                date: '2015-01-01',
+                releaseInfoUrl: ''
+            }] );
             return promise.promise;
         }
     }
