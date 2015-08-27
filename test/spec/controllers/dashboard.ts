@@ -1,26 +1,36 @@
+/// <reference path="../../../app/scripts/controllers/dashboard.ts" />
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
-/// <reference path="../../../app/scripts/controllers/dashboard.ts" />
+/// <reference path="../../mock/services/get-all-public-releases.ts" />
 
 'use strict';
+module labsFrontendApp
+{
+    describe('Controller: DashboardCtrl', () => {
 
-describe('Controller: DashboardCtrl', () => {
+        // load the controller's module
+        var dashboardCtrl: DashboardCtrl;
 
-  // load the controller's module
-  beforeEach(module('labsFrontendApp'));
+        var scope = {
+            releases: undefined,
+            feature: undefined,
+            message: undefined,
+            feature_sections: undefined,
+            hideSuccessMessage: undefined,
+            pickedFeature: undefined
+        };
 
-  var DashboardCtrl: labsFrontendApp.DashboardCtrl,
-    scope: labsFrontendApp.IDashboardScope;
+        // Initialize the controller and a mock scope
+        beforeEach( inject( ( $q: ng.IQService ) => {
+            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ) );
+        } ) );
 
-  // Initialize the controller and a mock scope
-  beforeEach(inject(($controller: ng.IControllerService, $rootScope: ng.IRootScopeService) => {
-    scope = <any>$rootScope.$new();
-    DashboardCtrl = $controller('DashboardCtrl', {
-      $scope: scope
+        it('should do nothing', () =>
+        {
+            //well indeed
+        } );
     });
-  }));
 
-  it('should do nothing', () =>  {
+}
 
-  })
-});
+

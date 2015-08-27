@@ -1,10 +1,12 @@
-/// <reference path="../app.ts" />
+/// <reference path="dashboard.ts" />
 
 'use strict';
 
 module labsFrontendApp {
-    export interface IDashboardScope extends ng.IScope {
 
+    export interface IPreviewScope extends IDashboardScope
+    {
+        releases: any;
     }
 
     export class SelectCtrl {
@@ -15,13 +17,8 @@ module labsFrontendApp {
     }
 }
 
-angular.module('labsFrontendApp')
-    .controller('SelectCtrl', ['$scope', function ($scope) {
-       //inherits from the dashboard controller
 
-    }
 
-    ]);
 
 
 

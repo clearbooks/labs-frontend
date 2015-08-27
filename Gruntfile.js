@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       typescript: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.ts'],
-        tasks: ['typescript:base']
+        tasks: ['typescript:base', 'ngAnnotate']
       },
       typescriptTest: {
         files: ['test/spec/{,*/}*.ts'],
@@ -66,7 +66,7 @@ module.exports = function (grunt) {
       options: {
         port: 9057,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
+        hostname: '0.0.0.0',
         livereload: 35729
       },
       livereload: {
@@ -75,6 +75,7 @@ module.exports = function (grunt) {
           middleware: function (connect) {
             return [
               connect.static('.tmp'),
+              connect.static('.tmp/compiled.annotated.js'),
               connect().use(
                 '/bower_components',
                 connect.static('./bower_components')
@@ -197,7 +198,7 @@ module.exports = function (grunt) {
     typescript: {
       base: {
         src: ['<%= yeoman.app %>/scripts/{,*/}*.ts'],
-        dest: '.tmp/scripts',
+        dest: '.tmp/compiled.js',
         options: {
           module: 'amd', //or commonjs
           target: 'es5', //or es3
@@ -392,9 +393,8 @@ module.exports = function (grunt) {
       dist: {
         files: [{
           expand: true,
-          cwd: '.tmp/concat/scripts',
-          src: '*.js',
-          dest: '.tmp/concat/scripts'
+          src: '.tmp/compiled.js',
+          ext: '.annotated.js'
         }]
       }
     },
@@ -470,10 +470,8 @@ module.exports = function (grunt) {
     }
 
     grunt.task.run([
-      'clean:server',
-      'wiredep',
-      'tsd:refresh',
-      'concurrent:server',
+      'build',
+      'compass:server',
       'autoprefixer:server',
       'connect:livereload',
       'watch'
@@ -501,10 +499,10 @@ module.exports = function (grunt) {
     'tsd:refresh',
     'useminPrepare',
     'concurrent:dist',
+    'ngAnnotate',
     'autoprefixer',
     'ngtemplates',
     'concat',
-    'ngAnnotate',
     'copy:dist',
     'cdnify',
     'cssmin',
