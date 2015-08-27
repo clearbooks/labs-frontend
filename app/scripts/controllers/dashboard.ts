@@ -72,12 +72,6 @@ module labsFrontendApp
           $scope.feature.chosen = pickedFeature;
         };
 
-        
-        
-        
-        
-        
-
     }
   }
 }
