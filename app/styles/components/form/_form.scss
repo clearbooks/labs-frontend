@@ -4,32 +4,6 @@
     margin-bottom: $baseline*2;
 }
 
-//remove this if we are to use the mui dropdown
-/*select {
-    border: none;
-    color: $black-body;
-    font-size: $body;
-    height: $baseline*2;
-    width: 100%;
-    background: $gray;
-    @include remove-outline;
-
-    margin-right: 0;
-    padding-left: $gutter-b;
-
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-
-    option{
-        background: red;
-
-        &:hover {
-            background: grey;
-        }
-    }
-}*/
-
 input, textarea {
     @include box-model;
     color: $black-body;

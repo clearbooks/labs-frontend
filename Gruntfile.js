@@ -210,7 +210,7 @@ module.exports = function (grunt) {
       },
       test: {
         src: ['test/spec/{,*/}*.ts', 'test/e2e/{,*/}*.ts'],
-        dest: '.tmp/spec',
+        dest: '.tmp/spec.js',
         options: {
           module: 'amd', //or commonjs
           target: 'es5', //or es3
