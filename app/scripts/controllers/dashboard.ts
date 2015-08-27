@@ -22,6 +22,8 @@ module labsFrontendApp
       releases.execute().then( ( releases ) => {
         $scope.releases = releases;
 
+      } );
+
 
         $scope.feature = {
           chosen: undefined
@@ -75,7 +77,7 @@ module labsFrontendApp
         
         
         
-      } );
+
     }
   }
 }

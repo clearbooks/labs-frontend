@@ -11,7 +11,7 @@ module labsFrontendApp {
 
     export class SelectCtrl {
         // @ngInject
-        constructor (private $scope: IDashboardScope) {
+        constructor (private $scope: IPreviewScope) {
 
         }
     }
