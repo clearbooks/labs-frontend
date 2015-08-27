@@ -22,7 +22,7 @@ module labsFrontendApp
             });
     })
     .config( ( $provide: any ) => {
-        $provide.value('apiUrl', 'api/' )
+        $provide.value('apiUrl', '{{LABS_API_URL}}/' )
     } )
     .controller( 'DashboardCtrl', DashboardCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
