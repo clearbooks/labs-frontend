@@ -1,0 +1,56 @@
+@mixin push-by($multiple) {
+    margin-bottom: $baseline*$multiple !important;
+}
+
+.vpushdown-1 {
+    @include push-by(1);
+}
+
+.vpushdown-2 {
+    @include push-by(2);
+}
+
+.vpushdown-3 {
+    @include push-by(3);
+}
+
+.vpushdown-4 {
+    @include push-by(4);
+}
+
+.vpushdown-5 {
+    @include push-by(5);
+}
+
+.vpushdown-6 {
+    @include push-by(6);
+}
+
+.vpushdown-7 {
+    @include push-by(7);
+}
+
+.vpushdown-8 {
+    @include push-by(8);
+}
+
+@mixin push-up($multiple) {
+    margin-top: $baseline*$multiple !important;
+}
+
+.vpushup-1 {
+    @include push-up(1);
+}
+
+.vpushup-2 {
+    @include push-up(2);
+}
+
+.vpushup-3 {
+    @include push-up(3);
+}
+
+.vpushup-4 {
+    @include push-up(4);
+}
+

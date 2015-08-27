@@ -11,9 +11,18 @@ module labsFrontendApp
         // load the controller's module
         var dashboardCtrl: DashboardCtrl;
 
+        var scope = {
+            releases: undefined,
+            feature: undefined,
+            message: undefined,
+            feature_sections: undefined,
+            hideSuccessMessage: undefined,
+            pickedFeature: undefined
+        };
+
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService ) => {
-            dashboardCtrl = new DashboardCtrl( {releases: []}, new GetAllPublicReleasesStub( $q ) );
+            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ) );
         } ) );
 
         it('should do nothing', () =>

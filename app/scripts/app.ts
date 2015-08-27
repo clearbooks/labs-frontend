@@ -1,6 +1,9 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
+/// <reference path="controllers/form.ts" />
+/// <reference path="controllers/select.ts" />
+
 /// <reference path="directives/next-release.ts" />
 'use strict';
 
@@ -27,6 +30,9 @@ module labsFrontendApp
     .controller( 'DashboardCtrl', DashboardCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
+    .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
+    .controller( 'SelectCtrl', SelectCtrl )
+    
 
 
     ;

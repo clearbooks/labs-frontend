@@ -1,0 +1,57 @@
+.over-pop-box {
+    /*overflow-y: scroll;*/
+    background: $white;
+    border-top: 1px solid $gray;
+    @include card(4);
+    height: 55%;
+    bottom: 10px;
+    z-index: 99999;
+    @include rounded;
+    box-shadow: bottom-shadow(5);
+    z-index: 10000;
+
+    a.close-modal {
+        position: absolute;
+        font-size: $body;
+        text-decoration: none;
+        color: $black-body;
+        right: $gutter*2;
+
+        span.close-text {
+            font-size: 16px;
+
+            @media screen and (max-width: 768px) {
+                display: none;
+            }
+        }
+    }
+
+    .success_message {
+        background: #eef8e9;
+        padding: 10px 0;
+        border-radius: 5px;
+        > span {
+            color: $green-base;
+            padding: 0 $gutter-b;
+
+        }
+    }
+}
+
+.black_overlay {
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $black-body;
+    z-index: 0;
+    -moz-opacity: 0.8;
+    opacity: .80;
+    filter: alpha(opacity=80);
+}
+
+
+
+
