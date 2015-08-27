@@ -7,32 +7,9 @@ module.exports = function(config) {
   'use strict';
 
   config.set({
+
     // enable / disable watching file and executing tests whenever any file changes
     autoWatch: true,
-
-    preprocessors: {
-      '**/*.ts': ['typescript']
-    },
-
-    typescriptPreprocessor: {
-      // options passed to the typescript compiler
-      options: {
-        sourceMap: true, // (optional) Generates corresponding .map file.
-        target: 'ES5', // (optional) Specify ECMAScript target version: 'ES3' (default), or 'ES5'
-        module: 'amd', // (optional) Specify module code generation: 'commonjs' or 'amd'
-        noImplicitAny: true, // (optional) Warn on expressions and declarations with an implied 'any' type.
-        noResolve: false, // (optional) Skip resolution and preprocessing.
-        removeComments: true // (optional) Do not emit comments to output.
-      },
-      // extra typing definitions to pass to the compiler (globs allowed)
-      typings: [
-        '../typings/tsd.d.ts'
-      ],
-      // transforming the filenames
-      transformPath: function(path) {
-        return path.replace(/\.ts$/, '.js');
-      }
-    },
 
     // base path, that will be used to resolve files and exclude
     basePath: '../',
@@ -57,9 +34,7 @@ module.exports = function(config) {
       'bower_components/angular-ui-router/release/angular-ui-router.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
-      "app/scripts/**/*.ts",
-      "test/mock/**/*.ts",
-      "test/spec/**/*.ts"
+      ".tmp/spec.js"
     ],
 
     // list of files / patterns to exclude
