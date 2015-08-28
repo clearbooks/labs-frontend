@@ -14,10 +14,14 @@ module labsFrontendApp {
 
     }
 
-    export class DashboardCtrl {
+    export class DashboardCtrl
+    {
         // @ngInject
-        constructor(private $scope:IDashboardScope, private releases:GetAllPublicReleases, private toggles:GetTogglesForRelease) {
-
+        constructor( private $scope:IDashboardScope,
+                     private releases:GetAllPublicReleases,
+                     private toggles:GetTogglesForRelease,
+                     private setActive: SetToggleActive )
+        {
             var releasePromise = releases.execute();
             this.getToggles( releasePromise );
 
@@ -47,7 +51,7 @@ module labsFrontendApp {
         /**
          * @param releases
          */
-        public getToggles( releases: ng.IPromise<Array<Release>> )
+        getToggles( releases: ng.IPromise<Array<Release>> )
         {
             releases.then( ( r: Array<Release> ) => {
                 this.toggles.execute( 1 ).then( ( toggles: Array<Toggle> ) => {
@@ -55,10 +59,15 @@ module labsFrontendApp {
                 } );
             } );
         }
+
+        /**
+         * @param toggleId
+         */
+        setToggleActive( toggleId:number ):void
+        {
+            this.setActive.execute( toggleId );
+        }
     }
-
-
-
 }
 
 

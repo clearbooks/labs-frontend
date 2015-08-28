@@ -1,5 +1,5 @@
 
-<div ng-controller="DashboardCtrl" class="wrapper">
+<div ng-controller="DashboardCtrl as ctrl" class="wrapper">
 
     <div class="t3-t8 d1-d9 preview-brand">
         <img class="d1-d3 t3-t4" src="images/preview.svg" />
@@ -43,7 +43,7 @@
                     <a class="t-all d-all" href="">Read more</a>
                     <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback</a>
                 </div>
-                <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'">Preview</a>
+                <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id)">Preview</a>
             </div>
 
         </div>
