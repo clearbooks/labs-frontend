@@ -36,6 +36,7 @@
     "time-grunt": "^1.0.0",
     "typescript": "^1.5.3",
     "karma-chai-plugins": "~0.6.0"
+
   },
   "engines": {
     "node": ">=0.10.0"

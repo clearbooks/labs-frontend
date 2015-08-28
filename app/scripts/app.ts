@@ -5,7 +5,10 @@
 /// <reference path="controllers/form.ts" />
 /// <reference path="controllers/select.ts" />
 
+/// <reference path="services/jwt-token-storage.ts" />
 /// <reference path="directives/next-release.ts" />
+/// <reference path="controllers/jwt-callback.ts" />
+
 'use strict';
 
 module labsFrontendApp
@@ -24,12 +27,18 @@ module labsFrontendApp
                 url: "/dashboard",
                 templateUrl: "views/dashboard.html"
             });
+            $stateProvider.state( 'jwt', {
+                url: "/jwt",
+                templateUrl: "views/jwt.html"
+            });
     })
     .config( ( $provide: any ) => {
         $provide.value('apiUrl', '{{LABS_API_URL}}/' )
     } )
     .controller( 'DashboardCtrl', DashboardCtrl )
+    .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
+    .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'toggles', HttpGetTogglesForRelease )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
