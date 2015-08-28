@@ -19,6 +19,7 @@ module labsFrontendApp
         /**
          * Construct this
          * @param $cookies
+         * @ngInject
          */
         constructor( private $cookies: ng.cookies.ICookiesService )
         {
