@@ -21,7 +21,7 @@ module labsFrontendApp
 
         it( 'should put the last part of the URL fragment into the JWT token storage then go to the dashboard', () =>
         {
-            location.hash( '/jwt/123456.123234.123123' );
+            location.path( '/jwt/123456.123234.123123' );
             new JwtCallbackCtrl( scope, jwtTokenStorage, location );
             jwtTokenStorage.get().should.equal( '123456.123234.123123' );
             location.path().should.equal( '/dashboard' );

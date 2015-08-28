@@ -18,7 +18,7 @@ module labsFrontendApp
          */
         constructor( $scope: IJwtCallbackScope, jwtStorage: JwtTokenStorage, $location: ng.ILocationService )
         {
-            jwtStorage.put( $location.hash().split('/').pop() );
+            jwtStorage.put( $location.path().split('/').pop() );
             $location.path( '/dashboard' );
         }
     }
