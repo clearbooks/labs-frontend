@@ -1,6 +1,10 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
+/// <reference path="services/get-toggles-for-release.ts" />
+/// <reference path="controllers/form.ts" />
+/// <reference path="controllers/select.ts" />
+
 /// <reference path="services/jwt-token-storage.ts" />
 /// <reference path="directives/next-release.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
@@ -35,7 +39,11 @@ module labsFrontendApp
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
     .service( 'jwtStorage', CookieJwtTokenStorage )
+    .service( 'toggles', HttpGetTogglesForRelease )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
+    .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
+    .controller( 'SelectCtrl', SelectCtrl )
+    
 
 
     ;

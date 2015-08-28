@@ -1,18 +1,39 @@
 .button {
-  @include box-model;
-  @include fade;
-  @include rounded;
-  font-size: $body;
-  font-family: $stack;
-  font-weight: 400;
-  text-align: center;
-  background: $brand;
-  color: $white;
-  padding: $baseline*0.5;
-  letter-spacing: 0px;
-  line-height: $baseline*0.75;
-  display: inline-block;
-  cursor: pointer;
-  text-decoration: none;
-  margin-bottom: $baseline;
+    @include box-model;
+    @include fade;
+    @include rounded;
+    border: none;
+    font-size: $body;
+    font-family: $stack;
+    font-weight: 400;
+    text-align: center;
+    background: $brand;
+    color: $white;
+    padding: $baseline*0.5;
+    letter-spacing: 0px;
+    line-height: $baseline*0.75;
+    display: inline-block;
+    cursor: pointer;
+    outline: none;
+    text-decoration: none;
+    margin-bottom: $baseline;
+
+    &.click-effect {
+        border: none;
+        border-top: 1px transparent solid;
+        border-right: 1px transparent solid;
+        border-bottom: 6px $brand-dark solid;
+        border-left: 1px transparent solid;
+        transition: background 0.2s ease, border-bottom-color 0.2s ease, border-bottom-width 0.1s ease, margin-top 0.1s ease;
+
+        &:hover {
+            background: $cyan;
+        }
+
+        &:active {
+            border-bottom-width: 2px;
+            margin-top: 4px;
+        }
+
+    }
 }

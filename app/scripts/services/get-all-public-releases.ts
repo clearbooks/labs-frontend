@@ -1,4 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="abstract-http-service.ts" />
 
 module labsFrontendApp
 {
@@ -14,17 +15,13 @@ module labsFrontendApp
         execute(): ng.IPromise<Array<Release>>
     }
 
-    export class HttpGetAllPublicReleases implements GetAllPublicReleases
+    export class HttpGetAllPublicReleases extends HttpService<Array<Release>> implements GetAllPublicReleases
     {
         /**
-         * @param $http
-         * @param $q
-         * @param apiUrl
-         * @ngInject
+         * The URL to use
+         * @type {string}
          */
-        constructor( private $http: ng.IHttpService, private $q: ng.IQService, private apiUrl: string )
-        {
-        }
+        protected url = 'public-releases/list';
 
         /**
          * Execute this Use Case
@@ -32,9 +29,7 @@ module labsFrontendApp
          */
         execute():ng.IPromise<Array<Release>>
         {
-            return this.$http.get( this.apiUrl + 'public-releases/list' ).then( ( stuff: any ) => {
-                return stuff.data;
-            } );
+            return this.get( {} );
         }
     }
 }

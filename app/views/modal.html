@@ -1,0 +1,57 @@
+<div class="d-all t-all m-all d-padinfull t-padinfull m-padinfull vpushup-2">
+
+    <div class="d-all t-all m-all vpushdown-1">
+        <h1 class="d1-d8 t1-t8 d-floatleft">Submit feedback</h1>
+    </div>
+
+
+    <form class="form" name ="featuresFeedback" ng-controller="PreviewFeedbackFormCtrl" ng-submit="processForm(feature.chosen, formData, featuresFeedback.$valid)" novalidate >
+
+        <div class="d-all t-all m-all vpushdown-1 success_message" ng-show="message.success"><span>Thank you for your feedback!</span></div>
+
+        <fieldset>
+            <div class="labs-form-select-group">
+                <div class="labs-select" ng-controller="SelectCtrl">
+                    <select ng-model="feature.chosen"
+                            ng-options="feature.name for feature in feature_sections track by feature.id"
+                            ng-focus="hideSuccessMessage()"></select>
+                </div>
+            </div>
+
+
+            <div class="feedback-radio-btns d-all t-all m-all vpushdown-1">
+                <div class="d3-d7 t1-t5 m-all positive-feedback">
+                    <input type="radio" name="moodIcon" id="posfeedback" ng-model="formData.mood" ng-focus="hideSuccessMessage()" required value="1"/>
+                    <label for="posfeedback"><span class="icon happy"></span><span>I'm giving praise</span></label>
+                </div>
+                <div class="d8-d12 t6-t9 m-all d-overlap t-overlap negative-feedback">
+                    <input type="radio" name="moodIcon" id="negfeedback" ng-model="formData.mood" ng-focus="hideSuccessMessage()" required value="0"/>
+                    <label for="negfeedback"><span class="icon sad"></span><span>I'm reporting an issue</span></label>
+                </div>
+                <div class="d-all t-all m-all d-padin t-padin m-padin error_container vpushup-1" ng-show="showValidationMessages && featuresFeedback.$submitted && featuresFeedback.moodIcon.$error.required">
+                    <div class="errors">Please select a happy or sad face.</div>
+                </div>
+            </div>
+
+            <textarea class="d-all t-all m-all d-padin t-padin m-padin vpushdown-1" ng-focus="hideSuccessMessage()" required="required"
+                      ng-model="formData.message" name="message"></textarea>
+         <div class="d-all t-all m-all d-padin t-padin m-padin error_container vpushup-1" ng-show="showValidationMessages && featuresFeedback.$submitted && featuresFeedback.message.$error.required">
+                <div class="errors">Please fill in a feedback message.</div>
+          </div>
+
+        </fieldset>
+
+
+        <button type="submit" class="button click-effect d8-d9 t6-t8 d-floatright t-floatright vpushup-2" ng-click="submitform()">
+            <span>Submit</span></button>
+
+         <pre>
+                 {{feature.chosen.name}}
+                 {{formData}}
+         </pre>
+
+
+    </form>
+
+
+</div>
