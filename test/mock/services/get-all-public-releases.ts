@@ -16,12 +16,17 @@ module labsFrontendApp
         execute():ng.IPromise<Array<Release>>
         {
             var promise = this.$q.defer();
-            promise.resolve( [{
+            promise.resolve( [GetAllPublicReleasesStub.getStubRelease()] );
+            return promise.promise;
+        }
+
+        static getStubRelease()
+        {
+            return {
                 name: 'Cat Release',
                 date: '2015-01-01',
                 releaseInfoUrl: ''
-            }] );
-            return promise.promise;
+            };
         }
     }
 }

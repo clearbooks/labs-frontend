@@ -2,6 +2,7 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../../mock/services/get-all-public-releases.ts" />
+/// <reference path="../../mock/services/get-toggles-for-release.ts" />
 
 'use strict';
 module labsFrontendApp
@@ -10,6 +11,8 @@ module labsFrontendApp
 
         // load the controller's module
         var dashboardCtrl: DashboardCtrl;
+        var toggleSpy: GetTogglesForReleaseSpy;
+        var rootScope: ng.IRootScopeService;
 
         var scope = {
             releases: undefined,
@@ -21,13 +24,17 @@ module labsFrontendApp
         };
 
         // Initialize the controller and a mock scope
-        beforeEach( inject( ( $q: ng.IQService ) => {
-            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ) );
+        beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
+            toggleSpy =  new GetTogglesForReleaseSpy( $q );
+            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy );
+            rootScope = $rootScope;
         } ) );
 
-        it('should do nothing', () =>
+        it('should grab releases then get toggles for release ID 1', () =>
         {
-            //well indeed
+            rootScope.$apply();
+            expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
+            expect( toggleSpy.getReleaseId() ).toBe( 1 );
         } );
     });
 
