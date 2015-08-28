@@ -2,6 +2,7 @@
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
 /// <reference path="services/get-toggles-for-release.ts" />
+/// <reference path="services/set-toggle-active.ts" />
 /// <reference path="controllers/form.ts" />
 /// <reference path="controllers/select.ts" />
 
@@ -40,12 +41,10 @@ module labsFrontendApp
     .service( 'releases', HttpGetAllPublicReleases )
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'toggles', HttpGetTogglesForRelease )
+    .service( 'setActive', HttpSetToggleActive )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )
-    
-
-
     ;
 }
 

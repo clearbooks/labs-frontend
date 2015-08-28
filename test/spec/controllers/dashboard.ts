@@ -3,6 +3,7 @@
 /// <reference path="../../../typings/jasmine/jasmine.d.ts" />
 /// <reference path="../../mock/services/get-all-public-releases.ts" />
 /// <reference path="../../mock/services/get-toggles-for-release.ts" />
+/// <reference path="../../mock/services/set-toggle-active.ts" />
 
 'use strict';
 module labsFrontendApp
@@ -13,6 +14,7 @@ module labsFrontendApp
         var dashboardCtrl: DashboardCtrl;
         var toggleSpy: GetTogglesForReleaseSpy;
         var rootScope: ng.IRootScopeService;
+        var setToggleActiveSpy: SetToggleActiveSpy;
 
         var scope = {
             releases: undefined,
@@ -26,7 +28,8 @@ module labsFrontendApp
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
             toggleSpy =  new GetTogglesForReleaseSpy( $q );
-            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy );
+            setToggleActiveSpy = new SetToggleActiveSpy();
+            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy );
             rootScope = $rootScope;
         } ) );
 
@@ -35,6 +38,12 @@ module labsFrontendApp
             rootScope.$apply();
             expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
             expect( toggleSpy.getReleaseId() ).toBe( 1 );
+        } );
+
+        it( 'should pass thru calls to setToggleActive to the service', () =>
+        {
+            dashboardCtrl.setToggleActive( 1 );
+            setToggleActiveSpy.getToggleId().should.equal( 1 );
         } );
     });
 

@@ -1,5 +1,4 @@
-/// <reference path="../../../app/scripts/services/get-toggles-for-release.ts" />
-
+/// <reference path="../../../app/scripts/services/set-toggle-active.ts" />
 
 module labsFrontendApp
 {
