@@ -29,6 +29,17 @@ module labsFrontendApp
                 return stuff.data;
             } );
         }
+
+        /**
+         * @param params
+         * @returns {IPromise<TResult>}
+         */
+        protected post( params: Object ): ng.IPromise<T>
+        {
+            return this.$http.post( this.apiUrl + this.url, $.param( params ) ).then( ( stuff: any ) => {
+                return stuff.data;
+            } );
+        }
     }
 
 }
