@@ -29,8 +29,8 @@ module labsFrontendApp
                 templateUrl: "views/dashboard.html"
             });
             $stateProvider.state( 'jwt', {
-                url: "/jwt",
-                templateUrl: "views/jwt.html"
+                url: "/jwt/:token",
+                templateUrl: "views/jwt.html",
             });
     })
     .config( ( $provide: any ) => {
