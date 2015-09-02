@@ -34,7 +34,7 @@ module labsFrontendApp
             });
     })
     .config( ( $provide: any ) => {
-        $provide.value('apiUrl', '{{LABS_API_URL}}/' )
+        $provide.value('apiUrl', 'api/' )
     } )
     .controller( 'DashboardCtrl', DashboardCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
