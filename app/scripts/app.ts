@@ -10,11 +10,14 @@
 /// <reference path="directives/next-release.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
 /// <reference path="services/unauthorised-request-handler.ts" />
+/// <reference path="config/config.ts" />
+
 
 'use strict';
 
 module labsFrontendApp
 {
+    declare var window: AppWindow;
     angular.module('labsFrontendApp', [
         'ngAnimate',
         'ngCookies',
@@ -35,8 +38,10 @@ module labsFrontendApp
             });
     })
     .config( ( $provide: any ) => {
-        $provide.value('apiUrl', '{{LABS_API_URL}}/' )
-    } )
+        $provide.value('apiUrl', 'api/' );
+        $provide.value('appUrl', window.config.jwtServer )
+
+        } )
     .controller( 'DashboardCtrl', DashboardCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )

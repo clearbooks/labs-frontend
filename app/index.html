@@ -22,7 +22,6 @@
     <nav class="cf">
       <img class="" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
     </nav>
-
     <div ui-view></div>
 
     <!-- build:js(.) scripts/vendor.js -->
@@ -38,12 +37,15 @@
     <!-- endbower -->
     <!-- endbuild -->
 
+    <!-- Left unminified so we can use ansible templates -->
+    <script src="scripts/config/config.js"></script>
+
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="compiled.annotated.js"></script>
     <!-- endbuild -->
 
-        <script src="scripts/app.js"></script>
-        <script src="https://get.gridsetapp.com/33432/overlay/"></script>
-        <script src="scripts/mui.js"></script>
+    <script src="scripts/app.js"></script>
+    <script src="https://get.gridsetapp.com/33432/overlay/"></script>
+    <script src="scripts/mui.js"></script>
 </body>
 </html>
