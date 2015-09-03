@@ -9,6 +9,7 @@
 /// <reference path="services/jwt-token-storage.ts" />
 /// <reference path="directives/next-release.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
+/// <reference path="services/unauthorised-request-handler.ts" />
 
 'use strict';
 
@@ -42,6 +43,7 @@ module labsFrontendApp
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'toggles', HttpGetTogglesForRelease )
     .service( 'setActive', HttpSetToggleActive )
+    .service( 'unauthorisedHandler', ConsoleUnauthorisedRequestHandler )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )

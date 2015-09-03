@@ -1,5 +1,6 @@
 /// <reference path="../../../typings/angularjs/angular-mocks.d.ts" />
 /// <reference path="../../../app/scripts/services/abstract-http-service.ts" />
+/// <reference path="../../../app/scripts/services/unauthorised-request-handler.ts" />
 /// <reference path="../../../app/scripts/services/jwt-token-storage.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
 
@@ -20,10 +21,22 @@ module labsFrontendApp
         }
     }
 
+    class UnauthorisedRequestHandlerSpy implements UnauthorisedRequestHandler
+    {
+        public wasCalled = false;
+
+        handleUnauthorisedRequest():void
+        {
+            this.wasCalled = true;
+        }
+
+    }
+
     describe("HTTP service facade", () =>
     {
         var service: HttpServiceFake;
         var $httpBackend: ng.IHttpBackendService;
+        var unauthorisedSpy: UnauthorisedRequestHandlerSpy;
         var apiUrl: string;
 
         var expectedHeaders = {
@@ -38,7 +51,8 @@ module labsFrontendApp
             var $injector = angular.injector([ 'ngMock' ]);
             $httpBackend = $injector.get( '$httpBackend' );
             var jwtStorage = new CookieJwtTokenStorage( $cookies );
-            service = new HttpServiceFake( $injector.get('$http'), $q, apiUrl, jwtStorage );
+            unauthorisedSpy = new UnauthorisedRequestHandlerSpy();
+            service = new HttpServiceFake( $injector.get('$http'), $q, apiUrl, jwtStorage, unauthorisedSpy );
             jwtStorage.put( 'jwt!' );
         } ) );
 
@@ -62,6 +76,15 @@ module labsFrontendApp
             $httpBackend.expectPOST( apiUrl + 'test', $.param( {brollies: true} ), expectedHeaders ).respond( 200, '["pat"]' );
             service.runPost( {brollies: true} ).should.eventually.deep.equal( ["pat"] );
             $httpBackend.flush();
+        } );
+
+        it( 'should call the UnauthorisedRequestHandler when an API call fails for any reason', () =>
+        {
+            $httpBackend.expectPOST( apiUrl + 'test' ).respond( 401 );
+            service.runPost( {brollies: true} );
+            $httpBackend.flush();
+            expect( unauthorisedSpy.wasCalled ).toBe( true );
+
         } );
 
         afterEach( () =>
