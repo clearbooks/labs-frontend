@@ -11,7 +11,7 @@ module labsFrontendApp
 
         execute( toggleId: number )
         {
-            this.post( {toggleId: toggleId, newStatus: true, userId: 1} );
+            this.post( {toggleId: toggleId, newStatus: 'active', userId: 1} );
         }
     }
 }
