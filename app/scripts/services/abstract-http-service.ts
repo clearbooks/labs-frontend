@@ -60,7 +60,7 @@ module labsFrontendApp
         protected post( params: Object ): ng.IPromise<T>
         {
             var headers = this.getHeaders();
-            headers["Content-Type"] =  "x-www-form-urlencoded;charset=utf-8";
+            headers["Content-Type"] =  "application/x-www-form-urlencoded;charset=utf-8";
 
             var req = {
                 method: 'POST',
