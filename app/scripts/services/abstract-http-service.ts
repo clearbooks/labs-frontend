@@ -1,3 +1,6 @@
+/// <reference path="unauthorised-request-handler.ts" />
+
+
 module labsFrontendApp
 {
     export class HttpService<T>
@@ -14,8 +17,13 @@ module labsFrontendApp
          * @param apiUrl
          * @ngInject
          * @param jwtStorage
+         * @param unauthorisedHandler
          */
-        constructor( private $http: ng.IHttpService, private $q: ng.IQService, private apiUrl: string, private jwtStorage: JwtTokenStorage )
+        constructor( private $http: ng.IHttpService,
+                     private $q: ng.IQService,
+                     private apiUrl: string,
+                     private jwtStorage: JwtTokenStorage,
+                     private unauthorisedHandler: UnauthorisedRequestHandler )
         {
             $http.defaults.headers.common.Authorization = jwtStorage.get();
         }
@@ -40,6 +48,8 @@ module labsFrontendApp
         {
             return this.$http.get( this.apiUrl + this.url, { params: params, headers: this.getHeaders() } ).then( ( stuff: any ) => {
                 return stuff.data;
+            }, () => {
+                this.unauthorisedHandler.handleUnauthorisedRequest();
             } );
         }
 
@@ -61,6 +71,8 @@ module labsFrontendApp
 
             return this.$http( req ).then( ( stuff: any ) => {
                 return stuff.data;
+            }, () => {
+                this.unauthorisedHandler.handleUnauthorisedRequest();
             } );
         }
     }
