@@ -39,7 +39,7 @@ module labsFrontendApp
     })
     .config( ( $provide: any ) => {
         $provide.value('apiUrl', 'api/' );
-        $provide.value('appUrl', window.config.jwtServer )
+        $provide.value('jwtUrl', window.config.jwtServer )
 
         } )
     .controller( 'DashboardCtrl', DashboardCtrl )
@@ -48,7 +48,7 @@ module labsFrontendApp
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'toggles', HttpGetTogglesForRelease )
     .service( 'setActive', HttpSetToggleActive )
-    .service( 'unauthorisedHandler', ConsoleUnauthorisedRequestHandler )
+    .service( 'unauthorisedHandler', RedirectUnauthorisedRequestHandler )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )

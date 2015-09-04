@@ -5,12 +5,19 @@ module labsFrontendApp
         handleUnauthorisedRequest(): void
     }
 
-    // until I figure out my typescript configuration issues
-    export class ConsoleUnauthorisedRequestHandler implements UnauthorisedRequestHandler
+    export class RedirectUnauthorisedRequestHandler implements UnauthorisedRequestHandler
     {
+        /**
+         * @ngInject
+         * @param jwtUrl
+         */
+        constructor( private jwtUrl: string )
+        {
+        }
+
         handleUnauthorisedRequest():void
         {
-            console.log('Consider yourself taken off to the JWT server')
+            window.location.replace( this.jwtUrl );
         }
     }
 }
