@@ -58,7 +58,7 @@ module labsFrontendApp
 
         it( 'should encode POST parameters as www-form-data', () =>
         {
-            expectedHeaders["Content-Type"] = "x-www-form-urlencoded;charset=utf-8";
+            expectedHeaders["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
             $httpBackend.expectPOST( apiUrl + 'test', $.param( {brollies: true} ), expectedHeaders ).respond( 200, '["pat"]' );
             service.runPost( {brollies: true} ).should.eventually.deep.equal( ["pat"] );
             $httpBackend.flush();
