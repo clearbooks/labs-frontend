@@ -43,7 +43,9 @@
                     <a class="t-all d-all" href="">Read more</a>
                     <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback</a>
                 </div>
-                <a href="" class="button blue t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id)">Preview</a>
+                <a href="" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id)">
+                    Preview
+                </a>
             </div>
 
         </div>
