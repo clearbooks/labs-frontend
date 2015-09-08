@@ -26,6 +26,7 @@ module labsFrontendApp {
         {
             var releasePromise = releases.execute();
             this.getToggles( releasePromise );
+            $scope.activated = {};
 
             releasePromise.then((releases) => {
                 $scope.releases = releases;
@@ -67,10 +68,12 @@ module labsFrontendApp {
 
         /**
          * @param toggleId
+         * @param toggleName
          */
-        setToggleActive( toggleId:number ):void
+        setToggleActive( toggleId:number, toggleName: string ):void
         {
             this.setActive.execute( toggleId );
+            this.$scope.activated[toggleName] = 1;
         }
     }
 }
