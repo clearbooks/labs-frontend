@@ -10,6 +10,7 @@
 /// <reference path="directives/next-release.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
 /// <reference path="services/unauthorised-request-handler.ts" />
+/// <reference path="services/get-toggles-activated-by-user.ts" />
 /// <reference path="config/config.ts" />
 
 
@@ -45,6 +46,7 @@ module labsFrontendApp
     .controller( 'DashboardCtrl', DashboardCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
+    .service( 'getTogglesActivatedByUser', HttpGetTogglesActivatedByUser )
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'toggles', HttpGetTogglesForRelease )
     .service( 'setActive', HttpSetToggleActive )

@@ -5,6 +5,7 @@
 
 module labsFrontendApp {
     export interface IDashboardScope {
+        activated: Object;
         releases: any;
         feature: any;
         message: any;
@@ -20,7 +21,8 @@ module labsFrontendApp {
         constructor( private $scope:IDashboardScope,
                      private releases:GetAllPublicReleases,
                      private toggles:GetTogglesForRelease,
-                     private setActive: SetToggleActive )
+                     private setActive: SetToggleActive,
+                     private getTogglesActivatedByUser: GetTogglesActivatedByUser )
         {
             var releasePromise = releases.execute();
             this.getToggles( releasePromise );
@@ -29,6 +31,9 @@ module labsFrontendApp {
                 $scope.releases = releases;
             });
 
+            getTogglesActivatedByUser.execute().then( ( activated ) => {
+                $scope.activated = activated;
+            } );
 
             $scope.feature = {
                 chosen: undefined
