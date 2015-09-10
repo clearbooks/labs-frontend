@@ -5,6 +5,7 @@
 
 module labsFrontendApp {
     export interface IDashboardScope {
+        activated: Object;
         releases: any;
         feature: any;
         message: any;
@@ -20,15 +21,20 @@ module labsFrontendApp {
         constructor( private $scope:IDashboardScope,
                      private releases:GetAllPublicReleases,
                      private toggles:GetTogglesForRelease,
-                     private setActive: SetToggleActive )
+                     private setActive: SetToggleActive,
+                     private getTogglesActivatedByUser: GetTogglesActivatedByUser )
         {
             var releasePromise = releases.execute();
             this.getToggles( releasePromise );
+            $scope.activated = {};
 
             releasePromise.then((releases) => {
                 $scope.releases = releases;
             });
 
+            getTogglesActivatedByUser.execute().then( ( activated ) => {
+                $scope.activated = activated;
+            } );
 
             $scope.feature = {
                 chosen: undefined
@@ -62,10 +68,12 @@ module labsFrontendApp {
 
         /**
          * @param toggleId
+         * @param toggleName
          */
-        setToggleActive( toggleId:number ):void
+        setToggleActive( toggleId:number, toggleName: string ):void
         {
             this.setActive.execute( toggleId );
+            this.$scope.activated[toggleName] = 1;
         }
     }
 }
