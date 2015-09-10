@@ -4,6 +4,7 @@
 /// <reference path="../../mock/services/get-all-public-releases.ts" />
 /// <reference path="../../mock/services/get-toggles-for-release.ts" />
 /// <reference path="../../mock/services/set-toggle-active.ts" />
+/// <reference path="../../mock/services/get-toggles-activated-by-user.ts" />
 
 'use strict';
 module labsFrontendApp
@@ -15,6 +16,7 @@ module labsFrontendApp
         var toggleSpy: GetTogglesForReleaseSpy;
         var rootScope: ng.IRootScopeService;
         var setToggleActiveSpy: SetToggleActiveSpy;
+        var getTogglesActivatedByUserStub;
 
         var scope = {
             releases: undefined,
@@ -22,14 +24,17 @@ module labsFrontendApp
             message: undefined,
             feature_sections: undefined,
             hideSuccessMessage: undefined,
-            pickedFeature: undefined
+            pickedFeature: undefined,
+            activated: undefined
         };
 
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
             toggleSpy =  new GetTogglesForReleaseSpy( $q );
             setToggleActiveSpy = new SetToggleActiveSpy();
-            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy );
+            getTogglesActivatedByUserStub = new GetTogglesActivatedByUserStub( $q );
+            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy,
+                                               getTogglesActivatedByUserStub);
             rootScope = $rootScope;
         } ) );
 
@@ -40,10 +45,36 @@ module labsFrontendApp
             expect( toggleSpy.getReleaseId() ).toBe( 1 );
         } );
 
+        it( 'should put activated toggles onto the scope', () =>
+        {
+            rootScope.$apply();
+            expect( scope.activated ).toEqual( getTogglesActivatedByUserStub.getStubData() )
+        } );
+
         it( 'should pass thru calls to setToggleActive to the service', () =>
         {
-            dashboardCtrl.setToggleActive( 1 );
+            dashboardCtrl.setToggleActive( 1, 'dogs', false );
             setToggleActiveSpy.getToggleId().should.equal( 1 );
+        } );
+
+        it( 'should update the scope when setToggleActive is called', () =>
+        {
+            scope.activated['dogs'] = 0;
+            dashboardCtrl.setToggleActive( 1, 'dogs', false );
+            scope.activated['dogs'].should.equal( 1 );
+        } );
+
+        it( 'should make toggles active if they are inactive', () =>
+        {
+            dashboardCtrl.setToggleActive( 1, 'dogs', true );
+            setToggleActiveSpy.geLastActiveStatus().should.equal( true );
+        } );
+
+        it( 'should make toggles inactive if they are active', () =>
+        {
+            dashboardCtrl.setToggleActive( 1, 'dogs', false );
+            setToggleActiveSpy.geLastActiveStatus().should.equal( false );
+            expect( typeof scope.activated['dogs'] ).toEqual( "undefined" );
         } );
     });
 
