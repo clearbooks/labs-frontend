@@ -41,3 +41,7 @@ Run `grunt` for building and `grunt serve` for preview.
 
 Running `grunt test` will run the unit tests with karma.
 
+## Credits
+
+![stamp_small](https://cloud.githubusercontent.com/assets/980959/9278343/27074a4c-42a8-11e5-8262-89c1d6f2217e.png)
+

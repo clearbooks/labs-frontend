@@ -18,6 +18,10 @@
     text-decoration: none;
     margin-bottom: $baseline;
 
+    &.active {
+        background-color: $green-base;
+    }
+
     &.click-effect {
         border: none;
         border-top: 1px transparent solid;
