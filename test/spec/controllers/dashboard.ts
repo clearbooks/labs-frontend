@@ -60,7 +60,7 @@ module labsFrontendApp
         it( 'should update the scope when setToggleActive is called', () =>
         {
             scope.activated['dogs'] = 0;
-            dashboardCtrl.setToggleActive( 1, 'dogs', false );
+            dashboardCtrl.setToggleActive( 1, 'dogs', true);
             scope.activated['dogs'].should.equal( 1 );
         } );
 
@@ -68,6 +68,7 @@ module labsFrontendApp
         {
             dashboardCtrl.setToggleActive( 1, 'dogs', true );
             setToggleActiveSpy.geLastActiveStatus().should.equal( true );
+            scope.activated['dogs'].should.equal(1);
         } );
 
         it( 'should make toggles inactive if they are active', () =>
