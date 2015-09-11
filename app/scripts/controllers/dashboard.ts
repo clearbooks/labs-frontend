@@ -1,6 +1,7 @@
 /// <reference path="../services/get-all-public-releases.ts" />
 /// <reference path="../services/get-toggles-for-release.ts" />
-
+/// <reference path="../services/get-is-auto-subscribed.ts" />
+/// <reference path="../services/toggle-auto-subscribe.ts" />
 'use strict';
 
 module labsFrontendApp {
@@ -12,6 +13,7 @@ module labsFrontendApp {
         feature_sections: any;
         hideSuccessMessage: any;
         pickedFeature: any;
+        autoSubscribed: boolean;
 
     }
 
@@ -22,7 +24,10 @@ module labsFrontendApp {
                      private releases:GetAllPublicReleases,
                      private toggles:GetTogglesForRelease,
                      private setActive: SetToggleActive,
-                     private getTogglesActivatedByUser: GetTogglesActivatedByUser )
+                     private getTogglesActivatedByUser: GetTogglesActivatedByUser,
+                     private toggleAutoSubscribe: ToggleAutoSubscribe,
+                     private getIsAutoSubscribed: GetIsAutoSubscribed
+        )
         {
             var releasePromise = releases.execute();
             this.getToggles( releasePromise );
@@ -35,6 +40,10 @@ module labsFrontendApp {
             getTogglesActivatedByUser.execute().then( ( activated ) => {
                 $scope.activated = activated;
             } );
+
+            getIsAutoSubscribed.execute().then((autoSubscribed: IsAutoSubscribed) => {
+                $scope.autoSubscribed = autoSubscribed.autoSubscribed;
+            });
 
             $scope.feature = {
                 chosen: undefined
@@ -82,6 +91,12 @@ module labsFrontendApp {
             } else {
                 delete this.$scope.activated[toggleName];
             }
+        }
+
+        autoSubscribe():void
+        {
+            this.toggleAutoSubscribe.execute();
+            this.$scope.autoSubscribed = !this.$scope.autoSubscribed;
         }
     }
 }

@@ -25,7 +25,9 @@
             available to benefit from the
             latest Clear Books.
         </p>
-        <a href="" class="button blue t-all d-all">Auto subscribe</a>
+        <a href="" ng-class="autoSubscribed ? 'autoSubscribed': ''" class="button blue t-all d-all" ng-click="ctrl.autoSubscribe()">
+            {{ autoSubscribed ? "Stop auto subscribing" : "Auto subscribe" }}
+        </a>
     </div>
 
 

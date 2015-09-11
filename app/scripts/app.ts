@@ -2,7 +2,9 @@
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
 /// <reference path="services/get-toggles-for-release.ts" />
+/// <reference path="services/get-is-auto-subscribed.ts" />
 /// <reference path="services/set-toggle-active.ts" />
+/// <reference path="services/toggle-auto-subscribe.ts" />
 /// <reference path="controllers/form.ts" />
 /// <reference path="controllers/select.ts" />
 
@@ -51,6 +53,8 @@ module labsFrontendApp
     .service( 'toggles', HttpGetTogglesForRelease )
     .service( 'setActive', HttpSetToggleActive )
     .service( 'unauthorisedHandler', RedirectUnauthorisedRequestHandler )
+    .service( 'toggleAutoSubscribe', HttpAutoSubscribe)
+    .service( 'getIsAutoSubscribed', HttpGetIsAutoSubscribed)
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )
