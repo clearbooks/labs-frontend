@@ -97,7 +97,26 @@ module labsFrontendApp
             dashboardCtrl.autoSubscribe();
             toggleAutoSubscribeSpy.getExecuted().should.equal(true);
             expect(scope.autoSubscribed).toEqual(!getIsAutoSubscribedStub.getStubData().autoSubscribed)
-        })
+        });
+
+        it ('should return "Auto subscribed" when autoSubscribed is set to true', () =>
+        {
+            var content = dashboardCtrl.getButtonContent(true, null);
+            expect(content).toEqual("Auto subscribed");
+        });
+
+        it ('should return "Preview" when autoSubscribed is set to false and toggle is not activated', () =>
+        {
+            var content = dashboardCtrl.getButtonContent(false, false);
+            expect(content).toEqual("Preview");
+        });
+
+        it ('should return "Stop preview" when autoSubscribed is set to false and toggle is activated', () =>
+        {
+            scope.activated['cats'] = 1;
+            var content = dashboardCtrl.getButtonContent(false, true);
+            expect(content).toEqual("Stop preview");
+        });
 
     });
 

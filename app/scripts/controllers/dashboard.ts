@@ -98,6 +98,19 @@ module labsFrontendApp {
             this.toggleAutoSubscribe.execute();
             this.$scope.autoSubscribed = !this.$scope.autoSubscribed;
         }
+
+        getButtonContent(autoSubscribed: boolean, activated: boolean):string
+        {
+            if(autoSubscribed) {
+                return "Auto subscribed";
+            } else {
+                if(activated) {
+                    return "Stop preview";
+                } else {
+                    return "Preview"
+                }
+            }
+        }
     }
 }
 
