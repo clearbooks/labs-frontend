@@ -1,3 +1,3 @@
 var config = {
-    jwtServer: '{{ jwt_server_url }}'
+    jwtServer: 'https://secure.clearbooks.local/accounting/auth/auth?app=labs'
 };

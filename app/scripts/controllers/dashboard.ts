@@ -73,6 +73,9 @@ module labsFrontendApp {
          */
         setToggleActive( toggleId:number, toggleName: string, active: boolean ):void
         {
+            if(typeof active === 'undefined') {
+                active = true;
+            }
             this.setActive.execute( toggleId, active );
             if(active) {
                 this.$scope.activated[toggleName] = 1;
