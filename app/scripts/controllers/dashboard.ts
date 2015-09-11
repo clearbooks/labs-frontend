@@ -69,11 +69,19 @@ module labsFrontendApp {
         /**
          * @param toggleId
          * @param toggleName
+         * @param active
          */
-        setToggleActive( toggleId:number, toggleName: string ):void
+        setToggleActive( toggleId:number, toggleName: string, active: boolean ):void
         {
-            this.setActive.execute( toggleId );
-            this.$scope.activated[toggleName] = 1;
+            if(typeof active === 'undefined') {
+                active = true;
+            }
+            this.setActive.execute( toggleId, active );
+            if(active) {
+                this.$scope.activated[toggleName] = 1;
+            } else {
+                delete this.$scope.activated[toggleName];
+            }
         }
     }
 }

@@ -53,15 +53,29 @@ module labsFrontendApp
 
         it( 'should pass thru calls to setToggleActive to the service', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs' );
+            dashboardCtrl.setToggleActive( 1, 'dogs', false );
             setToggleActiveSpy.getToggleId().should.equal( 1 );
         } );
 
         it( 'should update the scope when setToggleActive is called', () =>
         {
             scope.activated['dogs'] = 0;
-            dashboardCtrl.setToggleActive( 1, 'dogs' );
+            dashboardCtrl.setToggleActive( 1, 'dogs', true);
             scope.activated['dogs'].should.equal( 1 );
+        } );
+
+        it( 'should make toggles active if they are inactive', () =>
+        {
+            dashboardCtrl.setToggleActive( 1, 'dogs', true );
+            setToggleActiveSpy.geLastActiveStatus().should.equal( true );
+            scope.activated['dogs'].should.equal(1);
+        } );
+
+        it( 'should make toggles inactive if they are active', () =>
+        {
+            dashboardCtrl.setToggleActive( 1, 'dogs', false );
+            setToggleActiveSpy.geLastActiveStatus().should.equal( false );
+            expect( typeof scope.activated['dogs'] ).toEqual( "undefined" );
         } );
     });
 
