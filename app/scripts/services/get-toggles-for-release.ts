@@ -7,6 +7,7 @@ module labsFrontendApp
     {
         id: number,
         name: string
+        summary: string
         url: string
     }
 
