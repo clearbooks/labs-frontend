@@ -22,6 +22,10 @@
         background-color: $green-base;
     }
 
+    &:disabled {
+        background-color: $green-light;
+    }
+
     &.click-effect {
         border: none;
         border-top: 1px transparent solid;

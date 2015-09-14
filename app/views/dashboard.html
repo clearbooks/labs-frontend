@@ -25,7 +25,9 @@
             available to benefit from the
             latest Clear Books.
         </p>
-        <a href="" class="button blue t-all d-all">Auto subscribe</a>
+        <a href="" ng-class="autoSubscribed ? 'active': ''" class="button blue t-all d-all" ng-click="ctrl.autoSubscribe()">
+            {{ autoSubscribed ? "Stop auto subscribing" : "Auto subscribe" }}
+        </a>
     </div>
 
 
@@ -43,9 +45,9 @@
                     <a class="t-all d-all" href="{{div.url}}">Read more</a>
                     <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback</a>
                 </div>
-                <a href="" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name])">
-                    {{ activated[div.name] ? "Stop Preview" : "Preview" }}
-                </a>
+                <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name])">
+                    {{ ctrl.getButtonContent(activated[div.name]) }}
+                </button>
             </div>
 
         </div>

@@ -5,6 +5,8 @@
 /// <reference path="../../mock/services/get-toggles-for-release.ts" />
 /// <reference path="../../mock/services/set-toggle-active.ts" />
 /// <reference path="../../mock/services/get-toggles-activated-by-user.ts" />
+/// <reference path="../../mock/services/toggle-auto-subscribe.ts" />
+/// <reference path="../../mock/services/get-is-auto-subscribed.ts" />
 
 'use strict';
 module labsFrontendApp
@@ -17,6 +19,8 @@ module labsFrontendApp
         var rootScope: ng.IRootScopeService;
         var setToggleActiveSpy: SetToggleActiveSpy;
         var getTogglesActivatedByUserStub;
+        var toggleAutoSubscribeSpy: ToggleAutoSubscribeSpy;
+        var getIsAutoSubscribedStub: GetIsAutoSubscribedStub;
 
         var scope = {
             releases: undefined,
@@ -25,16 +29,19 @@ module labsFrontendApp
             feature_sections: undefined,
             hideSuccessMessage: undefined,
             pickedFeature: undefined,
-            activated: undefined
+            activated: undefined,
+            autoSubscribed: undefined
         };
 
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
             toggleSpy =  new GetTogglesForReleaseSpy( $q );
             setToggleActiveSpy = new SetToggleActiveSpy();
+            toggleAutoSubscribeSpy = new ToggleAutoSubscribeSpy();
             getTogglesActivatedByUserStub = new GetTogglesActivatedByUserStub( $q );
+            getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
             dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy,
-                                               getTogglesActivatedByUserStub);
+                                               getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub );
             rootScope = $rootScope;
         } ) );
 
@@ -43,6 +50,12 @@ module labsFrontendApp
             rootScope.$apply();
             expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
             expect( toggleSpy.getReleaseId() ).toBe( 1 );
+        } );
+
+        it('should get if the user is auto subscribed and set it on the scope', () =>
+        {
+            rootScope.$apply();
+            expect(scope.autoSubscribed).toEqual(getIsAutoSubscribedStub.getStubData().autoSubscribed);
         } );
 
         it( 'should put activated toggles onto the scope', () =>
@@ -77,6 +90,28 @@ module labsFrontendApp
             setToggleActiveSpy.geLastActiveStatus().should.equal( false );
             expect( typeof scope.activated['dogs'] ).toEqual( "undefined" );
         } );
+
+        it( 'should set autoSubscribed to true when toggleAutoSubscribe is called', () =>
+        {
+            rootScope.$apply();
+            dashboardCtrl.autoSubscribe();
+            toggleAutoSubscribeSpy.getExecuted().should.equal(true);
+            expect(scope.autoSubscribed).toEqual(!getIsAutoSubscribedStub.getStubData().autoSubscribed)
+        });
+
+        it ('should return "Preview" when toggle is not activated', () =>
+        {
+            var content = dashboardCtrl.getButtonContent(false);
+            expect(content).toEqual("Preview");
+        });
+
+        it ('should return "Stop preview" when toggle is activated', () =>
+        {
+            scope.activated['cats'] = 1;
+            var content = dashboardCtrl.getButtonContent(true);
+            expect(content).toEqual("Stop preview");
+        });
+
     });
 
 }
