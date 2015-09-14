@@ -99,22 +99,16 @@ module labsFrontendApp
             expect(scope.autoSubscribed).toEqual(!getIsAutoSubscribedStub.getStubData().autoSubscribed)
         });
 
-        it ('should return "Auto subscribed" when autoSubscribed is set to true', () =>
+        it ('should return "Preview" when toggle is not activated', () =>
         {
-            var content = dashboardCtrl.getButtonContent(true, null);
-            expect(content).toEqual("Auto subscribed");
-        });
-
-        it ('should return "Preview" when autoSubscribed is set to false and toggle is not activated', () =>
-        {
-            var content = dashboardCtrl.getButtonContent(false, false);
+            var content = dashboardCtrl.getButtonContent(false);
             expect(content).toEqual("Preview");
         });
 
-        it ('should return "Stop preview" when autoSubscribed is set to false and toggle is activated', () =>
+        it ('should return "Stop preview" when toggle is activated', () =>
         {
             scope.activated['cats'] = 1;
-            var content = dashboardCtrl.getButtonContent(false, true);
+            var content = dashboardCtrl.getButtonContent(true);
             expect(content).toEqual("Stop preview");
         });
 

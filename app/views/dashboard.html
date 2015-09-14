@@ -46,7 +46,7 @@
                     <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback</a>
                 </div>
                 <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name])">
-                    {{ ctrl.getButtonContent(autoSubscribed, activated[div.name]) }}
+                    {{ ctrl.getButtonContent(activated[div.name]) }}
                 </button>
             </div>
 
