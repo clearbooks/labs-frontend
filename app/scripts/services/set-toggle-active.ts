@@ -5,13 +5,20 @@ module labsFrontendApp
         execute( toggleId: number, active: boolean );
     }
 
-    export class HttpSetToggleActive extends HttpService<any> implements SetToggleActive
+    export class HttpSetToggleActive implements SetToggleActive
     {
         protected url = 'toggle/change-status';
 
+        /**
+         * @ngInject
+         * @param apiUrl
+         * @param simplePoster
+         */
+        constructor( private apiUrl: string, private simplePoster: SimplePoster ) {}
+
         execute( toggleId: number, active: boolean )
         {
-            this.post( {toggleId: toggleId, newStatus: active ? 'active' : 'inactive'} );
+            this.simplePoster.post( this.apiUrl + this.url, {toggleId: toggleId, newStatus: active ? 'active' : 'inactive'} );
         }
     }
 }

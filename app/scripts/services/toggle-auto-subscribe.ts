@@ -5,13 +5,19 @@ module labsFrontendApp
         execute();
     }
 
-    export class HttpAutoSubscribe extends HttpService<any> implements ToggleAutoSubscribe
+    export class HttpAutoSubscribe implements ToggleAutoSubscribe
     {
-        protected url = 'user/toggle-auto-subscribe';
+        /**
+         * @ngInject
+         * @param apiUrl
+         * @param simplePoster
+         */
+        constructor( private apiUrl: string, private simplePoster: SimplePoster ) {}
 
-        execute()
+
+        public execute()
         {
-            this.post( {} );
+            this.simplePoster.post( this.apiUrl + 'user/toggle-auto-subscribe', {} );
         }
     }
 }

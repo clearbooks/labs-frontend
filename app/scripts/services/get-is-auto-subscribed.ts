@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="abstract-http-service.ts" />
+/// <reference path="http/simple-getter.ts" />
 
 module labsFrontendApp
 {
@@ -13,13 +13,14 @@ module labsFrontendApp
         execute(): ng.IPromise<Object>
     }
 
-    export class HttpGetIsAutoSubscribed extends HttpService<IsAutoSubscribed> implements GetIsAutoSubscribed
+    export class HttpGetIsAutoSubscribed implements GetIsAutoSubscribed
     {
         /**
-         * The URL to use
-         * @type {string}
+         * @ngInject
+         * @param apiUrl
+         * @param simpleGetter
          */
-        protected url = 'user/is-auto-subscribed';
+        constructor( private apiUrl: string, private simpleGetter: SimpleGetter ) {}
 
         /**
          * Execute this Use Case
@@ -27,7 +28,7 @@ module labsFrontendApp
          */
         execute():ng.IPromise<IsAutoSubscribed>
         {
-            return this.get( {} );
+            return this.simpleGetter.get( this.apiUrl + 'user/is-auto-subscribed', {} );
         }
     }
 }

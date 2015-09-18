@@ -13,6 +13,7 @@
 /// <reference path="controllers/jwt-callback.ts" />
 /// <reference path="services/unauthorised-request-handler.ts" />
 /// <reference path="services/get-toggles-activated-by-user.ts" />
+/// <reference path="services/http/simple-http.ts" />
 /// <reference path="config/config.ts" />
 
 
@@ -55,6 +56,8 @@ module labsFrontendApp
     .service( 'unauthorisedHandler', RedirectUnauthorisedRequestHandler )
     .service( 'toggleAutoSubscribe', HttpAutoSubscribe)
     .service( 'getIsAutoSubscribed', HttpGetIsAutoSubscribed)
+    .service( 'simpleGetter', SimpleHttp )
+    .service( 'simplePoster', SimpleHttp )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )

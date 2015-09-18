@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="abstract-http-service.ts" />
+/// <reference path="http/simple-getter.ts" />
 
 module labsFrontendApp
 {
@@ -15,13 +15,14 @@ module labsFrontendApp
         execute(): ng.IPromise<Array<Release>>
     }
 
-    export class HttpGetAllPublicReleases extends HttpService<Array<Release>> implements GetAllPublicReleases
+    export class HttpGetAllPublicReleases implements GetAllPublicReleases
     {
         /**
-         * The URL to use
-         * @type {string}
+         * @ngInject
+         * @param apiUrl
+         * @param simpleGetter
          */
-        protected url = 'public-releases/list';
+        constructor( private apiUrl: string, private simpleGetter: SimpleGetter ) {}
 
         /**
          * Execute this Use Case
@@ -29,7 +30,7 @@ module labsFrontendApp
          */
         execute():ng.IPromise<Array<Release>>
         {
-            return this.get( {} );
+            return this.simpleGetter.get<Array<Release>>( this.apiUrl + 'public-releases/list', {} );
         }
     }
 }
