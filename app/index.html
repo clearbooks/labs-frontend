@@ -23,6 +23,13 @@
       <img class="" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
     </nav>
     <div ui-view></div>
+    <script src="scripts/config/config.js"></script>
+    <script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"></script>
+    <script>
+      slaves = {};
+      slaves[config.accountApiHost] = '/proxy.html';
+      xdomain.slaves(slaves);
+    </script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -36,10 +43,6 @@
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-    <!-- Left unminified so we can use ansible templates -->
-    <script src="scripts/config/config.js"></script>
-
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="compiled.annotated.js"></script>
     <!-- endbuild -->

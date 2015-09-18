@@ -14,7 +14,7 @@ module labsFrontendApp {
         hideSuccessMessage: any;
         pickedFeature: any;
         autoSubscribed: boolean;
-
+        groups: any;
     }
 
     export class DashboardCtrl
@@ -26,7 +26,8 @@ module labsFrontendApp {
                      private setActive: SetToggleActive,
                      private getTogglesActivatedByUser: GetTogglesActivatedByUser,
                      private toggleAutoSubscribe: ToggleAutoSubscribe,
-                     private getIsAutoSubscribed: GetIsAutoSubscribed
+                     private getIsAutoSubscribed: GetIsAutoSubscribed,
+                     private getGroupsForUser: GetGroupsForUser
         )
         {
             var releasePromise = releases.execute();
@@ -36,6 +37,10 @@ module labsFrontendApp {
             releasePromise.then((releases) => {
                 $scope.releases = releases;
             });
+
+            getGroupsForUser.execute().then( ( groups ) => {
+                $scope.groups = groups;
+            } );
 
             getTogglesActivatedByUser.execute().then( ( activated ) => {
                 $scope.activated = activated;
@@ -61,6 +66,11 @@ module labsFrontendApp {
             $scope.pickedFeature = (pickedFeature) => {
                 $scope.feature.chosen = pickedFeature;
             };
+        }
+
+        redirect( url: string )
+        {
+            window.location.replace( url );
         }
 
         /**
