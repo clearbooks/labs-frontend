@@ -17,7 +17,7 @@ module labsFrontendApp
 
         handleUnauthorisedRequest():void
         {
-            //window.location.replace( this.jwtUrl );
+            window.location.replace( this.jwtUrl );
         }
     }
 }
