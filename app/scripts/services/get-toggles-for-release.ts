@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="abstract-http-service.ts" />
+/// <reference path="http/simple-getter.ts" />
 
 module labsFrontendApp
 {
@@ -16,16 +16,21 @@ module labsFrontendApp
         execute( releaseId: number ): ng.IPromise<Array<Toggle>>
     }
 
-    export class HttpGetTogglesForRelease extends HttpService<Array<Toggle>> implements GetTogglesForRelease
+    export class HttpGetTogglesForRelease implements GetTogglesForRelease
     {
-        protected url = 'toggle/list';
+        /**
+         * @ngInject
+         * @param apiUrl
+         * @param simpleGetter
+         */
+        constructor( private apiUrl: string, private simpleGetter: SimpleGetter ) {}
 
         /**
          * @param releaseId
          */
         execute( releaseId:number ):ng.IPromise<Array<Toggle>>
         {
-            return this.get( {release: releaseId} );
+            return this.simpleGetter.get( this.apiUrl + 'toggle/list', {release: releaseId} );
         }
     }
 }

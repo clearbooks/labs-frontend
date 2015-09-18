@@ -1,5 +1,5 @@
 /// <reference path="../../../typings/tsd.d.ts" />
-/// <reference path="abstract-http-service.ts" />
+/// <reference path="http/simple-getter.ts" />
 
 module labsFrontendApp
 {
@@ -13,13 +13,14 @@ module labsFrontendApp
         execute(): ng.IPromise<Object>
     }
 
-    export class HttpGetTogglesActivatedByUser extends HttpService<Array<ActivatedToggle>> implements GetAllPublicReleases
+    export class HttpGetTogglesActivatedByUser implements GetAllPublicReleases
     {
         /**
-         * The URL to use
-         * @type {string}
+         * @ngInject
+         * @param apiUrl
+         * @param simpleGetter
          */
-        protected url = 'toggle/user/is-activated';
+        constructor( private apiUrl: string, private simpleGetter: SimpleGetter ) {}
 
         /**
          * Execute this Use Case
@@ -27,7 +28,7 @@ module labsFrontendApp
          */
         execute():ng.IPromise<Object>
         {
-            return this.get( {} );
+            return this.simpleGetter.get( this.apiUrl + 'toggle/user/is-activated', {} );
         }
     }
 }
