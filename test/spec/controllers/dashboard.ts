@@ -5,6 +5,7 @@
 /// <reference path="../../mock/services/get-toggles-for-release.ts" />
 /// <reference path="../../mock/services/set-toggle-active.ts" />
 /// <reference path="../../mock/services/get-toggles-activated-by-user.ts" />
+/// <reference path="../../mock/services/get-groups-for-user.ts" />
 /// <reference path="../../mock/services/toggle-auto-subscribe.ts" />
 /// <reference path="../../mock/services/get-is-auto-subscribed.ts" />
 
@@ -30,7 +31,8 @@ module labsFrontendApp
             hideSuccessMessage: undefined,
             pickedFeature: undefined,
             activated: undefined,
-            autoSubscribed: undefined
+            autoSubscribed: undefined,
+            groups: undefined
         };
 
         // Initialize the controller and a mock scope
@@ -41,7 +43,7 @@ module labsFrontendApp
             getTogglesActivatedByUserStub = new GetTogglesActivatedByUserStub( $q );
             getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
             dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy,
-                                               getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub );
+                                               getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub, new GetGroupsForUserStub( $q )  );
             rootScope = $rootScope;
         } ) );
 
@@ -50,6 +52,13 @@ module labsFrontendApp
             rootScope.$apply();
             expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
             expect( toggleSpy.getReleaseId() ).toBe( 1 );
+        } );
+
+
+        it('should grab groups from the service and shove em onto the scope', () =>
+        {
+            rootScope.$apply();
+            expect( scope.groups ).toEqual( [GetGroupsForUserStub.getStubGroup()] );
         } );
 
         it('should get if the user is auto subscribed and set it on the scope', () =>

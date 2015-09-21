@@ -14,6 +14,7 @@
 /// <reference path="services/unauthorised-request-handler.ts" />
 /// <reference path="services/get-toggles-activated-by-user.ts" />
 /// <reference path="services/http/simple-http.ts" />
+/// <reference path="services/get-groups-for-user.ts" />
 /// <reference path="config/config.ts" />
 
 
@@ -28,7 +29,8 @@ module labsFrontendApp
         'ngResource',
         'ngSanitize',
         'ngTouch',
-        'ui.router'
+        'ui.router',
+        'angular-jwt'
     ]).config(
         ($stateProvider:angular.ui.IStateProvider, $urlRouterProvider:angular.ui.IUrlRouterProvider) => {
             $urlRouterProvider.otherwise("/dashboard");
@@ -43,9 +45,10 @@ module labsFrontendApp
     })
     .config( ( $provide: any ) => {
         $provide.value('apiUrl', 'api/' );
-        $provide.value('jwtUrl', window.config.jwtServer )
-
-        } )
+        $provide.value('jwtUrl', window.config.jwtServer );
+        $provide.value('accountApiHost', window.config.accountApiHost );
+        $provide.value('accountApiEndpoint', window.config.accountApiEndpoint );
+    } )
     .controller( 'DashboardCtrl', DashboardCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
@@ -58,6 +61,7 @@ module labsFrontendApp
     .service( 'getIsAutoSubscribed', HttpGetIsAutoSubscribed)
     .service( 'simpleGetter', SimpleHttp )
     .service( 'simplePoster', SimpleHttp )
+    .service( 'getGroupsForUser', HttpGetGroupsForUser )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )

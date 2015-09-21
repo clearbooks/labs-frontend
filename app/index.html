@@ -23,6 +23,13 @@
       <img class="" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
     </nav>
     <div ui-view></div>
+    <script src="scripts/config/config.js"></script>
+    <script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"></script>
+    <script>
+      slaves = {};
+      slaves[config.accountApiHost] = '/proxy.html';
+      xdomain.slaves(slaves);
+    </script>
 
     <!-- build:js(.) scripts/vendor.js -->
     <!-- bower:js -->
@@ -30,16 +37,14 @@
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-animate/angular-animate.js"></script>
     <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
     <script src="bower_components/angular-touch/angular-touch.js"></script>
     <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+    <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
-
-    <!-- Left unminified so we can use ansible templates -->
-    <script src="scripts/config/config.js"></script>
-
     <!-- build:js({.tmp,app}) scripts/scripts.js -->
     <script src="compiled.annotated.js"></script>
     <!-- endbuild -->
