@@ -29,7 +29,8 @@ module labsFrontendApp
         'ngResource',
         'ngSanitize',
         'ngTouch',
-        'ui.router'
+        'ui.router',
+        'angular-jwt'
     ]).config(
         ($stateProvider:angular.ui.IStateProvider, $urlRouterProvider:angular.ui.IUrlRouterProvider) => {
             $urlRouterProvider.otherwise("/dashboard");

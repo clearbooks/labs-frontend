@@ -29,7 +29,7 @@ module labsFrontendApp
          * Put a token into the storage
          * @param token
          */
-        public put(token)
+        public put( token: string )
         {
             this.$cookies.put( 'jwt', token );
         }
@@ -41,6 +41,5 @@ module labsFrontendApp
         {
             return this.$cookies.get( 'jwt' );
         }
-
     }
 }
