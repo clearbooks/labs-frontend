@@ -24,7 +24,7 @@ module labsFrontendApp
         {
             this.url = url;
             this.params = params;
-            return this.$q.defer().promise;
+            return this.$q.defer().promise.then( () => {} );
         }
     }
 }
