@@ -1,4 +1,5 @@
 /// <reference path="dashboard.ts" />
+/// <reference path="../services/submit-toggle-feedback.ts" />
 
 'use strict';
 
@@ -8,71 +9,39 @@ module labsFrontendApp {
         formData:any;
         formDataArray: any;
         showValidationMessages: any;
-        processForm: any;
         submitted :any;
-
+        processForm: any;
     }
 
     export class PreviewFeedbackFormCtrl {
         // @ngInject
-        constructor(private $scope:FormScope) {
+        constructor(private $scope:FormScope, private submitFeedback: SubmitToggleFeedback) {
 
             //empty object and empty array to hold the form data
             $scope.formData = {};
             $scope.formDataArray = [];
+            $scope.message = {};
             $scope.message.success = false;//don't show message on form load//not working
             $scope.showValidationMessages = false;
-
-
-            $scope.processForm = function( chosenFeature, formData, isValid ) {
-
-                console.log(chosenFeature, formData);
-                console.log("feature is: " + chosenFeature.title + " mood: " + formData.mood + " message: " + formData.message);
-
-
-                $scope.submitted = true;
-
-                if (isValid) {
-
-                    $scope.showValidationMessages = false;
-                    $scope.message.success = true;//show success message
-                    $scope.formData = {};//empty form fields
-                }
-
-                else {
-
-                    $scope.showValidationMessages = true;
-                    $scope.message.success = false;//show success message
-
-                }
-
-            };
-
-            //pass data to php for processing
-            /*$http({
-             method  : 'POST',
-             url     : 'send-mail.php',
-             data    : $.param( $scope.formData ),
-             headers : { 'Content-Type': 'application/x-www-form-urlencoded' }
-             })
-             //if successful
-             .success(function(data) {
-             console.log(data);
-
-             //push form data to array
-             $scope.formDataArray.push(formData);
-             $scope.formData = {};//this should empty form fields
-             $scope.featuresFeedback.$setPristine();
-             //test
-             alert('message sent');
-             $scope.submission = true; //show success message
-
-             });*/
-
+            $scope.showValidationMessages = false;
+            $scope.processForm = (chosenFeature, formData, isValid) => {
+                this.submitForm(chosenFeature, formData, isValid);
+            }
         }
 
-        public submitForm() {
+        submitForm(chosenFeature, formData, isValid) {
+            this.$scope.submitted = true;
+            if (isValid) {
+                this.submitFeedback.execute(chosenFeature.id, formData);
+                this.$scope.showValidationMessages = false;
+                this.$scope.message.success = true;//show success message
+                this.$scope.formData = {};//empty form fields
+            }
+            else {
+                this.$scope.showValidationMessages = true;
+                this.$scope.message.success = false;//show success message
 
+            }
         }
     }
 }

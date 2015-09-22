@@ -16,6 +16,7 @@
 /// <reference path="services/http/simple-http.ts" />
 /// <reference path="services/get-groups-for-user.ts" />
 /// <reference path="config/config.ts" />
+/// <reference path="services/submit-toggle-feedback.ts" />
 
 
 'use strict';
@@ -62,6 +63,7 @@ module labsFrontendApp
     .service( 'simpleGetter', SimpleHttp )
     .service( 'simplePoster', SimpleHttp )
     .service( 'getGroupsForUser', HttpGetGroupsForUser )
+    .service( 'submitFeedback', HttpSubmitToggleFeedback)
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )
