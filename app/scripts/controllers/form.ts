@@ -70,6 +70,10 @@ module labsFrontendApp {
              });*/
 
         }
+
+        public submitForm() {
+
+        }
     }
 }
 
