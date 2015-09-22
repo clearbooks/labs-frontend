@@ -7,7 +7,7 @@ module labsFrontendApp
 
     export class HttpSetToggleActive implements SetToggleActive
     {
-        protected url = 'toggle/change-status';
+        protected url = 'user/toggle/change-status';
 
         /**
          * @ngInject
