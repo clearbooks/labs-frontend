@@ -16,41 +16,48 @@
     <link href="https://get.gridsetapp.com/33432/" rel="stylesheet" />
   </head>
   <body ng-app="labsFrontendApp">
-    <!--[if lte IE 8]>
+    <div ng-controller="GroupCtrl as g">
+      <!--[if lte IE 8]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
-    <![endif]-->
-    <nav class="cf">
-      <img class="" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
-    </nav>
-    <div ui-view></div>
-    <script src="scripts/config/config.js"></script>
-    <script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"></script>
-    <script>
-      slaves = {};
-      slaves[config.accountApiHost] = '/proxy.html';
-      xdomain.slaves(slaves);
-    </script>
+      <![endif]-->
+      <nav class="cf" >
+        <div class="wrapper">
+          <form class="d11-d13 labs-select inline">
+            <select ng-model="currentGroup" ng-options="group.name for group in groups track by group.id" ng-change="g.redirect(currentGroup.url)"></select>
+          </form>
+        </div>
+        <img class="" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
+      </nav>
+      <div ui-view></div>
+      <script src="scripts/config/config.js"></script>
+      <script src="//cdn.rawgit.com/jpillora/xdomain/0.7.3/dist/xdomain.min.js"></script>
+      <script>
+        slaves = {};
+        slaves[config.accountApiHost] = '/proxy.html';
+        xdomain.slaves(slaves);
+      </script>
 
-    <!-- build:js(.) scripts/vendor.js -->
-    <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-cookies/angular-cookies.js"></script>
-    <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
-    <script src="bower_components/angular-resource/angular-resource.js"></script>
-    <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
-    <script src="bower_components/angular-touch/angular-touch.js"></script>
-    <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
-    <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
-    <!-- endbower -->
-    <!-- endbuild -->
-    <!-- build:js({.tmp,app}) scripts/scripts.js -->
-    <script src="compiled.annotated.js"></script>
-    <!-- endbuild -->
+      <!-- build:js(.) scripts/vendor.js -->
+      <!-- bower:js -->
+      <script src="bower_components/jquery/dist/jquery.js"></script>
+      <script src="bower_components/angular/angular.js"></script>
+      <script src="bower_components/angular-animate/angular-animate.js"></script>
+      <script src="bower_components/angular-cookies/angular-cookies.js"></script>
+      <script src="bower_components/angular-jwt/dist/angular-jwt.js"></script>
+      <script src="bower_components/angular-resource/angular-resource.js"></script>
+      <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+      <script src="bower_components/angular-touch/angular-touch.js"></script>
+      <script src="bower_components/angular-ui-router/release/angular-ui-router.js"></script>
+      <script src="bower_components/angular-utf8-base64/angular-utf8-base64.js"></script>
+      <!-- endbower -->
+      <!-- endbuild -->
+      <!-- build:js({.tmp,app}) scripts/scripts.js -->
+      <script src="compiled.annotated.js"></script>
+      <!-- endbuild -->
 
-    <script src="scripts/app.js"></script>
-    <script src="https://get.gridsetapp.com/33432/overlay/"></script>
-    <script src="scripts/mui.js"></script>
+      <script src="scripts/app.js"></script>
+      <script src="https://get.gridsetapp.com/33432/overlay/"></script>
+      <script src="scripts/mui.js"></script>
+  </div>
 </body>
 </html>

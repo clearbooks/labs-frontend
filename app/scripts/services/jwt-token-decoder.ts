@@ -1,9 +1,14 @@
 module labsFrontendApp
 {
-    export class JwtTokenDecoder<T>
+    export interface DeferredJwtPayloadProvider<T>
+    {
+        getJson(): ng.IPromise<T>
+    }
+
+    export class JwtTokenDecoder<T> implements DeferredJwtPayloadProvider<T>
     {
         /**
-         * @ngInect
+         * @ngInject
          * @param jwtStorage
          * @param $q
          * @param jwtHelper
