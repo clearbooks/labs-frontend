@@ -1,9 +1,10 @@
 /// <reference path="../services/jwt-token-storage.ts" />
+/// <reference path="group.ts" />
 
 
 module labsFrontendApp
 {
-    export interface IJwtCallbackScope
+    export interface IJwtCallbackScope extends GroupScope
     {
         //this scope intentionally left blank
     }
@@ -15,10 +16,16 @@ module labsFrontendApp
          * @param $scope
          * @param jwtStorage
          * @param $location
+         * @param jwtDecoder
          */
-        constructor( $scope: IJwtCallbackScope, jwtStorage: JwtTokenStorage, $location: ng.ILocationService )
+        constructor( $scope: IJwtCallbackScope, jwtStorage: JwtTokenStorage, $location: ng.ILocationService, jwtDecoder: DeferredJwtPayloadProvider<JwtToken> )
         {
             jwtStorage.put( $location.path().split('/').pop() );
+            jwtDecoder.getJson().then( ( token: JwtToken ) => {
+                $scope.currentGroup.id = token.groupId;
+            } );
+
+
             $location.path( '/dashboard' );
         }
     }

@@ -1,5 +1,6 @@
 /// <reference path="../../typings/tsd.d.ts" />
 /// <reference path="controllers/dashboard.ts" />
+/// <reference path="controllers/group.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
 /// <reference path="services/get-toggles-for-release.ts" />
 /// <reference path="services/get-is-auto-subscribed.ts" />
@@ -7,8 +8,8 @@
 /// <reference path="services/toggle-auto-subscribe.ts" />
 /// <reference path="controllers/form.ts" />
 /// <reference path="controllers/select.ts" />
-
 /// <reference path="services/jwt-token-storage.ts" />
+/// <reference path="services/jwt-token-decoder.ts" />
 /// <reference path="directives/next-release.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
 /// <reference path="services/unauthorised-request-handler.ts" />
@@ -51,10 +52,12 @@ module labsFrontendApp
         $provide.value('accountApiEndpoint', window.config.accountApiEndpoint );
     } )
     .controller( 'DashboardCtrl', DashboardCtrl )
+    .controller( 'GroupCtrl', GroupCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
     .service( 'getTogglesActivatedByUser', HttpGetTogglesActivatedByUser )
     .service( 'jwtStorage', CookieJwtTokenStorage )
+    .service( 'jwtDecoder', JwtTokenDecoder )
     .service( 'toggles', HttpGetTogglesForRelease )
     .service( 'setActive', HttpSetToggleActive )
     .service( 'unauthorisedHandler', RedirectUnauthorisedRequestHandler )

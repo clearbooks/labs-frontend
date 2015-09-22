@@ -43,7 +43,7 @@ module labsFrontendApp
             getTogglesActivatedByUserStub = new GetTogglesActivatedByUserStub( $q );
             getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
             dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy,
-                                               getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub, new GetGroupsForUserStub( $q )  );
+                                               getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub  );
             rootScope = $rootScope;
         } ) );
 
@@ -52,13 +52,6 @@ module labsFrontendApp
             rootScope.$apply();
             expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
             expect( toggleSpy.getReleaseId() ).toBe( 1 );
-        } );
-
-
-        it('should grab groups from the service and shove em onto the scope', () =>
-        {
-            rootScope.$apply();
-            expect( scope.groups ).toEqual( [GetGroupsForUserStub.getStubGroup()] );
         } );
 
         it('should get if the user is auto subscribed and set it on the scope', () =>

@@ -138,9 +138,12 @@ label[for="features-dropdown"] {
         }
     }
 
+    &.inline > select {
+        display: inline;
+    }
+
     > select {
         @include mui-node-inserted();
-
         display: block;
         height: $baseline*2;
         width: 100%;
