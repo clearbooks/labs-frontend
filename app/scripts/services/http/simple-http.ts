@@ -26,7 +26,6 @@ module labsFrontendApp
          */
         private getHeaders()
         {
-            console.log( 'hi', this.jwtStorage.get() );
             return {
                 Authorization: this.jwtStorage.get()
             }
