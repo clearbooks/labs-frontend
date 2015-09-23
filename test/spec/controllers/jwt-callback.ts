@@ -19,7 +19,7 @@ module labsFrontendApp
             location = $location;
             scope = { currentGroup: {id: undefined, name: "", url: ""}, groups: [] };
             jwtTokenStorage = new CookieJwtTokenStorage( $cookies );
-            decoder = new JwtTokenDecoderStub<JwtToken>( $q, {groupId: 123, userId: 12345} );
+            decoder = new JwtTokenDecoderStub<JwtToken>( $q, {groupId: 123, userId: 12345, isAdmin: true} );
             rootScope = $rootScope;
         } ) );
 

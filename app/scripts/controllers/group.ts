@@ -9,7 +9,8 @@ module labsFrontendApp
     export interface JwtToken
     {
         groupId: number;
-        userId: number
+        userId: number;
+        isAdmin: boolean
     }
 
     export class GroupCtrl
@@ -27,7 +28,7 @@ module labsFrontendApp
             } );
 
             jwtDecoder.getJson().then( ( json: JwtToken ) => {
-                $scope.currentGroup = { id: json.groupId, name: '', url: '' }
+                $scope.currentGroup = { id: json.groupId, name: '', url: '', isAdmin : json.isAdmin}
             } );
         }
 
