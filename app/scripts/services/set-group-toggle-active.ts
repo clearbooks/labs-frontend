@@ -1,13 +1,9 @@
+/// <reference path="set-user-toggle-active.ts" />
 module labsFrontendApp
 {
-    export interface SetToggleActive
+    export class HttpSetGroupToggleActive implements SetToggleActive
     {
-        execute( toggleId: number, active: boolean );
-    }
-
-    export class HttpSetToggleActive implements SetToggleActive
-    {
-        protected url = 'user/toggle/change-status';
+        protected url = 'group/toggle/change-status';
 
         /**
          * @ngInject

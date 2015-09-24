@@ -1,7 +1,8 @@
 /// <reference path="../services/get-all-public-releases.ts" />
-/// <reference path="../services/get-toggles-for-release.ts" />
+/// <reference path="../services/get-user-toggles-for-release.ts" />
 /// <reference path="../services/get-is-auto-subscribed.ts" />
 /// <reference path="../services/toggle-auto-subscribe.ts" />
+/// <reference path="../services/get-group-toggles-for-release.ts" />
 'use strict';
 
 module labsFrontendApp {
@@ -11,6 +12,8 @@ module labsFrontendApp {
         feature: any;
         message: any;
         feature_sections: any;
+        user_features: any;
+        group_features: any;
         hideSuccessMessage: any;
         pickedFeature: any;
         autoSubscribed: boolean;
@@ -22,15 +25,25 @@ module labsFrontendApp {
         // @ngInject
         constructor( private $scope:IDashboardScope,
                      private releases:GetAllPublicReleases,
-                     private toggles:GetTogglesForRelease,
-                     private setActive: SetToggleActive,
+                     private userToggles:GetUserTogglesForRelease,
+                     private groupToggles:GetGroupTogglesForRelease,
+                     private userSetActive: SetToggleActive,
+                     private groupSetActive: SetToggleActive,
                      private getTogglesActivatedByUser: GetTogglesActivatedByUser,
                      private toggleAutoSubscribe: ToggleAutoSubscribe,
                      private getIsAutoSubscribed: GetIsAutoSubscribed
         )
         {
             var releasePromise = releases.execute();
-            this.getToggles( releasePromise );
+
+            $scope.feature_sections = [];
+
+            releasePromise.then ((releases) => {
+                this.getUserToggles(releases);
+                this.getGroupToggles(releases);
+            });
+
+
             $scope.activated = {};
 
             releasePromise.then((releases) => {
@@ -63,15 +76,27 @@ module labsFrontendApp {
             };
         }
 
+        private addTogglesToFeatureSections(toggles) {
+            this.$scope.feature_sections.push.apply(this.$scope.feature_sections, toggles)
+        }
+
         /**
          * @param releases
          */
-        getToggles( releases: ng.IPromise<Array<Release>> )
+        getUserToggles( releases: Array<Release> )
         {
-            releases.then( ( r: Array<Release> ) => {
-                this.toggles.execute( 1 ).then( ( toggles: Array<Toggle> ) => {
-                    this.$scope.feature_sections = toggles;
-                } );
+            this.userToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
+                this.$scope.user_features = toggles;
+                this.addTogglesToFeatureSections(toggles);
+            } );
+        }
+
+
+        getGroupToggles( releases: Array<Release> )
+        {
+            this.groupToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
+                this.$scope.group_features = toggles;
+                this.addTogglesToFeatureSections(toggles);
             } );
         }
 
@@ -79,13 +104,18 @@ module labsFrontendApp {
          * @param toggleId
          * @param toggleName
          * @param active
+         * @param type
          */
-        setToggleActive( toggleId:number, toggleName: string, active: boolean ):void
+        setToggleActive( toggleId:number, toggleName: string, active: boolean, type: string ):void
         {
             if(typeof active === 'undefined') {
                 active = true;
             }
-            this.setActive.execute( toggleId, active );
+            if(type === "simple") {
+                this.userSetActive.execute(toggleId, active);
+            } else if (type === "group") {
+                this.groupSetActive.execute(toggleId, active);
+            }
             if(active) {
                 this.$scope.activated[toggleName] = 1;
             } else {

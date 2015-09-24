@@ -3,20 +3,12 @@
 
 module labsFrontendApp
 {
-    export interface Toggle
-    {
-        id: number,
-        name: string
-        summary: string
-        url: string
-    }
-
-    export interface GetTogglesForRelease
+    export interface GetGroupTogglesForRelease
     {
         execute( releaseId: number ): ng.IPromise<Array<Toggle>>
     }
 
-    export class HttpGetTogglesForRelease implements GetTogglesForRelease
+    export class HttpGetGroupTogglesForRelease implements GetGroupTogglesForRelease
     {
         /**
          * @ngInject
@@ -30,7 +22,7 @@ module labsFrontendApp
          */
         execute( releaseId:number ):ng.IPromise<Array<Toggle>>
         {
-            return this.simpleGetter.get( this.apiUrl + 'toggle/list', {release: releaseId} );
+            return this.simpleGetter.get( this.apiUrl + 'toggle/group/list', {release: releaseId} );
         }
     }
 }
