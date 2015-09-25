@@ -23,13 +23,25 @@ module labsFrontendApp
          */
         constructor( $scope: GroupScope, getGroupsForUser: GetGroupsForUser, jwtDecoder: DeferredJwtPayloadProvider<JwtToken> )
         {
-            getGroupsForUser.execute().then( ( groups: Array<Group> ) => {
+            $scope.currentGroup = {id: undefined, name: '', url: '', isAdmin: undefined};
+
+            var groups = getGroupsForUser.execute();
+            var token = jwtDecoder.getJson();
+
+            groups.then( ( groups: Array<Group> ) => {
                 $scope.groups = groups;
+                console.log($scope.groups);
             } );
 
-            jwtDecoder.getJson().then( ( json: JwtToken ) => {
-                $scope.currentGroup = { id: json.groupId, name: '', url: '', isAdmin : json.isAdmin}
-            } );
+            groups.then( (groups: Array<Group> ) => {
+                token.then( (json: JwtToken ) => {
+                    var curGroup = this.getCurrentGroupFromGroupList(groups, json.groupId);
+                    $scope.currentGroup.id = curGroup.id;
+                    $scope.currentGroup.name = curGroup.name;
+                    $scope.currentGroup.url = curGroup.url;
+                    $scope.currentGroup.isAdmin = json.isAdmin;
+                })
+            })
         }
 
         /**
@@ -39,6 +51,18 @@ module labsFrontendApp
         redirect( url: string )
         {
             window.location.replace( url );
+        }
+
+        getCurrentGroupFromGroupList(groups: Array<Group>, currentGroupId: number): Group
+        {
+            console.log(groups[0].id);
+            for(var i = 0; i < groups.length; i++) {
+                console.log(groups[i]);
+                if( groups[i].id == currentGroupId) {
+                    console.log(currentGroupId);
+                    return groups[i];
+                }
+            }
         }
     }
 }

@@ -17,7 +17,7 @@ module labsFrontendApp
         beforeEach( inject( ( $cookies: ng.cookies.ICookiesService, $location: ng.ILocationService, $q: ng.IQService, $rootScope: ng.IRootScopeService ) =>
         {
             location = $location;
-            scope = { currentGroup: {id: undefined, name: "", url: ""}, groups: [] };
+            scope = { currentGroup: {id: undefined, name: "", url: "", isAdmin: undefined}, groups: [] };
             jwtTokenStorage = new CookieJwtTokenStorage( $cookies );
             decoder = new JwtTokenDecoderStub<JwtToken>( $q, {groupId: 123, userId: 12345, isAdmin: true} );
             rootScope = $rootScope;

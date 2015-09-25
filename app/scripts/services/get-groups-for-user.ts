@@ -8,6 +8,7 @@ module labsFrontendApp
         id: number;
         name: string;
         url: string;
+        isAdmin: boolean;
     }
 
     export interface GetGroupsForUser
