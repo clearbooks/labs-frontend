@@ -36,11 +36,8 @@ module labsFrontendApp
 
             groups.then( (groups: Array<Group> ) => {
                 token.then( (json: JwtToken ) => {
-                    if($scope.currentGroup.id) {
-                        var curGroup = this.getCurrentGroupFromGroupList(groups, $scope.currentGroup.id);
-                    } else {
-                        var curGroup = this.getCurrentGroupFromGroupList(groups, json.groupId);
-                    }
+                    var curGroupId = $scope.currentGroup.id ? $scope.currentGroup.id : json.groupId;
+                    var curGroup = this.getCurrentGroupFromGroupList(groups, curGroupId);
                     $scope.currentGroup.id = curGroup.id;
                     $scope.currentGroup.name = curGroup.name;
                     $scope.currentGroup.url = curGroup.url;
