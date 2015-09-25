@@ -5,6 +5,7 @@ module labsFrontendApp
 {
     export interface Release
     {
+        id: number,
         name: string,
         date: string,
         releaseInfoUrl: string

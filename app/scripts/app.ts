@@ -2,9 +2,9 @@
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="controllers/group.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
-/// <reference path="services/get-toggles-for-release.ts" />
+/// <reference path="services/get-user-toggles-for-release.ts" />
 /// <reference path="services/get-is-auto-subscribed.ts" />
-/// <reference path="services/set-toggle-active.ts" />
+/// <reference path="services/set-user-toggle-active.ts" />
 /// <reference path="services/toggle-auto-subscribe.ts" />
 /// <reference path="controllers/form.ts" />
 /// <reference path="controllers/select.ts" />
@@ -18,6 +18,7 @@
 /// <reference path="services/get-groups-for-user.ts" />
 /// <reference path="config/config.ts" />
 /// <reference path="services/submit-toggle-feedback.ts" />
+/// <reference path="services/set-group-toggle-active.ts" />
 
 
 'use strict';
@@ -58,8 +59,10 @@ module labsFrontendApp
     .service( 'getTogglesActivatedByUser', HttpGetTogglesActivatedByUser )
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'jwtDecoder', JwtTokenDecoder )
-    .service( 'toggles', HttpGetTogglesForRelease )
-    .service( 'setActive', HttpSetToggleActive )
+    .service( 'userToggles', HttpGetUserTogglesForRelease )
+    .service( 'groupToggles', HttpGetGroupTogglesForRelease )
+    .service( 'userSetActive', HttpSetUserToggleActive )
+    .service( 'groupSetActive', HttpSetGroupToggleActive )
     .service( 'unauthorisedHandler', RedirectUnauthorisedRequestHandler )
     .service( 'toggleAutoSubscribe', HttpAutoSubscribe)
     .service( 'getIsAutoSubscribed', HttpGetIsAutoSubscribed)

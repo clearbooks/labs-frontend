@@ -40,23 +40,33 @@
             <h2 class="t-all">Release due: <next-release/></h2>
         </div>
 
-        <div class="preview-toggle cf t-all" ng-repeat="div in feature_sections | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
-            <div class={{div.id}}>
-               <h3>{{div.name}}</h3>
-                <p>{{div.summary}}</p>
-                <div class="t2-t5" ng-class-odd="'d2-d4'" ng-class-even="'d8-d9'">
-                    <a class="t-all d-all" href="{{div.url}}">Read more</a>
-                    <a class="t-all d-all" href="" ng-click="$parent.overPopBoxShow = !$parent.black_overlay; $parent.black_overlay = !$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback</a>
+        <div class="release-info d2-d13">
+            <h2 class="t-all">Features for just you</h2>
+            <div class="preview-toggle cf t-all" ng-repeat="div in user_features | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+                <div class={{div.id}}>
+                    <ng-include src="'views/feature.html'"></ng-include>
+                    <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                        {{ ctrl.getButtonContent(activated[div.name]) }}
+                    </button>
                 </div>
-                <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name])">
-                    {{ ctrl.getButtonContent(activated[div.name]) }}
-                </button>
             </div>
-
         </div>
 
+        <div class="release-info d2-d13">
+            <h2 class="t-all">Features for {{ currentGroup.name }}</h2>
+            <div class="preview-toggle cf t-all" ng-repeat="div in group_features | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+                <div class={{div.id}}>
+                    <ng-include src="'views/feature.html'"></ng-include>
+                    <button type="button" ng-disabled="autoSubscribed || !currentGroup.isAdmin" ng-class="activated[div.name] ? 'active' : ''" class="button t-floatright d-pad d-overlap" ng-class-odd="'d5-d6'" ng-class-even="'d11-d12'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                        {{ ctrl.getButtonContent(activated[div.name]) }}
+                    </button>
+                </div>
+            </div>
+        </div>
 
     </div>
+
+
     <div id="fade" class="black_overlay" ng-show="black_overlay"></div>
     <div class="wrapper fixed">
         <div class="over-pop-box d3-d12 t-all m-all d-pad t-padinfull m-padinfull" ng-show="overPopBoxShow">

@@ -16,9 +16,11 @@ module labsFrontendApp
 
         // load the controller's module
         var dashboardCtrl: DashboardCtrl;
-        var toggleSpy: GetTogglesForReleaseSpy;
+        var userToggleSpy: GetTogglesForReleaseSpy;
+        var groupToggleSpy: GetTogglesForReleaseSpy;
         var rootScope: ng.IRootScopeService;
-        var setToggleActiveSpy: SetToggleActiveSpy;
+        var userSetToggleActiveSpy: SetToggleActiveSpy;
+        var groupSetToggleActiveSpy: SetToggleActiveSpy;
         var getTogglesActivatedByUserStub;
         var toggleAutoSubscribeSpy: ToggleAutoSubscribeSpy;
         var getIsAutoSubscribedStub: GetIsAutoSubscribedStub;
@@ -28,6 +30,8 @@ module labsFrontendApp
             feature: undefined,
             message: undefined,
             feature_sections: undefined,
+            user_features: undefined,
+            group_features: undefined,
             hideSuccessMessage: undefined,
             pickedFeature: undefined,
             activated: undefined,
@@ -37,22 +41,37 @@ module labsFrontendApp
 
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
-            toggleSpy =  new GetTogglesForReleaseSpy( $q );
-            setToggleActiveSpy = new SetToggleActiveSpy();
+            userToggleSpy =  new GetTogglesForReleaseSpy( $q );
+            groupToggleSpy = new GetTogglesForReleaseSpy( $q );
+            userSetToggleActiveSpy = new SetToggleActiveSpy();
+            groupSetToggleActiveSpy = new SetToggleActiveSpy();
             toggleAutoSubscribeSpy = new ToggleAutoSubscribeSpy();
             getTogglesActivatedByUserStub = new GetTogglesActivatedByUserStub( $q );
             getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
-            dashboardCtrl = new DashboardCtrl( scope, new GetAllPublicReleasesStub( $q ), toggleSpy, setToggleActiveSpy,
-                                               getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub  );
+            dashboardCtrl = new DashboardCtrl(
+                scope, new GetAllPublicReleasesStub( $q ), userToggleSpy, groupToggleSpy,
+                userSetToggleActiveSpy, groupSetToggleActiveSpy,
+                getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub
+            );
             rootScope = $rootScope;
         } ) );
 
-        it('should grab releases then get toggles for release ID 1', () =>
+        it('should grab releases then get toggles for release ID 41', () =>
         {
             rootScope.$apply();
             expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
-            expect( toggleSpy.getReleaseId() ).toBe( 1 );
+            expect( userToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubRelease().id );
+            expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubRelease().id );
         } );
+
+        it('should add features correctly to feature_sections', () =>
+        {
+            rootScope.$apply();
+            var expectedArray = [];
+            expectedArray.push.apply(expectedArray, userToggleSpy.getToggles());
+            expectedArray.push.apply(expectedArray, groupToggleSpy.getToggles());
+            expect(scope.feature_sections).toEqual(expectedArray);
+        });
 
         it('should get if the user is auto subscribed and set it on the scope', () =>
         {
@@ -66,30 +85,38 @@ module labsFrontendApp
             expect( scope.activated ).toEqual( getTogglesActivatedByUserStub.getStubData() )
         } );
 
-        it( 'should pass thru calls to setToggleActive to the service', () =>
+        it( 'should pass thru calls to userSetToggleActive to the service when called with type "simple"', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs', false );
-            setToggleActiveSpy.getToggleId().should.equal( 1 );
+            dashboardCtrl.setToggleActive( 1, 'dogs', false, "simple" );
+            expect(userSetToggleActiveSpy.getToggleId()).toEqual( 1 );
+            expect(groupSetToggleActiveSpy.getToggleId()).toBeUndefined();
         } );
+
+        it( 'should pass thru calls to groupSetToggleActive ot the service when called with type "group"', () =>
+        {
+            dashboardCtrl.setToggleActive(1, 'dogs', false, "group" );
+            expect(groupSetToggleActiveSpy.getToggleId()).toEqual( 1 );
+            expect(userSetToggleActiveSpy.getToggleId()).toBeUndefined();
+        });
 
         it( 'should update the scope when setToggleActive is called', () =>
         {
             scope.activated['dogs'] = 0;
-            dashboardCtrl.setToggleActive( 1, 'dogs', true);
+            dashboardCtrl.setToggleActive( 1, 'dogs', true, "simple");
             scope.activated['dogs'].should.equal( 1 );
         } );
 
         it( 'should make toggles active if they are inactive', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs', true );
-            setToggleActiveSpy.geLastActiveStatus().should.equal( true );
+            dashboardCtrl.setToggleActive( 1, 'dogs', true, "simple" );
+            userSetToggleActiveSpy.geLastActiveStatus().should.equal( true );
             scope.activated['dogs'].should.equal(1);
         } );
 
         it( 'should make toggles inactive if they are active', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs', false );
-            setToggleActiveSpy.geLastActiveStatus().should.equal( false );
+            dashboardCtrl.setToggleActive( 1, 'dogs', false, "simple" );
+            userSetToggleActiveSpy.geLastActiveStatus().should.equal( false );
             expect( typeof scope.activated['dogs'] ).toEqual( "undefined" );
         } );
 
@@ -113,7 +140,6 @@ module labsFrontendApp
             var content = dashboardCtrl.getButtonContent(true);
             expect(content).toEqual("Stop preview");
         });
-
     });
 
 }

@@ -23,6 +23,8 @@ module labsFrontendApp
             feature: undefined,
             message: undefined,
             feature_sections: undefined,
+            user_features: undefined,
+            group_features: undefined,
             hideSuccessMessage: undefined,
             pickedFeature: undefined,
             activated: undefined,

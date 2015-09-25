@@ -23,6 +23,7 @@ module labsFrontendApp
         static getStubRelease()
         {
             return {
+                id: 1,
                 name: 'Cat Release',
                 date: '2015-01-01',
                 releaseInfoUrl: ''
