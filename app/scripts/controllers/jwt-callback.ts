@@ -23,12 +23,8 @@ module labsFrontendApp
             jwtStorage.put( $location.path().split('/').pop() );
 
             jwtDecoder.getJson().then( ( token: JwtToken ) => {
-                console.log("jwt-callback: ");
-                console.log(token);
                 $scope.currentGroup.id = token.groupId;
-                $scope.currentGroup.isAdmin = token.isAdmin;
-                console.log("Current Group: ");
-                console.log($scope.currentGroup);
+                $scope.currentGroup.isAdmin = token.isAdmin ? token.isAdmin: false;
             } );
 
 

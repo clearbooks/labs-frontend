@@ -38,10 +38,9 @@ module labsFrontendApp
                 token.then( (json: JwtToken ) => {
                     var curGroupId = $scope.currentGroup.id ? $scope.currentGroup.id : json.groupId;
                     var curGroup = this.getCurrentGroupFromGroupList(groups, curGroupId);
-                    if(!$scope.currentGroup) {
-                        $scope.currentGroup.id = curGroup.id;
-                        $scope.currentGroup.isAdmin = json.isAdmin;
-                    }
+
+                    $scope.currentGroup.id = $scope.currentGroup.id ? $scope.currentGroup.id : json.groupId;
+                    $scope.currentGroup.isAdmin = this.getIsAdmin($scope.currentGroup.isAdmin, json.isAdmin);
                     $scope.currentGroup.name = curGroup.name;
                     $scope.currentGroup.url = curGroup.url;
                 })
@@ -63,6 +62,15 @@ module labsFrontendApp
                 if( groups[i].id == currentGroupId) {
                     return groups[i];
                 }
+            }
+        }
+
+        getIsAdmin(curGroupAdmin: boolean, jsonAdmin: boolean) : boolean
+        {
+            if(curGroupAdmin != undefined) {
+                return curGroupAdmin;
+            } else {
+                return jsonAdmin
             }
         }
     }

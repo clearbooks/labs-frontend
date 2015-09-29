@@ -10,7 +10,7 @@ module labsFrontendApp
     describe('Controller: GroupCtrl', () => {
 
         // load the controller's module
-        var dashboardCtrl:GroupCtrl;
+        var groupCtrl:GroupCtrl;
         var rootScope:ng.IRootScopeService;
 
         var scope:GroupScope = {
@@ -20,7 +20,7 @@ module labsFrontendApp
 
         // Initialize the controller and a mock scope
         beforeEach(inject(($q:ng.IQService, $rootScope:ng.IRootScopeService) => {
-            dashboardCtrl = new GroupCtrl(scope, new GetGroupsForUserStub($q), new JwtTokenDecoderStub($q, {
+            groupCtrl = new GroupCtrl(scope, new GetGroupsForUserStub($q), new JwtTokenDecoderStub($q, {
                 groupId: 1337,
                 isAdmin: true
             }));
@@ -63,9 +63,29 @@ module labsFrontendApp
 
             var curGroupId = 2;
 
-            var curGroup = dashboardCtrl.getCurrentGroupFromGroupList(groups, curGroupId);
+            var curGroup = groupCtrl.getCurrentGroupFromGroupList(groups, curGroupId);
 
             expect(curGroup).toEqual(expectedGroup);
+        });
+
+        it( 'should correctly set isAdmin to false if is has been set to false on the scope before reading the token ', () => {
+            var isAdmin = groupCtrl.getIsAdmin(false, undefined);
+            expect(isAdmin).toBeFalsy();
+        });
+
+        it( 'should correctly set isAdmin to true if it has been set to true on the scope before reading the token', () => {
+            var isAdmin = groupCtrl.getIsAdmin(true, undefined);
+            expect(isAdmin).toBeTruthy();
+        });
+
+        it( 'should correctly set isAdmin to false if it has not been set on the scope yet and the token reads false', () => {
+            var isAdmin = groupCtrl.getIsAdmin(undefined, false);
+            expect(isAdmin).toBeFalsy();
+        });
+
+        it( 'should correctly set isAdmin to true if it has not been set on the scope yet and the token reads true', () => {
+            var isAdmin = groupCtrl.getIsAdmin(undefined, true);
+            expect(isAdmin).toBeTruthy();
         });
     });
 
