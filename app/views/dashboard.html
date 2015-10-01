@@ -36,11 +36,17 @@
 
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
 
-        <div class="release-info d2-d13">
+        <div class="release-info d2-d13 t-all">
             <h2 class="t-all">Release due: <next-release/></h2>
         </div>
 
-        <div class="release-info d2-d13">
+        <!--todo put toggle buttons into here-->
+        <div class="features-toggles d2-d13 t-all">
+            <div class="d5-d7">test button</div>
+            <div class="d8-d10">test button2</div>
+        </div>
+
+        <div class="release-info d2-d13 t-all">
             <h2 class="t-all">Features for just you</h2>
             <div class="preview-toggle cf t-all" ng-repeat="div in user_features | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
                 <div class={{div.id}}>
@@ -52,7 +58,8 @@
             </div>
         </div>
 
-        <div class="release-info d2-d13">
+        <!--this is for groups need to hide if user toggle is turned on-->
+        <div class="release-info d2-d13 t-all">
             <h2 class="t-all">Features for {{ currentGroup.name }}</h2>
             <div class="preview-toggle cf t-all" ng-repeat="div in group_features | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
                 <div class={{div.id}}>

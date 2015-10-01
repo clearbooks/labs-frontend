@@ -125,6 +125,11 @@ label[for="features-dropdown"] {
 // SELECT-COMPONENT
 // ============================================================================
 
+form.labs-select {
+   margin-top: 10px;
+}
+
+
 .labs-select {
 
     position: relative;
@@ -180,12 +185,70 @@ label[for="features-dropdown"] {
             opacity: 1;  // iOS fix for unreadable disabled content
         }
     }
+
+    .labs-select-menu {
+        position: absolute;
+        z-index: 1;
+        /* top: $baseline*2 !important;*/// sit below select
+        top: 0px !important;//cover select field
+        min-width: 100%;
+        height: auto! important;
+        overflow-y: hidden;
+        padding: 0;
+        background-color: $gray;
+        font-size: $body;
+
+        > div {
+            padding: 0 $gutter-b;
+            height: $baseline *2;
+            line-height: $body + $baseline;
+            cursor: pointer;
+            white-space: nowrap;
+            color: $black-body;
+            border-bottom: 1px solid $white;
+
+            &:hover {
+                background-color: $gray-base;
+            }
+
+            &[selected] {
+                background-color: $gray-base;
+            }
+        }
+    }
+
+    &.nav-dropdown {
+
+        > select {
+            background-color: #2470a6;
+            color: $white;
+            border-bottom: 1px solid #2470a6;
+        }
+
+        .labs-select-menu {
+
+            background-color: #2470a6;
+
+            > div {
+                color: $white;
+                border-bottom: 1px solid $brand-darker;
+
+                &:hover {
+                    background-color: $brand-darker;
+                }
+
+                &[selected] {
+                    background-color: $brand-darker;
+                }
+            }
+        }
+    }
 }
 
-.labs-select-menu {
+/*.labs-select-menu {
     position: absolute;
     z-index: 1;
-   /* top: $baseline*2 !important;*/// sit below select
+   *//* top: $baseline*2 !important;*//*// sit below select
     top: 0px !important;//cover select field
     min-width: 100%;
     height: auto! important;
@@ -211,7 +274,7 @@ label[for="features-dropdown"] {
             background-color: $gray-base;
         }
     }
-}
+}*/
 
 .labs-form-select-group {
     display: block;

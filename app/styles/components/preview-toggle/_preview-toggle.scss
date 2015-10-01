@@ -1,11 +1,19 @@
 .preview-toggle {
-  margin-bottom: $baseline * 5;
+
+  @include box-model;
+
+  background: #999;
+  margin-bottom: $baseline * 3;//margin-bottom: $baseline * 5;
+  height: 280px;//this might not work
+  padding: $gutter/2;
+
   h3 {
     font-size: $body;
     font-family: $stack-b;
     font-weight: 600;
-    line-height: $baseline * 1.5;    margin-bottom: $baseline * 0.5;
-    border-bottom: 1px solid $gray;
+    line-height: $baseline * 1.5;
+    //margin-bottom: $baseline * 0.5;
+    border-bottom: 1px solid $black-body;
 
   }
 
@@ -17,4 +25,23 @@
     text-decoration: none;
     margin-bottom: $baseline * 0.5;
   }
+}
+
+.preview-toggle {
+
+  &:nth-of-type(3) {
+    background: #eeeeee;
+  }
+
+  &:nth-of-type(4) {
+    background: #eeeeee;
+  }
+
+}
+
+//todo move this into separate sass file?
+
+.features-toggles{
+  background: hotpink;
+  height: 72px;
 }
