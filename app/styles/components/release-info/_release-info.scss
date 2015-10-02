@@ -2,10 +2,28 @@
     margin-top: $baseline * 1.5;
     h2 {
         line-height: $baseline * 3;
-        //margin-bottom: $baseline * 3;
+    }
+
+    a {
+        color: $brand;
+
+        &:hover {
+            color: #2078B6;
+        }
     }
 }
 
 .feature-summary {
-    min-height: 100px;//test this
+    height: 200px; //todo test this for example we need to know what teh min and maximum of marketing copy will be.
+
+    @media screen and (max-width: 768px) {
+        height: auto;
+        min-height: 170px;
+    }
+    padding-top: $baseline/2;
+
+    p {
+        font-size: 16px;
+    }
+
 }

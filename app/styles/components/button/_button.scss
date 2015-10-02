@@ -22,6 +22,10 @@
         background-color: $green-base;
     }
 
+    &:hover {
+    background: #2078B6;
+    }
+
     &:disabled {
         background-color: $green-light;
     }
@@ -43,5 +47,36 @@
             margin-top: 4px;
         }
 
+    }
+}
+
+button.toggle-button {
+
+    @include box-model;
+    @include fade;
+    @include rounded;
+
+    background: $brand;
+    color: $white;
+    text-align: center;
+    padding: $baseline/2;
+    border-radius: 3px;
+    outline: none;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+
+    .fa {
+        display: block;
+        font-size: 28px;
+        margin-bottom: 12px;
+    }
+
+    &:hover {
+        background: #2078B6;
+    }
+
+    &.active {
+        background-color: $green-base;
     }
 }
