@@ -72,11 +72,17 @@ button.toggle-button {
         margin-bottom: 12px;
     }
 
-    &:hover {
+    &:hover, &:hover.disabled {
         background: #2078B6;
+        opacity: 1;
     }
 
     &.active {
-        background-color: $green-base;
+       /* background-color: $green-base;*/
+        background-color: $brand-darker;//test
+    }
+
+    &.disabled {
+        opacity: 0.8;
     }
 }

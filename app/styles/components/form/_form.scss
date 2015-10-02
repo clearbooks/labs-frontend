@@ -220,7 +220,8 @@ form.labs-select {
     &.nav-dropdown {
 
         > select {
-            background-color: #2470a6;
+            /*background-color: #2470a6;*/
+            background-color: $brand-darker;
             color: $white;
             border-bottom: 1px solid #2470a6;
         }
