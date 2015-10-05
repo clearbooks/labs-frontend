@@ -5,10 +5,11 @@ module labsFrontendApp
 {
     export interface Toggle
     {
-        id: number,
+        id: number
         name: string
         summary: string
         url: string
+        screenshot: string
         type: string
     }
 

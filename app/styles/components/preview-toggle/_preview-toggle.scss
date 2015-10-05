@@ -23,39 +23,47 @@
     margin-bottom: $baseline * 0.5;
   }
 
+  .feature-summary {
+        height: 200px; //todo : test this for example we need to know what the min and maximum of marketing copy will be.
+        background: $white;
+
+        @media screen and (max-width: 768px) {
+            height: auto;
+            min-height: 170px;
+        }
+        padding-top: $baseline/2;
+
+        p {
+            font-size: 16px;
+        }
+
+    }
+
+  &.full-feature {
+
+    background: #eeeeee;
+
+    .feature-summary {
+      background: hotpink;
+      display: inline-block;
+    }
+
+    .image-holder {
+      display: inline-block;
+        height:400px;
+        background: green;
+        overflow: hidden;
+      //height: 300px;
+        //this is temporary
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+    }
+
+  }
+
 }
-
-
-/*alternating background*/
-/*.preview-toggle {
-
-  @media screen and (min-width: 769px) {
-
-    &:nth-of-type(3) {
-      background: #eeeeee;
-    }
-
-    &:nth-of-type(4) {
-      background: #eeeeee;
-    }
-
-    &:nth-of-type(7) {
-      background: #eeeeee;
-    }
-
-    &:nth-of-type(8) {
-      background: #eeeeee;
-    }
-  }
-
-  @media screen and (max-width: 768px) {
-
-    &:nth-of-type(2n) {
-      background: #eeeeee;
-    }
-  }
-
-}*/
 
 .features-toggles {
 

@@ -1,3 +1,4 @@
+
 .release-info {
     //margin-top: $baseline * 1.5;
 
@@ -18,19 +19,6 @@
             color: #2078B6;
         }
     }
-}
-
-.feature-summary {
-    height: 200px; //todo : test this for example we need to know what the min and maximum of marketing copy will be.
-
-    @media screen and (max-width: 768px) {
-        height: auto;
-        min-height: 170px;
-    }
-    padding-top: $baseline/2;
-
-    p {
-        font-size: 16px;
-    }
 
 }
+
