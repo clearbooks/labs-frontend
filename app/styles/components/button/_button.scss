@@ -85,4 +85,8 @@ button.toggle-button {
     &.disabled {
         opacity: 0.8;
     }
+
+    @media screen and (max-width: 897px){
+        height: 150px;
+    }
 }

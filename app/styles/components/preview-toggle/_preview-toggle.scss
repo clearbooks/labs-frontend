@@ -25,7 +25,9 @@
 
 }
 
-.preview-toggle {
+
+/*alternating background*/
+/*.preview-toggle {
 
   @media screen and (min-width: 769px) {
 
@@ -53,7 +55,7 @@
     }
   }
 
-}
+}*/
 
 .features-toggles {
 
@@ -63,6 +65,10 @@
     color: $brand;
     font-size: $baseline;
     text-align: center;
+  }
+
+  > div {
+    padding-top: $baseline;
   }
 
 }

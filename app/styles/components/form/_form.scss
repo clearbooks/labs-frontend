@@ -40,7 +40,6 @@ label[for="features-dropdown"] {
         background: $gray;
 
     }
-
 }
 
 .feedback-radio-btns {
@@ -77,7 +76,6 @@ label[for="features-dropdown"] {
                     color: $background;
                     margin-right: 8px;
                     font-size: $body*4;
-                    //check where t break in gridset is:
                     @media screen and (max-width: 768px) {
                         font-size: $body*3;
                     }
@@ -168,6 +166,7 @@ form.labs-select {
         font-size: $body;
         padding: 0 $gutter-b;
 
+
         &::-ms-expand {
             display: none;  // For IE
         }
@@ -220,15 +219,18 @@ form.labs-select {
     &.nav-dropdown {
 
         > select {
-            /*background-color: #2470a6;*/
             background-color: $brand-darker;
             color: $white;
-            border-bottom: 1px solid #2470a6;
+            border-bottom: none;
+            background-image: url(../images/expand-collapse-icon.svg);
+            background-position: 96% center;
+            background-size: 10%;
         }
 
         .labs-select-menu {
 
             background-color: #2470a6;
+            top: 60px !important;//uncover select
 
             > div {
                 color: $white;
