@@ -70,16 +70,30 @@
 
 .features-toggles {
 
-    padding: $baseline 0;
+    padding: $baseline 0 0 0;
+    height: 72px;
 
     p {
-        color: $brand;
+        color: $black;
         font-size: $baseline;
-        text-align: center;
+        text-align: left;
+
+        @media screen and (max-width: 1029px) {
+            font-size: $body+2px;
+        }
+
+        @media screen and (max-width: 768px) {
+            text-align: center;
+            font-size: $baseline;
+        }
     }
 
     > div {
         padding-top: $baseline;
+    }
+
+    @media screen and (max-width: 768px) {
+        height: auto;
     }
 
 }

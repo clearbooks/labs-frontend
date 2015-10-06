@@ -2,7 +2,7 @@
 .release-info {
 
     &.release-date {
-        background: $gray; //$brand;
+
     }
 
     h3.release-date {
@@ -12,6 +12,11 @@
         letter-spacing: 0;
         border-radius: 4px;
         margin-bottom: 0;
+        font-size: 28px;
+
+        @media screen and (max-width: 768px) {
+            text-align: center;
+        }
     }
 
     a {
