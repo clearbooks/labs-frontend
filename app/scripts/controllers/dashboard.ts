@@ -74,7 +74,6 @@ module labsFrontendApp {
 
             $scope.hideSuccessMessage = ()  => {
                 $scope.message.success = false;//hide message if user wants to write/submit more feedback
-                console.log("success message " + $scope.message.success);
             };
 
             $scope.pickedFeature = (pickedFeature) => {
