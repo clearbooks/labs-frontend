@@ -29,7 +29,8 @@ module labsFrontendApp
             pickedFeature: undefined,
             activated: undefined,
             autoSubscribed: undefined,
-            groups: undefined
+            groups: undefined,
+            clearForm: undefined
         };
 
         // Initialize the controller and a mock scope
@@ -63,7 +64,23 @@ module labsFrontendApp
             expect(scope.message.success).toBeFalsy();
             expect(submitToggleFeedbackSpy.getFormDataEntered()).toBeUndefined();
             expect(submitToggleFeedbackSpy.getToggleId()).toBeUndefined();
-        })
+        });
+
+        it('should set message.success to true and clear the form when clearForm is called with true', () => {
+            rootScope.$apply();
+            scope.formData = {message: "Quack"};
+            feedbackFormCtrl.clearForm(true);
+            expect(scope.message.success).toBeTruthy();
+            expect(scope.formData).toEqual({});
+        });
+
+        it('should set message.success to false and clear the form when clearForm is called with false', () => {
+            rootScope.$apply();
+            scope.formData = {message: "Quack"};
+            feedbackFormCtrl.clearForm(false);
+            expect(scope.message.success).toBeFalsy();
+            expect(scope.formData).toEqual({});
+        });
     });
 
 }

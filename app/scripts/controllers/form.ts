@@ -11,6 +11,7 @@ module labsFrontendApp {
         showValidationMessages: any;
         submitted :any;
         processForm: any;
+        clearForm: any;
     }
 
     export class PreviewFeedbackFormCtrl {
@@ -27,15 +28,17 @@ module labsFrontendApp {
             $scope.processForm = (chosenFeature, formData, isValid) => {
                 this.submitForm(chosenFeature, formData, isValid);
             }
+
+            this.$scope.hideSuccessMessage = ()  => {
+                this.$scope.message.success= false;//hide message if user wants to write/submit more feedback
+            };
         }
 
         submitForm(chosenFeature, formData, isValid) {
             this.$scope.submitted = true;
             if (isValid) {
                 this.submitFeedback.execute(chosenFeature.id, formData);
-                this.$scope.showValidationMessages = false;
-                this.$scope.message.success = true;//show success message
-                this.$scope.formData = {};//empty form fields
+                this.clearForm(true);
             }
             else {
                 this.$scope.showValidationMessages = true;
@@ -43,6 +46,14 @@ module labsFrontendApp {
 
             }
         }
+
+        clearForm = (successMessage: boolean)  => {
+            this.$scope.message.success = successMessage;//hide message if user wants to write/submit more feedback
+            this.$scope.showValidationMessages = false;
+            this.$scope.formData = {};//empty form fields
+        };
+
+
     }
 }
 
