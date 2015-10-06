@@ -1,7 +1,26 @@
+
 .release-info {
-    margin-top: $baseline * 1.5;
-    h2 {
-        line-height: $baseline * 3;
-        margin-bottom: $baseline * 3;
+
+    &.release-date {
+        background: $gray; //$brand;
     }
+
+    h3.release-date {
+        line-height: 46px;
+        color: $black; //$white;
+        padding-left: $gutter;
+        letter-spacing: 0;
+        border-radius: 4px;
+        margin-bottom: 0;
+    }
+
+    a {
+        color: $brand;
+
+        &:hover {
+            color: #2078B6;
+        }
+    }
+
 }
+

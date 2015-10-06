@@ -18,6 +18,12 @@ module labsFrontendApp {
         pickedFeature: any;
         autoSubscribed: boolean;
         groups: any;
+        //clearForm: any;
+    }
+
+    export interface SeparatedToggles {
+        withScreenshot: Array<Toggle>;
+        withoutScreenshot: Array<Toggle>;
     }
 
     export class DashboardCtrl
@@ -68,12 +74,13 @@ module labsFrontendApp {
 
             $scope.hideSuccessMessage = ()  => {
                 $scope.message.success = false;//hide message if user wants to write/submit more feedback
-                console.log("from close function " + $scope.message.success);
             };
 
             $scope.pickedFeature = (pickedFeature) => {
                 $scope.feature.chosen = pickedFeature;
             };
+
+
         }
 
         private addTogglesToFeatureSections(toggles) {
@@ -86,7 +93,7 @@ module labsFrontendApp {
         getUserToggles( releases: Array<Release> )
         {
             this.userToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
-                this.$scope.user_features = toggles;
+                this.$scope.user_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
             } );
         }
@@ -95,7 +102,7 @@ module labsFrontendApp {
         getGroupToggles( releases: Array<Release> )
         {
             this.groupToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
-                this.$scope.group_features = toggles;
+                this.$scope.group_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
             } );
         }
@@ -136,6 +143,32 @@ module labsFrontendApp {
             } else {
                 return "Preview"
             }
+        }
+
+        getFeatureClass(feature: Toggle, index: number):string
+        {
+            if(feature.screenshot) {
+                return 'd-all';
+            } else {
+                if(index % 2 === 0) {
+                    return 'd2-d7 d-pad';
+                } else {
+                    return 'd8-d13 d-pad';
+                }
+            }
+        }
+
+        separateToggles(toggles: Array<Toggle>): SeparatedToggles
+        {
+            var separatedToggles = {withScreenshot: [], withoutScreenshot: []};
+            toggles.forEach((toggle: Toggle) => {
+                if(toggle.screenshot) {
+                    separatedToggles.withScreenshot.push(toggle);
+                } else {
+                    separatedToggles.withoutScreenshot.push(toggle);
+                }
+            });
+            return separatedToggles;
         }
     }
 }

@@ -40,7 +40,6 @@ label[for="features-dropdown"] {
         background: $gray;
 
     }
-
 }
 
 .feedback-radio-btns {
@@ -77,7 +76,6 @@ label[for="features-dropdown"] {
                     color: $background;
                     margin-right: 8px;
                     font-size: $body*4;
-                    //check where t break in gridset is:
                     @media screen and (max-width: 768px) {
                         font-size: $body*3;
                     }
@@ -125,6 +123,11 @@ label[for="features-dropdown"] {
 // SELECT-COMPONENT
 // ============================================================================
 
+form.labs-select {
+   margin-top: 10px;
+}
+
+
 .labs-select {
 
     position: relative;
@@ -163,6 +166,7 @@ label[for="features-dropdown"] {
         font-size: $body;
         padding: 0 $gutter-b;
 
+
         &::-ms-expand {
             display: none;  // For IE
         }
@@ -180,35 +184,66 @@ label[for="features-dropdown"] {
             opacity: 1;  // iOS fix for unreadable disabled content
         }
     }
-}
 
-.labs-select-menu {
-    position: absolute;
-    z-index: 1;
-   /* top: $baseline*2 !important;*/// sit below select
-    top: 0px !important;//cover select field
-    min-width: 100%;
-    height: auto! important;
-    overflow-y: hidden;
-    padding: 0;
-    background-color: $gray;
-    font-size: $body;
+    .labs-select-menu {
+        position: absolute;
+        z-index: 1;
+        /* top: $baseline*2 !important;*/// sit below select
+        top: 0px !important;//cover select field
+        min-width: 100%;
+        height: auto! important;
+        overflow-y: hidden;
+        padding: 0;
+        background-color: $gray;
+        font-size: $body;
 
-    > div {
-        padding: 0 $gutter-b;
-        height: $baseline *2;
-        line-height: $body + $baseline;
-        cursor: pointer;
-        white-space: nowrap;
-        color: $black-body;
-        border-bottom: 1px solid $white;
+        > div {
+            padding: 0 $gutter-b;
+            height: $baseline *2;
+            line-height: $body + $baseline;
+            cursor: pointer;
+            white-space: nowrap;
+            color: $black-body;
+            border-bottom: 1px solid $white;
 
-        &:hover {
-            background-color: $gray-base;
+            &:hover {
+                background-color: $gray-base;
+            }
+
+            &[selected] {
+                background-color: $gray-base;
+            }
+        }
+    }
+
+    &.nav-dropdown {
+
+        > select {
+            background-color: $brand-darker;
+            color: $white;
+            border-bottom: none;
+            background-image: url(../images/expand-collapse-icon.svg);
+            background-position: 96% center;
+            background-size: 10%;
         }
 
-        &[selected] {
-            background-color: $gray-base;
+        .labs-select-menu {
+
+            background-color: #2470a6;
+            top: 60px !important;//uncover select
+
+            > div {
+                color: $white;
+                border-bottom: 1px solid $brand-darker;
+
+                &:hover {
+                    background-color: $brand-darker;
+                }
+
+                &[selected] {
+                    background-color: $brand-darker;
+                }
+            }
         }
     }
 }

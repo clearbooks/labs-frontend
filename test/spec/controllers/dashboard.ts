@@ -140,6 +140,72 @@ module labsFrontendApp
             var content = dashboardCtrl.getButtonContent(true);
             expect(content).toEqual("Stop preview");
         });
+
+        it ('should return an object containing two empty arrays called withScreenshot and withoutScreenshot when called with an empty array', () =>
+        {
+            var toggles = [];
+            var separatedToggles = dashboardCtrl.separateToggles(toggles);
+            expect(separatedToggles).toEqual({withScreenshot: [], withoutScreenshot: []});
+        });
+
+        it ('should return an object containing an array of one toggle with a screenshot, and an empty array of toggles without a screenshot when called with one toggle with a screenshot', () =>
+        {
+            var crimsonToggle = {
+                id: 1, name: 'toggle',
+                summary: 'toggle',
+                url: 'http://crimsonDucks',
+                screenshot: 'picture',
+                type: 'duck'
+            };
+            var toggles = [
+                crimsonToggle
+            ];
+
+            var separatedToggles = dashboardCtrl.separateToggles(toggles);
+            expect(separatedToggles).toEqual({withScreenshot: toggles, withoutScreenshot:[]});
+        });
+
+        it ('should return an object containing an empty array of toggles with a screenshot and an array of one toggle without a screenshot when called with only one toggle with no screenshot', () =>
+        {
+
+            var crimsonToggle = {
+                id: 1, name: 'toggle',
+                summary: 'toggle',
+                url: 'http://crimsonDucks',
+                screenshot: undefined,
+                type: 'duck'
+            };
+
+            var toggles = [
+                crimsonToggle
+            ];
+
+            var separatedToggles = dashboardCtrl.separateToggles(toggles);
+            expect(separatedToggles).toEqual({withScreenshot: [], withoutScreenshot:toggles});
+        });
+
+        it ('should return an object containing an array of one toggle with screenshot, and an array of one toggle without screenshot when called with an array containing a toggle with a screenshot, and a toggle without a screenshot', () => {
+            var crimsonScreenshot = {
+                id: 1, name: 'toggle',
+                summary: 'toggle',
+                url: 'http://crimsonDucks',
+                screenshot: 'picture',
+                type: 'duck'
+            };
+
+            var scarletNoScreenshot = {
+                id: 1, name: 'toggle',
+                summary: 'toggle',
+                url: 'http://scarletMallards',
+                screenshot: undefined,
+                type: 'duck'
+            };
+
+            var toggles = [crimsonScreenshot, scarletNoScreenshot];
+
+            var separatedToggles = dashboardCtrl.separateToggles(toggles);
+            expect(separatedToggles).toEqual({withScreenshot:[crimsonScreenshot], withoutScreenshot: [scarletNoScreenshot]});
+        });
     });
 
 }

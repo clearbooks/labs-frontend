@@ -1,20 +1,85 @@
 .preview-toggle {
-  margin-bottom: $baseline * 5;
-  h3 {
-    font-size: $body;
-    font-family: $stack-b;
-    font-weight: 600;
-    line-height: $baseline * 1.5;    margin-bottom: $baseline * 0.5;
-    border-bottom: 1px solid $gray;
 
-  }
+    @include box-model;
 
-  p {
-    width: 100% - $gutter;
-  }
+    margin-bottom: $baseline * 3;
+    min-height: 320px; //needs to work with feature summary height and max-characters of 400
+    padding: $gutter/2;
 
-  a {
-    text-decoration: none;
-    margin-bottom: $baseline * 0.5;
-  }
+    h3 {
+        font-size: $body;
+        font-family: $stack-b;
+        font-weight: 600;
+        line-height: $baseline * 1.5;
+        border-bottom: 1px solid $black-body;
+    }
+
+    p {
+        width: 100% - $gutter;
+    }
+
+    a {
+        text-decoration: none;
+        margin-bottom: $baseline * 0.5;
+    }
+
+    .feature-summary {
+        height: 220px; //this is based on a 400 character limit. If this changes please check image-holder height and preview toggle min-height.
+        background: $white;
+
+        @media screen and (max-width: 768px) {
+            height: auto;
+            min-height: 80px;
+        }
+        padding-top: $baseline/2;
+
+        p {
+            font-size: 16px;
+        }
+
+    }
+
+    &.full-feature {
+
+        background: $gray;
+
+        .feature-summary {
+            display: inline-block;
+            background: none;
+        }
+
+        .image-holder {
+            display: inline-block;
+            height: 300px; //image should be saved as w: 450px-500px  x 300-400px (no smaller than 400px * 300px). Needs to work with feature-summary height
+            text-align: center;
+            overflow: hidden;
+
+            @media screen and (max-width: 768px) {
+                height: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+    }
+
+}
+
+.features-toggles {
+
+    padding: $baseline 0;
+
+    p {
+        color: $brand;
+        font-size: $baseline;
+        text-align: center;
+    }
+
+    > div {
+        padding-top: $baseline;
+    }
+
 }

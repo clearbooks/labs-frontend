@@ -17,6 +17,7 @@ module labsFrontendApp
                     name: "Crimson Duck Mode",
                     summary: "The best mode you ever did see.",
                     url: "super.mode.awesome",
+                    screenshot: "screenshot",
                     type: "The best, around."
                 }
             ]
