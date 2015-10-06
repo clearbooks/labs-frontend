@@ -2,12 +2,12 @@
 .release-info {
 
     &.release-date {
-        background: $brand;
+        background: $gray; //$brand;
     }
 
     h3.release-date {
         line-height: 46px;
-        color: $white;
+        color: $black; //$white;
         padding-left: $gutter;
         letter-spacing: 0;
         border-radius: 4px;

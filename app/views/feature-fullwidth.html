@@ -1,6 +1,6 @@
 <h3>{{div.name}}</h3>
 <div class="feature-summary d2-d7 t-all vpushdown-1"><p>{{div.summary}}</p></div>
-<div class="d8-d13 t-all d-floatright image-holder vpushdown-1"><img src="../images/getting-started-example.jpg"></div>
+<div class="d8-d13 t-all d-floatright image-holder vpushdown-1"><img ng-src="{{div.screenshot}}"></div>
 <div class="t2-t5 d2-d4 d-pad">
     <a class="t-all d-all" href="{{div.url}}">Read more ..</a>
     <a class="t-all d-all" href="" ng-click="$parent.$parent.overPopBoxShow = !$parent.$parent.black_overlay; $parent.$parent.black_overlay = !$parent.$parent.black_overlay; pickedFeature(div); hideSuccessMessage();">Give feedback ..</a>
