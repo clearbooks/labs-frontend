@@ -112,6 +112,13 @@ $card-shadow:       $gray;
   animation-name: mui-node-inserted;
 }
 
+@mixin setBgColorOnHover($baseColor) {
+  background-color: $baseColor;
+  &:hover {
+    background-color: darken($baseColor, 5%);
+  }
+}
+
 @keyframes mui-node-inserted {
   from {opacity: 0.99;}
   to {opacity: 1;}

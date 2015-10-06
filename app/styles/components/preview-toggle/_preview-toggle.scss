@@ -1,35 +1,35 @@
 .preview-toggle {
 
-  @include box-model;
+    @include box-model;
 
-  margin-bottom: $baseline * 3;
-  min-height: 320px;//todo : need to find out the max-min of marketing copy allowed
-  padding: $gutter/2;
+    margin-bottom: $baseline * 3;
+    min-height: 320px; //needs to work with feature summary height and max-characters of 400
+    padding: $gutter/2;
 
-  h3 {
-    font-size: $body;
-    font-family: $stack-b;
-    font-weight: 600;
-    line-height: $baseline * 1.5;
-    border-bottom: 1px solid $black-body;
-  }
+    h3 {
+        font-size: $body;
+        font-family: $stack-b;
+        font-weight: 600;
+        line-height: $baseline * 1.5;
+        border-bottom: 1px solid $black-body;
+    }
 
-  p {
-    width: 100% - $gutter;
-  }
+    p {
+        width: 100% - $gutter;
+    }
 
-  a {
-    text-decoration: none;
-    margin-bottom: $baseline * 0.5;
-  }
+    a {
+        text-decoration: none;
+        margin-bottom: $baseline * 0.5;
+    }
 
-  .feature-summary {
-        height: 200px; //todo : test this for example we need to know what the min and maximum of marketing copy will be.
+    .feature-summary {
+        height: 220px; //this is based on a 400 character limit. If this changes please check image-holder height and preview toggle min-height.
         background: $white;
 
         @media screen and (max-width: 768px) {
             height: auto;
-            min-height: 170px;
+            min-height: 80px;
         }
         padding-top: $baseline/2;
 
@@ -39,44 +39,47 @@
 
     }
 
-  &.full-feature {
+    &.full-feature {
 
-    background: #eeeeee;
+        background: $gray;
 
-    .feature-summary {
-      background: hotpink;
-      display: inline-block;
-    }
-
-    .image-holder {
-      display: inline-block;
-        height:400px;
-        background: green;
-        overflow: hidden;
-      //height: 300px;
-        //this is temporary
-        img {
-            max-width: 100%;
-            height: auto;
+        .feature-summary {
+            display: inline-block;
+            background: none;
         }
-    }
 
-  }
+        .image-holder {
+            display: inline-block;
+            height: 300px; //image should be saved as w: 450px-500px  x 300-400px (no smaller than 400px * 300px). Needs to work with feature-summary height
+            text-align: center;
+            overflow: hidden;
+
+            @media screen and (max-width: 768px) {
+                height: auto;
+            }
+
+            img {
+                max-width: 100%;
+                height: auto;
+            }
+        }
+
+    }
 
 }
 
 .features-toggles {
 
-  padding: $baseline 0;
+    padding: $baseline 0;
 
-  p {
-    color: $brand;
-    font-size: $baseline;
-    text-align: center;
-  }
+    p {
+        color: $brand;
+        font-size: $baseline;
+        text-align: center;
+    }
 
-  > div {
-    padding-top: $baseline;
-  }
+    > div {
+        padding-top: $baseline;
+    }
 
 }
