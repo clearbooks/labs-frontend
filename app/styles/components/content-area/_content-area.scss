@@ -1,14 +1,16 @@
 .content-area {
     margin-bottom: $baseline * 2;
-    padding-bottom: $baseline * 3;
+    padding-bottom: $baseline * 2;
 
     &.auto-subscribe {
-        padding-bottom: $baseline;
+        padding-bottom: $baseline/2;
     }
 
-    @include card(1);
     &.white {
         background-color: white;
+        padding-top: $baseline *2;
+        padding-bottom: $baseline;
+        //@include card(1);
     }
     &.gray {
         background: $gray;

@@ -3,3 +3,4 @@ var config = {
     accountApiHost: '{{ account_api_host }}',
     accountApiEndpoint: '{{ account_api_endpoint }}'
 };
+

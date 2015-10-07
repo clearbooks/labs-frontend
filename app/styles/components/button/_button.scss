@@ -19,7 +19,6 @@
     @include setBgColorOnHover($green-base);
 
     &.active {
-
         @include setBgColorOnHover($red);
     }
 
@@ -44,7 +43,6 @@
             border-bottom-width: 2px;
             margin-top: 4px;
         }
-
     }
 }
 
@@ -53,37 +51,39 @@ button.toggle-button {
     @include box-model;
     @include fade;
     @include rounded;
-
-    background: $brand;
-    color: $white;
+    background: $gray-base;
+    color: $black;
     text-align: center;
     padding: $baseline/2;
     border-radius: 3px;
     outline: none;
-    font-size: 16px;
+    font-size: $body;
     border: none;
     cursor: pointer;
+    vertical-align: bottom;
+    min-height: 72px;
 
     .fa {
-        display: block;
-        font-size: 28px;
+        font-size: 24px;
         margin-bottom: 12px;
+        padding-right: 10px;
     }
 
     &:hover, &:hover.disabled {
-        background: #2078B6;
-        opacity: 1;
+        background: darken($gray-base, 10%);
     }
 
     &.active {
-        background-color: $brand-darker;
+        background-color: $white;
+        color: #5C5C5C;
     }
 
     &.disabled {
-        opacity: 0.8;
+        background: $gray-base;
     }
 
-    @media screen and (max-width: 897px){
-        height: 150px;
+    @media screen and (max-width: 768px)
+    {
+        min-height: 118px;
     }
 }
