@@ -35,7 +35,7 @@
 
     <div class="features-toggles d-all t-all">
         <div class="d2-d5 d-padfull t-all"><p>What would you like to do?</p></div>
-        <button class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures === 1, 'disabled':showUserFeatures ===2 }">Configure your features</button>
+        <button class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures !=2, 'disabled':showUserFeatures ===2 }">Configure your features</button>
         <button class="toggle-button d10-d14 t6-t8" ng-click="showUserFeatures = 2" ng-class="{'active':showUserFeatures === 2, 'disabled':showUserFeatures ===1 }">Configure company wide features</button>
     </div>
 
@@ -44,7 +44,7 @@
             <h3 class="t-all release-date">Release due: <next-release/></h3>
         </div>
 
-        <div class="release-info d2-d13 t-all" ng-show="showUserFeatures === 1 ">
+        <div class="release-info d2-d13 t-all" ng-hide="showUserFeatures === 2 ">
             <h3 class="t-all">Features just for you</h3>
             <div class="preview-toggle cf t-all full-feature" ng-repeat="div in user_features.withScreenshot | limitTo:8" ng-class="'d-all t-all'"  >
                 <div class={{div.id}}>
