@@ -70,8 +70,8 @@
             <h3 class="t-all">Features for {{ currentGroup.name }}</h3>
             <div class="preview-toggle cf t-all full-feature" ng-repeat="div in group_features.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
                 <div class={{div.id}}>
-                    <ng-include src="'views/feature-fullwidth'"></ng-include>
-                    <button type="button" ng-disabled="autoSubscribed || !currentGroup.isAdmin" ng-class="activated[div.name] ? 'active' : ''" class="button d2-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                    <ng-include src="'views/feature-fullwidth.html'"></ng-include>
+                    <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
                         {{ ctrl.getButtonContent(activated[div.name]) }}
                     </button>
                 </div>
