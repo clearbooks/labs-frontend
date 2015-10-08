@@ -124,7 +124,11 @@ label[for="features-dropdown"] {
 // ============================================================================
 
 form.labs-select {
-   margin-top: 10px;
+   margin-top: 12px;
+
+    @media screen and (max-width: 768px){
+        background-color: $brand-darker;
+    }
 }
 
 
@@ -223,18 +227,33 @@ form.labs-select {
             color: $white;
             border-bottom: none;
             background-image: url(../images/expand-collapse-icon.svg);
-            background-position: 96% center;
+            background-position: 98% center;
+            background-repeat: no-repeat;
             background-size: 10%;
+            width: 280px;
+            padding: 0 40px 0 20px;
+
+            @media screen and (max-width:768px){
+                width: 100%;
+                background-size: 4%;
+            }
         }
 
         .labs-select-menu {
 
             background-color: #2470a6;
-            top: 60px !important;//uncover select
 
             > div {
                 color: $white;
                 border-bottom: 1px solid $brand-darker;
+                min-width: 280px;
+
+                &:first-of-type {
+                    background-color: $brand-darker;
+                    color: $white;
+                    border-bottom: none;
+                    padding-bottom: 10px;
+                }
 
                 &:hover {
                     background-color: $brand-darker;
