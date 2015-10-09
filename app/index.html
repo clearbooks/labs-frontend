@@ -22,7 +22,9 @@
       <![endif]-->
       <nav class="cf" >
         <div class="wrapper">
-          <img class="d1-d4 t-all" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
+          <a href="https://secure.clearbooks.co.uk">
+            <img class="d1-d4 t-all" src="https://secure.clearbooks.co.uk/themes/minimaal-clearbooks/image/brand/logo-white.svg" />
+          </a>
           <form class="d11-d13 t2-t9 labs-select nav-dropdown inline">
             <select ng-model="currentGroup" ng-options="group.name for group in groups track by group.id" ng-change="g.redirect(currentGroup.url)"></select>
           </form>
