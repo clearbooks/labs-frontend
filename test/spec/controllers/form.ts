@@ -30,7 +30,8 @@ module labsFrontendApp
             activated: undefined,
             autoSubscribed: undefined,
             groups: undefined,
-            clearForm: undefined
+            clearForm: undefined,
+            showUserFeatures: undefined
         };
 
         // Initialize the controller and a mock scope

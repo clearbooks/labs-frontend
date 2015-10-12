@@ -18,6 +18,7 @@ module labsFrontendApp {
         pickedFeature: any;
         autoSubscribed: boolean;
         groups: any;
+        showUserFeatures: number;
         //clearForm: any;
     }
 
@@ -79,6 +80,8 @@ module labsFrontendApp {
             $scope.pickedFeature = (pickedFeature) => {
                 $scope.feature.chosen = pickedFeature;
             };
+
+            $scope.showUserFeatures = 2;
 
 
         }

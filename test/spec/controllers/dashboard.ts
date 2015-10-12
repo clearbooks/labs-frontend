@@ -36,7 +36,8 @@ module labsFrontendApp
             pickedFeature: undefined,
             activated: undefined,
             autoSubscribed: undefined,
-            groups: undefined
+            groups: undefined,
+            showUserFeatures: undefined
         };
 
         // Initialize the controller and a mock scope
