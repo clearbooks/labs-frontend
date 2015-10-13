@@ -63,6 +63,10 @@
                     </button>
                 </div>
             </div>
+
+            <div ng-show="user_features.withScreenshot.length === 0 && user_features.withoutScreenshot.length === 0">
+                <ng-include src="'views/no-features.html'"></ng-include>
+            </div>
         </div>
 
         <!--this is for groups. Need to hide if user toggle is turned on-->
@@ -84,6 +88,10 @@
                         {{ ctrl.getButtonContent(activated[div.name]) }}
                     </button>
                 </div>
+            </div>
+
+            <div ng-show="group_features.withScreenshot.length === 0 && group_features.withoutScreenshot.length === 0">
+                <ng-include src="'views/no-features.html'"></ng-include>
             </div>
         </div>
 
