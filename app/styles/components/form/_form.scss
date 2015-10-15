@@ -232,7 +232,7 @@ form.labs-select {
             background-size: 10%;
             width: 280px;
             padding: 0 40px 0 20px;
-            height:60px;//test
+            height:60px;
 
             @media screen and (max-width:768px){
                 width: 100%;
@@ -247,20 +247,13 @@ form.labs-select {
             top: 10px !important;//cover select field
 
             @media screen and (max-width:769px){
-                top: 0px !important;//cover select field
+                top: 0px !important;//cover select field to the top
             }
 
             > div {
                 color: $white;
                 border-bottom: 1px solid $brand-darker;
                 min-width: 280px;
-
-                &:first-of-type {
-                  /*  background-color: $brand-darker;
-                    color: $white;
-                    border-bottom: none;
-                    padding-bottom: 10px;*/
-                }
 
                 &:hover {
                     background-color: $brand-darker;
