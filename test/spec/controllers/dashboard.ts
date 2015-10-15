@@ -74,6 +74,11 @@ module labsFrontendApp
             expect(scope.feature_sections).toEqual(expectedArray);
         });
 
+        it('should set showUserFeatures to 1 as there are user toggles given', () => {
+            rootScope.$apply();
+            expect(scope.showUserFeatures).toEqual(1);
+        });
+
         it('should get if the user is auto subscribed and set it on the scope', () =>
         {
             rootScope.$apply();
@@ -207,6 +212,22 @@ module labsFrontendApp
             var separatedToggles = dashboardCtrl.separateToggles(toggles);
             expect(separatedToggles).toEqual({withScreenshot:[crimsonScreenshot], withoutScreenshot: [scarletNoScreenshot]});
         });
+
+        it('should return true when calling doShowFeatures with features in the list', () => {
+            var toggle = {
+                id: 1, name: 'toggle',
+                summary: 'toggle',
+                url: 'http://crimsonDucks',
+                screenshot: 'picture',
+                type: 'duck'
+            };
+
+            expect(dashboardCtrl.doShowFeatures({withScreenshot:[toggle], withoutScreenshot:[]})).toBeTruthy();
+        });
+
+        it('should return false when calling doShowFeatures with no features', () => {
+            expect(dashboardCtrl.doShowFeatures({withScreenshot:[], withoutScreenshot:[]})).toBeFalsy();
+        })
     });
 
 }

@@ -22,6 +22,11 @@ module labsFrontendApp {
         //clearForm: any;
     }
 
+    export interface FeatureList {
+        userFeatures: SeparatedToggles;
+        groupFeatures: SeparatedToggles;
+    }
+
     export interface SeparatedToggles {
         withScreenshot: Array<Toggle>;
         withoutScreenshot: Array<Toggle>;
@@ -81,9 +86,6 @@ module labsFrontendApp {
                 $scope.feature.chosen = pickedFeature;
             };
 
-            $scope.showUserFeatures = 2;
-
-
         }
 
         private addTogglesToFeatureSections(toggles) {
@@ -98,6 +100,9 @@ module labsFrontendApp {
             this.userToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.user_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
+                if(toggles.length > 0) {
+                    this.$scope.showUserFeatures = 1;
+                }
             } );
         }
 
@@ -107,6 +112,9 @@ module labsFrontendApp {
             this.groupToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.group_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
+                if(typeof this.$scope.showUserFeatures === "undefined") {
+                    this.$scope.showUserFeatures = 2;
+                }
             } );
         }
 
@@ -148,19 +156,6 @@ module labsFrontendApp {
             }
         }
 
-        getFeatureClass(feature: Toggle, index: number):string
-        {
-            if(feature.screenshot) {
-                return 'd-all';
-            } else {
-                if(index % 2 === 0) {
-                    return 'd2-d7 d-pad';
-                } else {
-                    return 'd8-d13 d-pad';
-                }
-            }
-        }
-
         separateToggles(toggles: Array<Toggle>): SeparatedToggles
         {
             var separatedToggles = {withScreenshot: [], withoutScreenshot: []};
@@ -172,6 +167,10 @@ module labsFrontendApp {
                 }
             });
             return separatedToggles;
+        }
+
+        doShowFeatures(toggles: SeparatedToggles) {
+            return toggles.withoutScreenshot.length > 0 || toggles.withScreenshot.length > 0;
         }
     }
 }

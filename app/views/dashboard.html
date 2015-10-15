@@ -35,8 +35,8 @@
 
     <div class="features-toggles d-all t-all">
         <div class="d2-d5 d-padfull t-all"><p>What would you like to do?</p></div>
-        <button class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures !=2, 'disabled':showUserFeatures ===2 }">Configure your features</button>
-        <button class="toggle-button d10-d14 t6-t8" ng-click="showUserFeatures = 2" ng-class="{'active':showUserFeatures === 2, 'disabled':showUserFeatures ===1 }">Configure company wide features</button>
+        <button ng-show="ctrl.doShowFeatures(user_features)" class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures !=2, 'disabled':showUserFeatures ===2 }">Configure your features</button>
+        <button ng-show="ctrl.doShowFeatures(group_features)" class="toggle-button d10-d14 t6-t8" ng-click="showUserFeatures = 2" ng-class="{'active':showUserFeatures === 2, 'disabled':showUserFeatures ===1 }">Configure company wide features</button>
     </div>
 
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
