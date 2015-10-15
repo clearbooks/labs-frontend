@@ -232,16 +232,23 @@ form.labs-select {
             background-size: 10%;
             width: 280px;
             padding: 0 40px 0 20px;
+            height:60px;//test
 
             @media screen and (max-width:768px){
                 width: 100%;
                 background-size: 4%;
+                height: 48px;
             }
         }
 
         .labs-select-menu {
 
             background-color: #2470a6;
+            top: 10px !important;//cover select field
+
+            @media screen and (max-width:769px){
+                top: 0px !important;//cover select field
+            }
 
             > div {
                 color: $white;
@@ -249,10 +256,10 @@ form.labs-select {
                 min-width: 280px;
 
                 &:first-of-type {
-                    background-color: $brand-darker;
+                  /*  background-color: $brand-darker;
                     color: $white;
                     border-bottom: none;
-                    padding-bottom: 10px;
+                    padding-bottom: 10px;*/
                 }
 
                 &:hover {

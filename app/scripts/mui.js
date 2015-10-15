@@ -1587,3 +1587,12 @@
     };
 
 },{"./lib/jqLite.js":5,"./lib/util.js":6}]},{},[7]);
+
+
+//fiona testing
+
+$('.labs-select .nav-dropdown select').click(function(){
+    alert("test");
+});
+
+
