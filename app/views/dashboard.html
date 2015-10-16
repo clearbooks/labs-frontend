@@ -40,10 +40,12 @@
     </div>
 
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
+
         <div class="release-info release-date d-all t-all d-padfull vpushdown-1">
             <h3 class="t-all release-date">Release due: <next-release/></h3>
         </div>
 
+        <!-- This is for user toggles -->
         <div class="release-info d2-d13 t-all" ng-hide="showUserFeatures === 2 ">
             <h3 class="t-all">Features just for you</h3>
             <div class="preview-toggle cf t-all full-feature" ng-repeat="div in user_features.withScreenshot | limitTo:8" ng-class="'d-all t-all'"  >
@@ -54,7 +56,6 @@
                     </button>
                 </div>
             </div>
-
             <div class="preview-toggle cf t-all" ng-repeat="div in user_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
                 <div class={{div.id}}>
                     <ng-include src="'views/feature.html'"></ng-include>
@@ -63,13 +64,9 @@
                     </button>
                 </div>
             </div>
-
-            <div ng-show="user_features.withScreenshot.length === 0 && user_features.withoutScreenshot.length === 0">
-                <ng-include src="'views/no-features.html'"></ng-include>
-            </div>
         </div>
 
-        <!--this is for groups. Need to hide if user toggle is turned on-->
+        <!--this is for group toggles-->
         <div class="release-info d2-d13 t-all" ng-show="showUserFeatures === 2">
             <h3 class="t-all">Features for {{ currentGroup.name }}</h3>
             <div class="preview-toggle cf t-all full-feature" ng-repeat="div in group_features.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
@@ -88,10 +85,6 @@
                         {{ ctrl.getButtonContent(activated[div.name]) }}
                     </button>
                 </div>
-            </div>
-
-            <div ng-show="group_features.withScreenshot.length === 0 && group_features.withoutScreenshot.length === 0">
-                <ng-include src="'views/no-features.html'"></ng-include>
             </div>
         </div>
 

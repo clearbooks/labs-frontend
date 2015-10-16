@@ -227,7 +227,11 @@ module labsFrontendApp
 
         it('should return false when calling doShowFeatures with no features', () => {
             expect(dashboardCtrl.doShowFeatures({withScreenshot:[], withoutScreenshot:[]})).toBeFalsy();
-        })
+        });
+
+        it('should return false when calling doShowFeatures with undefined', () => {
+            expect(dashboardCtrl.doShowFeatures(undefined)).toBeFalsy();
+        });
     });
 
 }

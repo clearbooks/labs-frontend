@@ -170,7 +170,7 @@ module labsFrontendApp {
         }
 
         doShowFeatures(toggles: SeparatedToggles) {
-            return toggles.withoutScreenshot.length > 0 || toggles.withScreenshot.length > 0;
+            return !(typeof toggles === "undefined") && (toggles.withoutScreenshot.length > 0 || toggles.withScreenshot.length > 0);
         }
     }
 }
