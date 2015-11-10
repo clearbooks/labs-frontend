@@ -51,8 +51,9 @@ module labsFrontendApp {
             $scope.feature_sections = [];
 
             releasePromise.then ((releases) => {
-                this.getUserToggles(releases);
-                this.getGroupToggles(releases);
+                var nextReleaseId = NextReleaseCtrl.getNextRelease(releases).id;
+                this.getUserToggles(nextReleaseId);
+                this.getGroupToggles(nextReleaseId);
             });
 
 
@@ -93,11 +94,11 @@ module labsFrontendApp {
         }
 
         /**
-         * @param releases
+         * @param releaseId
          */
-        getUserToggles( releases: Array<Release> )
+        getUserToggles( releaseId: number )
         {
-            this.userToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
+            this.userToggles.execute( releaseId ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.user_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
                 if(toggles.length > 0) {
@@ -107,9 +108,9 @@ module labsFrontendApp {
         }
 
 
-        getGroupToggles( releases: Array<Release> )
+        getGroupToggles( releaseId: number )
         {
-            this.groupToggles.execute( releases[0].id ).then( ( toggles: Array<Toggle> ) => {
+            this.groupToggles.execute( releaseId ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.group_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
                 if(typeof this.$scope.showUserFeatures === "undefined") {

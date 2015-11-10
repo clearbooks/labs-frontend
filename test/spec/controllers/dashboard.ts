@@ -60,9 +60,9 @@ module labsFrontendApp
         it('should grab releases then get toggles for release ID 41', () =>
         {
             rootScope.$apply();
-            expect( scope.releases ).toEqual( [GetAllPublicReleasesStub.getStubRelease()] );
-            expect( userToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubRelease().id );
-            expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubRelease().id );
+            expect( scope.releases ).toEqual( GetAllPublicReleasesStub.getStubReleases() );
+            expect( userToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubReleases()[1].id );
+            expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubReleases()[1].id );
         } );
 
         it('should add features correctly to feature_sections', () =>
