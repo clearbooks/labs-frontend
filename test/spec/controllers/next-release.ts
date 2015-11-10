@@ -19,11 +19,19 @@ module labsFrontendApp
             root = $rootScope;
         } ) );
 
-        it( 'should put the first release date from the API onto the scope', () =>
+        it( 'should get the future release when given an array of releases with one in the future and one in the past', () =>
+        {
+            var releases: Array<Release> = GetAllPublicReleasesStub.getStubReleases();
+            expect(NextReleaseCtrl.getNextRelease(releases)).toEqual(releases[1]);
+        });
+
+        it( 'should put the next release date from the API onto the scope', () =>
         {
             root.$apply();
-            expect( scope.nextRelease).toEqual( new Date( '2015-01-01' ) );
+            var expectedDate = new Date(GetAllPublicReleasesStub.getStubReleases()[1].date);
+            expect( scope.nextRelease ).toEqual( expectedDate );
         } );
+
     });
 
 }

@@ -16,18 +16,27 @@ module labsFrontendApp
         execute():ng.IPromise<Array<Release>>
         {
             var promise = this.$q.defer();
-            promise.resolve( [GetAllPublicReleasesStub.getStubRelease()] );
+            promise.resolve( GetAllPublicReleasesStub.getStubReleases() );
             return promise.promise;
         }
 
-        static getStubRelease()
+        static getStubReleases(): Array<Release>
         {
-            return {
+            var pastReleaseDate = new Date();
+            pastReleaseDate.setDate(pastReleaseDate.getDate() - 10);
+            var futureReleaseDate = new Date();
+            futureReleaseDate.setDate(futureReleaseDate.getDate() + 10);
+            return [{
                 id: 1,
                 name: 'Cat Release',
-                date: '2015-01-01',
+                date: pastReleaseDate.toDateString(),
                 releaseInfoUrl: ''
-            };
+            },{
+                id: 2,
+                name: 'Dog Release',
+                date: futureReleaseDate.toDateString(),
+                releaseInfoUrl: ''
+            }];
         }
     }
 }
