@@ -33,7 +33,7 @@
         </a>
     </div>
 
-    <div class="features-toggles d-all t-all">
+    <div ng-show="false" class="features-toggles d-all t-all">
         <div class="d2-d5 d-padfull t-all"><p>What would you like to do?</p></div>
         <button ng-show="ctrl.doShowFeatures(user_features)" class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures !=2, 'disabled':showUserFeatures ===2 }">Configure your features</button>
         <button ng-show="ctrl.doShowFeatures(group_features)" class="toggle-button d10-d14 t6-t8" ng-click="showUserFeatures = 2" ng-class="{'active':showUserFeatures === 2, 'disabled':showUserFeatures ===1 }">Configure company wide features</button>
@@ -41,52 +41,66 @@
 
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
 
-        <div class="release-info release-date d-all t-all d-padfull vpushdown-1">
-            <h3 class="t-all release-date">Release due: <next-release/></h3>
-        </div>
-
-        <!-- This is for user toggles -->
-        <div class="release-info d2-d13 t-all" ng-hide="showUserFeatures === 2 ">
-            <h3 class="t-all">Features just for you</h3>
-            <div class="preview-toggle cf t-all full-feature" ng-repeat="div in user_features.withScreenshot | limitTo:8" ng-class="'d-all t-all'"  >
-                <div class={{div.id}}>
-                    <ng-include src="'views/feature-fullwidth.html'"></ng-include>
-                    <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
-                        {{ ctrl.getButtonContent(activated[div.name]) }}
-                    </button>
-                </div>
+        <section ng-show="false">
+            <div class="release-info release-date d-all t-all d-padfull vpushdown-1">
+                <h3 class="t-all release-date">Release due: <next-release/></h3>
             </div>
-            <div class="preview-toggle cf t-all" ng-repeat="div in user_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
-                <div class={{div.id}}>
-                    <ng-include src="'views/feature.html'"></ng-include>
-                    <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button t6-t9 t-floatright" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
-                        {{ ctrl.getButtonContent(activated[div.name]) }}
-                    </button>
-                </div>
-            </div>
-        </div>
 
-        <!--this is for group toggles-->
-        <div class="release-info d2-d13 t-all" ng-show="showUserFeatures === 2">
-            <h3 class="t-all">Features for {{ currentGroup.name }}</h3>
-            <div class="preview-toggle cf t-all full-feature" ng-repeat="div in group_features.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
-                <div class={{div.id}}>
-                    <ng-include src="'views/feature-fullwidth.html'"></ng-include>
-                    <button type="button" ng-disabled="autoSubscribed || !currentGroup.isAdmin" ng-class="activated[div.name] ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
-                        {{ ctrl.getButtonContent(activated[div.name]) }}
-                    </button>
+            <!-- This is for user toggles -->
+            <div class="release-info d2-d13 t-all" ng-hide="showUserFeatures === 2 ">
+                <h3 class="t-all">Features just for you</h3>
+                <div class="preview-toggle cf t-all full-feature" ng-repeat="div in user_features.withScreenshot | limitTo:8" ng-class="'d-all t-all'"  >
+                    <div class={{div.id}}>
+                        <ng-include src="'views/feature-fullwidth.html'"></ng-include>
+                        <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                            {{ ctrl.getButtonContent(activated[div.name]) }}
+                        </button>
+                    </div>
+                </div>
+                <div class="preview-toggle cf t-all" ng-repeat="div in user_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+                    <div class={{div.id}}>
+                        <ng-include src="'views/feature.html'"></ng-include>
+                        <button type="button" ng-disabled="autoSubscribed" ng-class="activated[div.name] ? 'active' : ''" class="button t6-t9 t-floatright" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                            {{ ctrl.getButtonContent(activated[div.name]) }}
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="preview-toggle cf t-all" ng-repeat="div in group_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
-                <div class={{div.id}}>
-                    <ng-include src="'views/feature.html'"></ng-include>
-                    <button type="button" ng-disabled="autoSubscribed || !currentGroup.isAdmin" ng-class="activated[div.name] ? 'active' : ''" class="button t6-t9 t-floatright d-pad d-overlap" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
-                        {{ ctrl.getButtonContent(activated[div.name]) }}
-                    </button>
+            <!--this is for group toggles-->
+            <div class="release-info d2-d13 t-all" ng-show="showUserFeatures === 2">
+                <h3 class="t-all">Features for {{ currentGroup.name }}</h3>
+                <div class="preview-toggle cf t-all full-feature" ng-repeat="div in group_features.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
+                    <div class={{div.id}}>
+                        <ng-include src="'views/feature-fullwidth.html'"></ng-include>
+                        <button type="button" ng-disabled="autoSubscribed || !currentGroup.isAdmin" ng-class="activated[div.name] ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                            {{ ctrl.getButtonContent(activated[div.name]) }}
+                        </button>
+                    </div>
+                </div>
+
+                <div class="preview-toggle cf t-all" ng-repeat="div in group_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+                    <div class={{div.id}}>
+                        <ng-include src="'views/feature.html'"></ng-include>
+                        <button type="button" ng-disabled="autoSubscribed || !currentGroup.isAdmin" ng-class="activated[div.name] ? 'active' : ''" class="button t6-t9 t-floatright d-pad d-overlap" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive(div.id, div.name, !activated[div.name], div.type)">
+                            {{ ctrl.getButtonContent(activated[div.name]) }}
+                        </button>
+                    </div>
                 </div>
             </div>
-        </div>
+        </section>
+
+        <section ng-show="true">
+            <div class="d1-d7">
+                <h2 class="t-all">Nothing to see here!</h2>
+                <p class="t-all">Clear Books doesn’t have any new features in Preview for now. Please check back later!</p>
+                <p class="t-all">Instead, take a look at our <a href="https://secure.clearbooks.co.uk/community/news">News section on Community</a> to see features we have recently released.</p>
+            </div>
+            <div class="d9-d12 vpushdown-1">
+                <img class="t-all" src="images/empty-plate.svg" />
+            </div>
+        </section>
+        
 
     </div>
 
