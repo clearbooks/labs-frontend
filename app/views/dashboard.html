@@ -33,7 +33,7 @@
         </a>
     </div>
 
-    <div ng-show="false" class="features-toggles d-all t-all">
+    <div ng-show="ctrl.doShowFeatures(user_features) || ctrl.doShowFeatures(group_features)" class="features-toggles d-all t-all">
         <div class="d2-d5 d-padfull t-all"><p>What would you like to do?</p></div>
         <button ng-show="ctrl.doShowFeatures(user_features)" class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures !=2, 'disabled':showUserFeatures ===2 }">Configure your features</button>
         <button ng-show="ctrl.doShowFeatures(group_features)" class="toggle-button d10-d14 t6-t8" ng-click="showUserFeatures = 2" ng-class="{'active':showUserFeatures === 2, 'disabled':showUserFeatures ===1 }">Configure company wide features</button>
@@ -41,7 +41,8 @@
 
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
 
-        <section ng-show="false">
+        <!-- This is for the section that shows if there are toggles -->
+        <section ng-show="ctrl.doShowFeatures(user_features) || ctrl.doShowFeatures(group_features)">
             <div class="release-info release-date d-all t-all d-padfull vpushdown-1">
                 <h3 class="t-all release-date">Release due: <next-release/></h3>
             </div>
@@ -90,7 +91,8 @@
             </div>
         </section>
 
-        <section ng-show="true">
+        <!-- This is for the section that shows if there are not toggles -->
+        <section ng-show="!(ctrl.doShowFeatures(user_features) || ctrl.doShowFeatures(group_features))">
             <div class="d1-d7">
                 <h2 class="t-all">Nothing to see here!</h2>
                 <p class="t-all">Clear Books doesn’t have any new features in Preview for now. Please check back later!</p>
