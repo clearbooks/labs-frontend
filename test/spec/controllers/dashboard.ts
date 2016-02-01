@@ -37,8 +37,10 @@ module labsFrontendApp
             activated: undefined,
             autoSubscribed: undefined,
             groups: undefined,
-            showUserFeatures: undefined
-        };
+            showUserFeatures: undefined,
+            gotUserFeatures: undefined,
+            gotGroupFeatures: undefined,
+    };
 
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {

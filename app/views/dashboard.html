@@ -92,7 +92,7 @@
         </section>
 
         <!-- This is for the section that shows if there are not toggles -->
-        <section ng-show="!(ctrl.doShowFeatures(user_features) || ctrl.doShowFeatures(group_features))">
+        <section ng-show="ctrl.isNothingToSee()">
             <div class="d1-d7">
                 <h2 class="t-all">Nothing to see here!</h2>
                 <p class="t-all">Clear Books doesn’t have any new features in Preview for now. Please check back later!</p>
