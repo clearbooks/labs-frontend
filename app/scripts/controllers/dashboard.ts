@@ -19,6 +19,8 @@ module labsFrontendApp {
         autoSubscribed: boolean;
         groups: any;
         showUserFeatures: number;
+        gotUserFeatures: boolean;
+        gotGroupFeatures: boolean;
         //clearForm: any;
     }
 
@@ -49,6 +51,8 @@ module labsFrontendApp {
             var releasePromise = releases.execute();
 
             $scope.feature_sections = [];
+            $scope.gotUserFeatures = false;
+            $scope.gotGroupFeatures = false;
 
             releasePromise.then ((releases) => {
                 var nextReleaseId = NextReleaseCtrl.getNextRelease(releases).id;
@@ -101,6 +105,7 @@ module labsFrontendApp {
             this.userToggles.execute( releaseId ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.user_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
+                this.$scope.gotUserFeatures = true;
                 if(toggles.length > 0) {
                     this.$scope.showUserFeatures = 1;
                 }
@@ -113,6 +118,7 @@ module labsFrontendApp {
             this.groupToggles.execute( releaseId ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.group_features = this.separateToggles(toggles);
                 this.addTogglesToFeatureSections(toggles);
+                this.$scope.gotGroupFeatures = true;
                 if(typeof this.$scope.showUserFeatures === "undefined") {
                     this.$scope.showUserFeatures = 2;
                 }
@@ -157,6 +163,13 @@ module labsFrontendApp {
             }
         }
 
+        isNothingToSee(): boolean
+        {
+            return (
+                this.$scope.gotUserFeatures && this.$scope.gotGroupFeatures &&
+                !this.doShowFeatures(this.$scope.user_features) && !this.doShowFeatures(this.$scope.group_features)
+            )
+        }
         separateToggles(toggles: Array<Toggle>): SeparatedToggles
         {
             var separatedToggles = {withScreenshot: [], withoutScreenshot: []};

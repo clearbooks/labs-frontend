@@ -31,7 +31,9 @@ module labsFrontendApp
             autoSubscribed: undefined,
             groups: undefined,
             clearForm: undefined,
-            showUserFeatures: undefined
+            showUserFeatures: undefined,
+            gotUserFeatures: undefined,
+            gotGroupFeatures: undefined,
         };
 
         // Initialize the controller and a mock scope
