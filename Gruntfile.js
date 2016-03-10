@@ -422,8 +422,7 @@ module.exports = function (grunt) {
             'styles/fonts/{,*/}*.*',
             'styles/gridset/{,*/}*.*',
             'scripts/config/config.js',
-            'scripts/mui.js',
-            'scripts/gridset-overlay.js'
+            'scripts/mui.js'
           ]
         }, {
           expand: true,
