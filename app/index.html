@@ -13,7 +13,13 @@
     <!-- build:css(.tmp) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
-    <link href="https://get.gridsetapp.com/33432/" rel="stylesheet" />
+
+    <!--[if (!IE) | (gt IE 9)]><!-->
+    <link rel="stylesheet" href="styles/gridset/gridset.css" />
+    <!--<![endif]-->
+    <!--[if lte IE 9]>
+    <link rel="stylesheet" href="styles/gridset/gridset-ie-9.css" />
+    <![endif]-->
   </head>
   <body ng-app="labsFrontendApp">
     <div ng-controller="GroupCtrl as g">
@@ -57,9 +63,8 @@
       <script src="compiled.annotated.js"></script>
       <!-- endbuild -->
 
-      <script src="scripts/app.js"></script>
-      <script src="https://get.gridsetapp.com/33432/overlay/"></script>
       <script src="scripts/mui.js"></script>
+      <script src="scripts/gridset-overlay.js"></script>
   </div>
 </body>
 </html>
