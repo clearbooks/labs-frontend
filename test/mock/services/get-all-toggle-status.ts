@@ -1,6 +1,6 @@
 module labsFrontendApp
 {
-    export class GetTogglesActivatedByUserStub implements GetTogglesActivatedByUser
+    export class GetAllToggleStatusStub implements GetAllToggleStatus
     {
         constructor( private $q: ng.IQService )
         {
@@ -16,8 +16,9 @@ module labsFrontendApp
         public getStubData():Object
         {
             return {
-                cats: 1,
-                dogs: 1
+                1: { id: 1, active: 0, locked: 0 },
+                2: { id: 2, active: 1, locked: 0 },
+                3: { id: 3, active: 1, locked: 1 }
             }
         }
     }

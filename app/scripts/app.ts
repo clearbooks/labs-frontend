@@ -13,7 +13,7 @@
 /// <reference path="directives/next-release.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
 /// <reference path="services/unauthorised-request-handler.ts" />
-/// <reference path="services/get-toggles-activated-by-user.ts" />
+/// <reference path="services/get-all-toggle-status.ts" />
 /// <reference path="services/http/simple-http.ts" />
 /// <reference path="services/get-groups-for-user.ts" />
 /// <reference path="config/config.ts" />
@@ -56,7 +56,7 @@ module labsFrontendApp
     .controller( 'GroupCtrl', GroupCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
-    .service( 'getTogglesActivatedByUser', HttpGetTogglesActivatedByUser )
+    .service( 'getAllToggleStatus', HttpGetAllToggleStatus )
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'jwtDecoder', JwtTokenDecoder )
     .service( 'userToggles', HttpGetUserTogglesForRelease )

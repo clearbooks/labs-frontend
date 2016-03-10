@@ -27,7 +27,7 @@ module labsFrontendApp
             group_features: undefined,
             hideSuccessMessage: undefined,
             pickedFeature: undefined,
-            activated: undefined,
+            toggleStatuses: undefined,
             autoSubscribed: undefined,
             groups: undefined,
             clearForm: undefined,
