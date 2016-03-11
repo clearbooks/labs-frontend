@@ -5,7 +5,7 @@ module labsFrontendApp
 {
     export class GetTogglesWithoutReleaseStub implements GetUserTogglesWithoutRelease, GetGroupTogglesWithoutRelease
     {
-        private toggles: Array<labsFrontendApp.Toggle>;
+        private toggles: Array<labsFrontendApp.Toggle> = [ ];
 
         constructor( private $q: ng.IQService )
         {
@@ -16,9 +16,9 @@ module labsFrontendApp
                     summary: "The best mode you ever did see.",
                     url: "super.mode.awesome",
                     screenshot: "screenshot",
-                    type: "The best, around."
+                    type: "simple"
                 }
-            ]
+            ];
         }
 
         execute():angular.IPromise<Array<labsFrontendApp.Toggle>>
@@ -26,6 +26,11 @@ module labsFrontendApp
             var promise = this.$q.defer();
             promise.resolve( this.toggles );
             return promise.promise;
+        }
+
+        getToggles(): Array<labsFrontendApp.Toggle>
+        {
+            return this.toggles;
         }
     }
 }

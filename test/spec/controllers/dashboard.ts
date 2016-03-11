@@ -72,6 +72,18 @@ module labsFrontendApp
             expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubReleases()[1].id );
         } );
 
+        it('should grab user toggles without release', () =>
+        {
+            rootScope.$apply();
+            expect( scope.userTogglesWithoutRelease ).toEqual( dashboardCtrl.separateToggles( getUserTogglesWithoutRelease.getToggles() ) );
+        } );
+
+        it('should grab group toggles without release', () =>
+        {
+            rootScope.$apply();
+            expect( scope.groupTogglesWithoutRelease ).toEqual( dashboardCtrl.separateToggles( getGroupTogglesWithoutRelease.getToggles() ) );
+        } );
+
         it('should set selectedFeatureType to 1 as there are user toggles given', () => {
             rootScope.$apply();
             expect(scope.selectedFeatureType).toEqual(1);
