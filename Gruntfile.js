@@ -420,8 +420,9 @@ module.exports = function (grunt) {
             '*.html',
             'images/{,*/}*.{webp}',
             'styles/fonts/{,*/}*.*',
+            'styles/gridset/{,*/}*.*',
             'scripts/config/config.js',
-              'scripts/mui.js'
+            'scripts/mui.js'
           ]
         }, {
           expand: true,
