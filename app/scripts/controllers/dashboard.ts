@@ -7,7 +7,7 @@
 
 module labsFrontendApp {
     export interface IDashboardScope {
-        activated: Object;
+        toggleStatuses: Object;
         releases: any;
         feature: any;
         message: any;
@@ -43,7 +43,7 @@ module labsFrontendApp {
                      private groupToggles:GetGroupTogglesForRelease,
                      private userSetActive: SetToggleActive,
                      private groupSetActive: SetToggleActive,
-                     private getTogglesActivatedByUser: GetTogglesActivatedByUser,
+                     private getAllToggleStatus: GetAllToggleStatus,
                      private toggleAutoSubscribe: ToggleAutoSubscribe,
                      private getIsAutoSubscribed: GetIsAutoSubscribed
         )
@@ -61,14 +61,14 @@ module labsFrontendApp {
             });
 
 
-            $scope.activated = {};
+            $scope.toggleStatuses = {};
 
             releasePromise.then((releases) => {
                 $scope.releases = releases;
             });
 
-            getTogglesActivatedByUser.execute().then( ( activated ) => {
-                $scope.activated = activated;
+            getAllToggleStatus.execute().then( ( toggleStatuses ) => {
+                $scope.toggleStatuses = toggleStatuses;
             } );
 
             getIsAutoSubscribed.execute().then((autoSubscribed: IsAutoSubscribed) => {
@@ -127,25 +127,49 @@ module labsFrontendApp {
 
         /**
          * @param toggleId
-         * @param toggleName
          * @param active
          * @param type
          */
-        setToggleActive( toggleId:number, toggleName: string, active: boolean, type: string ):void
+        setToggleActive( toggleId:number, active: boolean, type: string ):void
         {
             if(typeof active === 'undefined') {
                 active = true;
             }
+
+            if ( typeof this.$scope.toggleStatuses[toggleId] == 'undefined' || this.isToggleLocked( toggleId ) ) {
+                return;
+            }
+
             if(type === "simple") {
                 this.userSetActive.execute(toggleId, active);
             } else if (type === "group") {
                 this.groupSetActive.execute(toggleId, active);
             }
             if(active) {
-                this.$scope.activated[toggleName] = 1;
+                this.$scope.toggleStatuses[toggleId].active = 1;
             } else {
-                delete this.$scope.activated[toggleName];
+                this.$scope.toggleStatuses[toggleId].active = 0;
             }
+        }
+
+        /**
+         * @param toggleId
+         * @returns {boolean}
+         */
+        isToggleActive( toggleId:number ):boolean
+        {
+            return typeof this.$scope.toggleStatuses[toggleId] != 'undefined'
+                   && this.$scope.toggleStatuses[toggleId].active == 1;
+        }
+
+        /**
+         * @param toggleId
+         * @returns {boolean}
+         */
+        isToggleLocked( toggleId:number ):boolean
+        {
+            return typeof this.$scope.toggleStatuses[toggleId] != 'undefined'
+                   && this.$scope.toggleStatuses[toggleId].locked == 1;
         }
 
         autoSubscribe():void

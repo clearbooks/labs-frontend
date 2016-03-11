@@ -24,6 +24,11 @@
 
     &:disabled {
         background-color: $green-light;
+        cursor: default;
+
+        &.active {
+            background-color: $red-light;
+        }
     }
 
     &.click-effect {

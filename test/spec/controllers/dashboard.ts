@@ -4,7 +4,7 @@
 /// <reference path="../../mock/services/get-all-public-releases.ts" />
 /// <reference path="../../mock/services/get-toggles-for-release.ts" />
 /// <reference path="../../mock/services/set-toggle-active.ts" />
-/// <reference path="../../mock/services/get-toggles-activated-by-user.ts" />
+/// <reference path="../../mock/services/get-all-toggle-status.ts" />
 /// <reference path="../../mock/services/get-groups-for-user.ts" />
 /// <reference path="../../mock/services/toggle-auto-subscribe.ts" />
 /// <reference path="../../mock/services/get-is-auto-subscribed.ts" />
@@ -21,7 +21,7 @@ module labsFrontendApp
         var rootScope: ng.IRootScopeService;
         var userSetToggleActiveSpy: SetToggleActiveSpy;
         var groupSetToggleActiveSpy: SetToggleActiveSpy;
-        var getTogglesActivatedByUserStub;
+        var getAllToggleStatusStub: GetAllToggleStatusStub;
         var toggleAutoSubscribeSpy: ToggleAutoSubscribeSpy;
         var getIsAutoSubscribedStub: GetIsAutoSubscribedStub;
 
@@ -34,7 +34,7 @@ module labsFrontendApp
             group_features: undefined,
             hideSuccessMessage: undefined,
             pickedFeature: undefined,
-            activated: undefined,
+            toggleStatuses: undefined,
             autoSubscribed: undefined,
             groups: undefined,
             showUserFeatures: undefined,
@@ -49,12 +49,12 @@ module labsFrontendApp
             userSetToggleActiveSpy = new SetToggleActiveSpy();
             groupSetToggleActiveSpy = new SetToggleActiveSpy();
             toggleAutoSubscribeSpy = new ToggleAutoSubscribeSpy();
-            getTogglesActivatedByUserStub = new GetTogglesActivatedByUserStub( $q );
+            getAllToggleStatusStub = new GetAllToggleStatusStub( $q );
             getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
             dashboardCtrl = new DashboardCtrl(
                 scope, new GetAllPublicReleasesStub( $q ), userToggleSpy, groupToggleSpy,
                 userSetToggleActiveSpy, groupSetToggleActiveSpy,
-                getTogglesActivatedByUserStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub
+                getAllToggleStatusStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub
             );
             rootScope = $rootScope;
         } ) );
@@ -87,45 +87,74 @@ module labsFrontendApp
             expect(scope.autoSubscribed).toEqual(getIsAutoSubscribedStub.getStubData().autoSubscribed);
         } );
 
-        it( 'should put activated toggles onto the scope', () =>
+        it( 'should put toggles status data onto the scope', () =>
         {
             rootScope.$apply();
-            expect( scope.activated ).toEqual( getTogglesActivatedByUserStub.getStubData() )
+            expect( scope.toggleStatuses ).toEqual( getAllToggleStatusStub.getStubData() )
         } );
 
         it( 'should pass thru calls to userSetToggleActive to the service when called with type "simple"', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs', false, "simple" );
+            rootScope.$apply();
+            dashboardCtrl.setToggleActive( 1, false, "simple" );
             expect(userSetToggleActiveSpy.getToggleId()).toEqual( 1 );
             expect(groupSetToggleActiveSpy.getToggleId()).toBeUndefined();
         } );
 
         it( 'should pass thru calls to groupSetToggleActive ot the service when called with type "group"', () =>
         {
-            dashboardCtrl.setToggleActive(1, 'dogs', false, "group" );
+            rootScope.$apply();
+            dashboardCtrl.setToggleActive(1, false, "group" );
             expect(groupSetToggleActiveSpy.getToggleId()).toEqual( 1 );
             expect(userSetToggleActiveSpy.getToggleId()).toBeUndefined();
         });
 
         it( 'should update the scope when setToggleActive is called', () =>
         {
-            scope.activated['dogs'] = 0;
-            dashboardCtrl.setToggleActive( 1, 'dogs', true, "simple");
-            scope.activated['dogs'].should.equal( 1 );
+            rootScope.$apply();
+            scope.toggleStatuses['1'].active = 0;
+            dashboardCtrl.setToggleActive( 1, true, "simple");
+            scope.toggleStatuses['1'].active.should.equal( 1 );
         } );
 
         it( 'should make toggles active if they are inactive', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs', true, "simple" );
+            rootScope.$apply();
+            dashboardCtrl.setToggleActive( 1, true, "simple" );
             userSetToggleActiveSpy.geLastActiveStatus().should.equal( true );
-            scope.activated['dogs'].should.equal(1);
+            scope.toggleStatuses['1'].active.should.equal(1);
         } );
 
         it( 'should make toggles inactive if they are active', () =>
         {
-            dashboardCtrl.setToggleActive( 1, 'dogs', false, "simple" );
+            rootScope.$apply();
+            dashboardCtrl.setToggleActive( 2, false, "simple" );
             userSetToggleActiveSpy.geLastActiveStatus().should.equal( false );
-            expect( typeof scope.activated['dogs'] ).toEqual( "undefined" );
+            scope.toggleStatuses['2'].active.should.equal(0);
+        } );
+
+        it( 'isToggleActive should return true if toggle is active', () =>
+        {
+            rootScope.$apply();
+            dashboardCtrl.isToggleActive( 2 ).should.equal(true);
+        } );
+
+        it( 'isToggleActive should return false if toggle is not active', () =>
+        {
+            rootScope.$apply();
+            dashboardCtrl.isToggleActive( 1 ).should.equal(false);
+        } );
+
+        it( 'isToggleLocked should return true if toggle is locked', () =>
+        {
+            rootScope.$apply();
+            dashboardCtrl.isToggleLocked( 3 ).should.equal(true);
+        } );
+
+        it( 'isToggleLocked should return false if toggle is not locked', () =>
+        {
+            rootScope.$apply();
+            dashboardCtrl.isToggleLocked( 2 ).should.equal(false);
         } );
 
         it( 'should set autoSubscribed to true when toggleAutoSubscribe is called', () =>
@@ -144,7 +173,6 @@ module labsFrontendApp
 
         it ('should return "Stop preview" when toggle is activated', () =>
         {
-            scope.activated['cats'] = 1;
             var content = dashboardCtrl.getButtonContent(true);
             expect(content).toEqual("Stop preview");
         });

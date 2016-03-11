@@ -3,17 +3,12 @@
 
 module labsFrontendApp
 {
-    export interface ActivatedToggle
-    {
-        key: string,
-    }
-
-    export interface GetTogglesActivatedByUser
+    export interface GetAllToggleStatus
     {
         execute(): ng.IPromise<Object>
     }
 
-    export class HttpGetTogglesActivatedByUser implements GetAllPublicReleases
+    export class HttpGetAllToggleStatus implements GetAllToggleStatus
     {
         /**
          * @ngInject
@@ -28,7 +23,7 @@ module labsFrontendApp
          */
         execute():ng.IPromise<Object>
         {
-            return this.simpleGetter.get( this.apiUrl + 'toggle/user/is-activated', {} );
+            return this.simpleGetter.get( this.apiUrl + 'toggle/user/all-toggle-status', {} );
         }
     }
 }
