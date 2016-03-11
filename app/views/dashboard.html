@@ -1,5 +1,4 @@
 <div ng-controller="DashboardCtrl as ctrl" class="wrapper">
-
     <div class="t3-t8 d1-d9 preview-brand vpushdown-2">
         <img class="d1-d3 t3-t4" src="images/preview.svg" />
         <div class="d4-d8">
@@ -33,61 +32,46 @@
         </a>
     </div>
 
-    <div ng-show="ctrl.doShowFeatures(user_features) || ctrl.doShowFeatures(group_features)" class="features-toggles d-all t-all">
+    <div ng-show="ctrl.hasAnyToggles()" class="features-toggles d-all t-all">
         <div class="d2-d5 d-padfull t-all"><p>What would you like to do?</p></div>
-        <button ng-show="ctrl.doShowFeatures(user_features)" class="toggle-button d6-d9 t3-t5" ng-click="showUserFeatures = 1" ng-class="{'active':showUserFeatures !=2, 'disabled':showUserFeatures ===2 }">Configure your features</button>
-        <button ng-show="ctrl.doShowFeatures(group_features)" class="toggle-button d10-d14 t6-t8" ng-click="showUserFeatures = 2" ng-class="{'active':showUserFeatures === 2, 'disabled':showUserFeatures ===1 }">Configure company wide features</button>
+        <button ng-show="ctrl.hasAnyUserToggles()" class="toggle-button d6-d9 t3-t5" ng-click="selectedFeatureType = ctrl.FEATURE_TYPE_SIMPLE" ng-class="{'active':selectedFeatureType === ctrl.FEATURE_TYPE_SIMPLE, 'disabled': selectedFeatureType !== ctrl.FEATURE_TYPE_SIMPLE }">Configure your features</button>
+        <button ng-show="ctrl.hasAnyGroupToggles()" class="toggle-button d10-d14 t6-t8" ng-click="selectedFeatureType = ctrl.FEATURE_TYPE_GROUP" ng-class="{'active':selectedFeatureType === ctrl.FEATURE_TYPE_GROUP, 'disabled': selectedFeatureType !== ctrl.FEATURE_TYPE_GROUP }">Configure company wide features</button>
     </div>
 
     <div class="content-area white t2-t9 t-padfull d-all d-padfull">
-
         <!-- This is for the section that shows if there are toggles -->
-        <section ng-show="ctrl.doShowFeatures(user_features) || ctrl.doShowFeatures(group_features)">
-            <div class="release-info release-date d-all t-all d-padfull vpushdown-1">
-                <h3 class="t-all release-date">Release due: <next-release/></h3>
+        <section ng-show="ctrl.hasAnyToggles()">
+            <!-- This is for user toggles -->
+            <div class="release-info release-date d-all t-all d-padfull vpushdown-1" ng-show="selectedFeatureType === ctrl.FEATURE_TYPE_SIMPLE">
+                <h3 class="t-all release-date">Features just for you</h3>
             </div>
 
-            <!-- This is for user toggles -->
-            <div class="release-info d2-d13 t-all" ng-hide="showUserFeatures === 2 ">
-                <h3 class="t-all">Features just for you</h3>
-                <div class="preview-toggle cf t-all full-feature" ng-repeat="div in user_features.withScreenshot | limitTo:8" ng-class="'d-all t-all'"  >
-                    <div class={{div.id}}>
-                        <ng-include src="'views/feature-fullwidth.html'"></ng-include>
-                        <button type="button" ng-disabled="ctrl.isToggleLocked( div.id )" ng-class="ctrl.isToggleActive( div.id ) ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap'" ng-click="ctrl.setToggleActive(div.id, !ctrl.isToggleActive( div.id ), div.type)">
-                            {{ ctrl.getButtonContent(ctrl.isToggleActive( div.id )) }}
-                        </button>
-                    </div>
-                </div>
-                <div class="preview-toggle cf t-all" ng-repeat="div in user_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
-                    <div class={{div.id}}>
-                        <ng-include src="'views/feature.html'"></ng-include>
-                        <button type="button" ng-disabled="ctrl.isToggleLocked( div.id )" ng-class="ctrl.isToggleActive( div.id ) ? 'active' : ''" class="button t6-t9 t-floatright" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive(div.id, !ctrl.isToggleActive( div.id ), div.type)">
-                            {{ ctrl.getButtonContent(ctrl.isToggleActive( div.id )) }}
-                        </button>
-                    </div>
-                </div>
+            <div class="release-info d2-d13 t-all" ng-show="selectedFeatureType === ctrl.FEATURE_TYPE_SIMPLE && ctrl.hasToggles(user_features)">
+                <h3 class="t-all">Release due: <next-release/></h3>
+                <user-toggle-list toggle-list="user_features" ctrl="ctrl" />
             </div>
+
+            <!-- Beta user toggles -->
+            <div class="release-info d2-d13 t-all" ng-show="selectedFeatureType === ctrl.FEATURE_TYPE_SIMPLE && ctrl.hasToggles(userTogglesWithoutRelease)">
+                <h3 class="t-all">Beta features</h3>
+                <user-toggle-list toggle-list="userTogglesWithoutRelease" ctrl="ctrl" />
+            </div>
+
 
             <!--this is for group toggles-->
-            <div class="release-info d2-d13 t-all" ng-show="showUserFeatures === 2">
-                <h3 class="t-all">Features for {{ currentGroup.name }}</h3>
-                <div class="preview-toggle cf t-all full-feature" ng-repeat="div in group_features.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
-                    <div class={{div.id}}>
-                        <ng-include src="'views/feature-fullwidth.html'"></ng-include>
-                        <button type="button" ng-disabled="ctrl.isToggleLocked( div.id ) || !currentGroup.isAdmin" ng-class="ctrl.isToggleActive( div.id ) ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive(div.id, !ctrl.isToggleActive( div.id ), div.type)">
-                            {{ ctrl.getButtonContent(ctrl.isToggleActive( div.id )) }}
-                        </button>
-                    </div>
-                </div>
+            <div class="release-info release-date d-all t-all d-padfull vpushdown-1" ng-show="selectedFeatureType === ctrl.FEATURE_TYPE_GROUP">
+                <h3 class="t-all release-date">Features for {{ currentGroup.name }}</h3>
+            </div>
 
-                <div class="preview-toggle cf t-all" ng-repeat="div in group_features.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
-                    <div class={{div.id}}>
-                        <ng-include src="'views/feature.html'"></ng-include>
-                        <button type="button" ng-disabled="ctrl.isToggleLocked( div.id ) || !currentGroup.isAdmin" ng-class="ctrl.isToggleActive( div.id ) ? 'active' : ''" class="button t6-t9 t-floatright d-pad d-overlap" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive(div.id, !ctrl.isToggleActive( div.id ), div.type)">
-                            {{ ctrl.getButtonContent(ctrl.isToggleActive( div.id )) }}
-                        </button>
-                    </div>
-                </div>
+            <div class="release-info d2-d13 t-all" ng-show="selectedFeatureType === ctrl.FEATURE_TYPE_GROUP && ctrl.hasToggles(group_features)">
+                <h3 class="t-all">Release due: <next-release/></h3>
+                <group-toggle-list toggle-list="group_features" ctrl="ctrl" />
+            </div>
+
+            <!-- Beta user toggles -->
+            <div class="release-info d2-d13 t-all" ng-show="selectedFeatureType === ctrl.FEATURE_TYPE_GROUP && ctrl.hasToggles(groupTogglesWithoutRelease)">
+                <h3 class="t-all">Beta features for {{ currentGroup.name }}</h3>
+                <user-toggle-list toggle-list="groupTogglesWithoutRelease" ctrl="ctrl" />
             </div>
         </section>
 
@@ -102,10 +86,7 @@
                 <img class="t-all" src="images/empty-plate.svg" />
             </div>
         </section>
-        
-
     </div>
-
 
     <div id="fade" class="black_overlay" ng-show="black_overlay"></div>
     <div class="wrapper fixed">
@@ -114,7 +95,5 @@
             <ng-include src="'views/modal.html'"></ng-include>
         </div>
     </div>
-
-
 </div>
 

@@ -11,6 +11,8 @@
 /// <reference path="services/jwt-token-storage.ts" />
 /// <reference path="services/jwt-token-decoder.ts" />
 /// <reference path="directives/next-release.ts" />
+/// <reference path="directives/user-toggle-list.ts" />
+/// <reference path="directives/group-toggle-list.ts" />
 /// <reference path="controllers/jwt-callback.ts" />
 /// <reference path="services/unauthorised-request-handler.ts" />
 /// <reference path="services/get-all-toggle-status.ts" />
@@ -19,6 +21,8 @@
 /// <reference path="config/config.ts" />
 /// <reference path="services/submit-toggle-feedback.ts" />
 /// <reference path="services/set-group-toggle-active.ts" />
+/// <reference path="services/get-user-toggles-without-release.ts" />
+/// <reference path="services/get-group-toggles-without-release.ts" />
 
 
 'use strict';
@@ -70,9 +74,12 @@ module labsFrontendApp
     .service( 'simplePoster', SimpleHttp )
     .service( 'getGroupsForUser', HttpGetGroupsForUser )
     .service( 'submitFeedback', HttpSubmitToggleFeedback)
+    .service( 'getUserTogglesWithoutRelease', HttpGetUserTogglesWithoutRelease )
+    .service( 'getGroupTogglesWithoutRelease', HttpGetGroupTogglesWithoutRelease )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
+    .directive('userToggleList', labsFrontendApp.userToggleListFactory)
+    .directive('groupToggleList', labsFrontendApp.groupToggleListFactory)
     .controller( 'PreviewFeedbackFormCtrl', PreviewFeedbackFormCtrl )
     .controller( 'SelectCtrl', SelectCtrl )
     ;
 }
-

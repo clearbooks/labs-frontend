@@ -8,6 +8,7 @@
 /// <reference path="../../mock/services/get-groups-for-user.ts" />
 /// <reference path="../../mock/services/toggle-auto-subscribe.ts" />
 /// <reference path="../../mock/services/get-is-auto-subscribed.ts" />
+/// <reference path="../../mock/services/get-toggles-without-release.ts" />
 
 'use strict';
 module labsFrontendApp
@@ -24,12 +25,13 @@ module labsFrontendApp
         var getAllToggleStatusStub: GetAllToggleStatusStub;
         var toggleAutoSubscribeSpy: ToggleAutoSubscribeSpy;
         var getIsAutoSubscribedStub: GetIsAutoSubscribedStub;
+        var getUserTogglesWithoutRelease: GetTogglesWithoutReleaseStub;
+        var getGroupTogglesWithoutRelease: GetTogglesWithoutReleaseStub;
 
         var scope = {
             releases: undefined,
             feature: undefined,
             message: undefined,
-            feature_sections: undefined,
             user_features: undefined,
             group_features: undefined,
             hideSuccessMessage: undefined,
@@ -37,9 +39,9 @@ module labsFrontendApp
             toggleStatuses: undefined,
             autoSubscribed: undefined,
             groups: undefined,
-            showUserFeatures: undefined,
-            gotUserFeatures: undefined,
-            gotGroupFeatures: undefined,
+            selectedFeatureType: undefined,
+            userTogglesWithoutRelease: undefined,
+            groupTogglesWithoutRelease: undefined
     };
 
         // Initialize the controller and a mock scope
@@ -51,10 +53,13 @@ module labsFrontendApp
             toggleAutoSubscribeSpy = new ToggleAutoSubscribeSpy();
             getAllToggleStatusStub = new GetAllToggleStatusStub( $q );
             getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
+            getUserTogglesWithoutRelease = new GetTogglesWithoutReleaseStub( $q );
+            getGroupTogglesWithoutRelease = new GetTogglesWithoutReleaseStub( $q );
             dashboardCtrl = new DashboardCtrl(
                 scope, new GetAllPublicReleasesStub( $q ), userToggleSpy, groupToggleSpy,
                 userSetToggleActiveSpy, groupSetToggleActiveSpy,
-                getAllToggleStatusStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub
+                getAllToggleStatusStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub,
+                getUserTogglesWithoutRelease, getGroupTogglesWithoutRelease
             );
             rootScope = $rootScope;
         } ) );
@@ -67,18 +72,9 @@ module labsFrontendApp
             expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubReleases()[1].id );
         } );
 
-        it('should add features correctly to feature_sections', () =>
-        {
+        it('should set selectedFeatureType to 1 as there are user toggles given', () => {
             rootScope.$apply();
-            var expectedArray = [];
-            expectedArray.push.apply(expectedArray, userToggleSpy.getToggles());
-            expectedArray.push.apply(expectedArray, groupToggleSpy.getToggles());
-            expect(scope.feature_sections).toEqual(expectedArray);
-        });
-
-        it('should set showUserFeatures to 1 as there are user toggles given', () => {
-            rootScope.$apply();
-            expect(scope.showUserFeatures).toEqual(1);
+            expect(scope.selectedFeatureType).toEqual(1);
         });
 
         it('should get if the user is auto subscribed and set it on the scope', () =>
@@ -243,7 +239,7 @@ module labsFrontendApp
             expect(separatedToggles).toEqual({withScreenshot:[crimsonScreenshot], withoutScreenshot: [scarletNoScreenshot]});
         });
 
-        it('should return true when calling doShowFeatures with features in the list', () => {
+        it('should return true when calling hasToggles with features in the list', () => {
             var toggle = {
                 id: 1, name: 'toggle',
                 summary: 'toggle',
@@ -252,18 +248,19 @@ module labsFrontendApp
                 type: 'duck'
             };
 
-            expect(dashboardCtrl.doShowFeatures({withScreenshot:[toggle], withoutScreenshot:[]})).toBeTruthy();
+            expect(dashboardCtrl.hasToggles({withScreenshot:[toggle], withoutScreenshot:[]})).toBeTruthy();
         });
 
-        it('should return false when calling doShowFeatures with no features', () => {
-            expect(dashboardCtrl.doShowFeatures({withScreenshot:[], withoutScreenshot:[]})).toBeFalsy();
+        it('should return false when calling hasToggles with no features', () => {
+            expect(dashboardCtrl.hasToggles({withScreenshot:[], withoutScreenshot:[]})).toBeFalsy();
         });
 
-        it('should return false when calling doShowFeatures with undefined', () => {
-            expect(dashboardCtrl.doShowFeatures(undefined)).toBeFalsy();
+        it('should return false when calling hasToggles with undefined', () => {
+            expect(dashboardCtrl.hasToggles(undefined)).toBeFalsy();
+        });
+
+        it('should return false when calling hasToggles with null', () => {
+            expect(dashboardCtrl.hasToggles(null)).toBeFalsy();
         });
     });
-
 }
-
-
