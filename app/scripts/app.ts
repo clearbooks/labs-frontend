@@ -2,6 +2,7 @@
 /// <reference path="controllers/dashboard.ts" />
 /// <reference path="controllers/group.ts" />
 /// <reference path="services/get-all-public-releases.ts" />
+/// <reference path="services/cached-public-releases.ts" />
 /// <reference path="services/get-user-toggles-for-release.ts" />
 /// <reference path="services/get-is-auto-subscribed.ts" />
 /// <reference path="services/set-user-toggle-active.ts" />
@@ -60,6 +61,7 @@ module labsFrontendApp
     .controller( 'GroupCtrl', GroupCtrl )
     .controller( 'JwtCallbackCtrl', JwtCallbackCtrl )
     .service( 'releases', HttpGetAllPublicReleases )
+    .service( 'cachedReleases', CachedPublicReleases )
     .service( 'getAllToggleStatus', HttpGetAllToggleStatus )
     .service( 'jwtStorage', CookieJwtTokenStorage )
     .service( 'jwtDecoder', JwtTokenDecoder )

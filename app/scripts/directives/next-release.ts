@@ -8,7 +8,7 @@ module labsFrontendApp
   export class NextRelease implements ng.IDirective
   {
     template = '<span>{{nextRelease | date : longDate}}</span>';
-    controller = ['$scope', 'releases', NextReleaseCtrl];
+    controller = ['$scope', 'cachedReleases', NextReleaseCtrl];
     restrict = 'E';
   }
 

@@ -67,9 +67,9 @@ module labsFrontendApp
         it('should grab releases then get toggles for release ID 41', () =>
         {
             rootScope.$apply();
-            expect( scope.releases ).toEqual( GetAllPublicReleasesStub.getStubReleases() );
-            expect( userToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubReleases()[1].id );
-            expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getStubReleases()[1].id );
+            expect( scope.releases ).toEqual( GetAllPublicReleasesStub.getDefaultStubReleases() );
+            expect( userToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getDefaultStubReleases()[1].id );
+            expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getDefaultStubReleases()[1].id );
         } );
 
         it('should grab user toggles without release', () =>

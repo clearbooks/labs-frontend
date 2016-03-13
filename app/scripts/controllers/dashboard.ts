@@ -34,7 +34,7 @@ module labsFrontendApp {
 
         // @ngInject
         constructor( private $scope:IDashboardScope,
-                     private releases:GetAllPublicReleases,
+                     private cachedReleases:GetAllPublicReleases,
                      private userToggles:GetUserTogglesForRelease,
                      private groupToggles:GetGroupTogglesForRelease,
                      private userSetActive: SetToggleActive,
@@ -46,20 +46,21 @@ module labsFrontendApp {
                      private getGroupTogglesWithoutRelease: GetGroupTogglesWithoutRelease
         )
         {
-            var releasePromise = releases.execute();
+            $scope.userTogglesWithoutRelease = null;
+            $scope.groupTogglesWithoutRelease = null;
+            $scope.user_features = null;
+            $scope.group_features = null;
 
-            releasePromise.then ((releases) => {
-                var nextReleaseId = NextReleaseCtrl.getNextRelease(releases).id;
-                this.getUserToggles(nextReleaseId);
-                this.getGroupToggles(nextReleaseId);
+            cachedReleases.execute().then((releases) => {
+                $scope.releases = releases;
+                var nextRelease = NextReleaseCtrl.getNextRelease(releases);
+                if ( nextRelease !== null ) {
+                    this.getUserToggles(nextRelease.id);
+                    this.getGroupToggles(nextRelease.id);
+                }
             });
-
 
             $scope.toggleStatuses = {};
-
-            releasePromise.then((releases) => {
-                $scope.releases = releases;
-            });
 
             getAllToggleStatus.execute().then( ( toggleStatuses ) => {
                 $scope.toggleStatuses = toggleStatuses;
@@ -84,11 +85,6 @@ module labsFrontendApp {
             $scope.pickedFeature = (pickedFeature) => {
                 $scope.feature.chosen = pickedFeature;
             };
-
-            $scope.userTogglesWithoutRelease = null;
-            $scope.groupTogglesWithoutRelease = null;
-            $scope.user_features = null;
-            $scope.group_features = null;
 
             getUserTogglesWithoutRelease.execute().then( ( userTogglesWithoutRelease: Array<Toggle> ) => {
                 $scope.userTogglesWithoutRelease = this.separateToggles( userTogglesWithoutRelease );
