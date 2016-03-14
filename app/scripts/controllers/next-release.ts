@@ -12,10 +12,13 @@ module labsFrontendApp
     export class NextReleaseCtrl
     {
         // @ngInject
-        constructor (private $scope: INextReleaseScope, private releases: GetAllPublicReleases)
+        constructor (private $scope: INextReleaseScope, private cachedReleases: GetAllPublicReleases)
         {
-            releases.execute().then( ( releases ) => {
-                $scope.nextRelease = new Date( NextReleaseCtrl.getNextRelease(releases).date );
+            cachedReleases.execute().then( ( releases ) => {
+                var nextRelease = NextReleaseCtrl.getNextRelease(releases);
+                if ( nextRelease !== null ) {
+                    $scope.nextRelease = new Date( nextRelease.date );
+                }
             } );
         }
 
@@ -28,8 +31,7 @@ module labsFrontendApp
                     return releases[i];
                 }
             }
-            return releases[0];
+            return null;
         }
     }
 }
-

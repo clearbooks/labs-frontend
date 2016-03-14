@@ -5,8 +5,14 @@ module labsFrontendApp
 {
     export class GetAllPublicReleasesStub implements GetAllPublicReleases
     {
+        /**
+         * Array<Release>
+         */
+        private releases;
+
         constructor( private $q: ng.IQService )
         {
+            this.releases = GetAllPublicReleasesStub.getDefaultStubReleases();
         }
 
         /**
@@ -16,11 +22,19 @@ module labsFrontendApp
         execute():ng.IPromise<Array<Release>>
         {
             var promise = this.$q.defer();
-            promise.resolve( GetAllPublicReleasesStub.getStubReleases() );
+            promise.resolve( this.releases );
             return promise.promise;
         }
 
-        static getStubReleases(): Array<Release>
+        /**
+         * @param releases
+         */
+        setReleases( releases: Array<Release> )
+        {
+            this.releases = releases;
+        }
+
+        static getDefaultStubReleases(): Array<Release>
         {
             var pastReleaseDate = new Date();
             pastReleaseDate.setDate(pastReleaseDate.getDate() - 10);
