@@ -11,22 +11,15 @@ module labsFrontendApp {
         releases: any;
         feature: any;
         message: any;
-        feature_sections: any;
         user_features: any;
         group_features: any;
         hideSuccessMessage: any;
         pickedFeature: any;
         autoSubscribed: boolean;
         groups: any;
-        showUserFeatures: number;
-        gotUserFeatures: boolean;
-        gotGroupFeatures: boolean;
-        //clearForm: any;
-    }
-
-    export interface FeatureList {
-        userFeatures: SeparatedToggles;
-        groupFeatures: SeparatedToggles;
+        selectedFeatureType: number;
+        userTogglesWithoutRelease: any;
+        groupTogglesWithoutRelease: any;
     }
 
     export interface SeparatedToggles {
@@ -36,6 +29,9 @@ module labsFrontendApp {
 
     export class DashboardCtrl
     {
+        public FEATURE_TYPE_SIMPLE: number = 1;
+        public FEATURE_TYPE_GROUP: number = 2;
+
         // @ngInject
         constructor( private $scope:IDashboardScope,
                      private releases:GetAllPublicReleases,
@@ -45,14 +41,12 @@ module labsFrontendApp {
                      private groupSetActive: SetToggleActive,
                      private getAllToggleStatus: GetAllToggleStatus,
                      private toggleAutoSubscribe: ToggleAutoSubscribe,
-                     private getIsAutoSubscribed: GetIsAutoSubscribed
+                     private getIsAutoSubscribed: GetIsAutoSubscribed,
+                     private getUserTogglesWithoutRelease: GetUserTogglesWithoutRelease,
+                     private getGroupTogglesWithoutRelease: GetGroupTogglesWithoutRelease
         )
         {
             var releasePromise = releases.execute();
-
-            $scope.feature_sections = [];
-            $scope.gotUserFeatures = false;
-            $scope.gotGroupFeatures = false;
 
             releasePromise.then ((releases) => {
                 var nextReleaseId = NextReleaseCtrl.getNextRelease(releases).id;
@@ -91,36 +85,72 @@ module labsFrontendApp {
                 $scope.feature.chosen = pickedFeature;
             };
 
+            $scope.userTogglesWithoutRelease = null;
+            $scope.groupTogglesWithoutRelease = null;
+            $scope.user_features = null;
+            $scope.group_features = null;
+
+            getUserTogglesWithoutRelease.execute().then( ( userTogglesWithoutRelease: Array<Toggle> ) => {
+                $scope.userTogglesWithoutRelease = this.separateToggles( userTogglesWithoutRelease );
+
+                if ( userTogglesWithoutRelease.length > 0 ) {
+                    this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_SIMPLE );
+                }
+            } );
+
+            getGroupTogglesWithoutRelease.execute().then( ( groupTogglesWithoutRelease: Array<Toggle> ) => {
+                $scope.groupTogglesWithoutRelease = this.separateToggles( groupTogglesWithoutRelease );
+
+                if ( groupTogglesWithoutRelease.length > 0 ) {
+                    this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_GROUP );
+                }
+            } );
         }
 
-        private addTogglesToFeatureSections(toggles) {
-            this.$scope.feature_sections.push.apply(this.$scope.feature_sections, toggles)
+        /**
+         * @param featureType
+         */
+        private switchToFeatureTypeIfUndefined( featureType: number ):void
+        {
+            if ( typeof this.$scope.selectedFeatureType !== 'undefined'
+                && !( featureType == this.FEATURE_TYPE_SIMPLE && this.$scope.selectedFeatureType == this.FEATURE_TYPE_GROUP ) ) {
+                return;
+            }
+
+            this.$scope.selectedFeatureType = featureType;
+        }
+
+        /**
+         * @returns {boolean}
+         */
+        private hasFeaturesLoaded():boolean
+        {
+            return this.$scope.userTogglesWithoutRelease != null && this.$scope.groupTogglesWithoutRelease != null
+                && this.$scope.user_features != null && this.$scope.group_features != null;
         }
 
         /**
          * @param releaseId
          */
-        getUserToggles( releaseId: number )
+        getUserToggles( releaseId: number ):void
         {
             this.userToggles.execute( releaseId ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.user_features = this.separateToggles(toggles);
-                this.addTogglesToFeatureSections(toggles);
-                this.$scope.gotUserFeatures = true;
-                if(toggles.length > 0) {
-                    this.$scope.showUserFeatures = 1;
+                if ( toggles.length > 0 ) {
+                    this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_SIMPLE );
                 }
             } );
         }
 
-
-        getGroupToggles( releaseId: number )
+        /**
+         * @param releaseId
+         */
+        getGroupToggles( releaseId: number ):void
         {
             this.groupToggles.execute( releaseId ).then( ( toggles: Array<Toggle> ) => {
                 this.$scope.group_features = this.separateToggles(toggles);
-                this.addTogglesToFeatureSections(toggles);
-                this.$scope.gotGroupFeatures = true;
-                if(typeof this.$scope.showUserFeatures === "undefined") {
-                    this.$scope.showUserFeatures = 2;
+                if ( toggles.length > 0 ) {
+                    this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_GROUP );
                 }
             } );
         }
@@ -178,6 +208,10 @@ module labsFrontendApp {
             this.$scope.autoSubscribed = !this.$scope.autoSubscribed;
         }
 
+        /**
+         * @param activated
+         * @returns {any}
+         */
         getButtonContent(activated: boolean):string
         {
             if(activated) {
@@ -187,13 +221,14 @@ module labsFrontendApp {
             }
         }
 
+        /**
+         * @returns {boolean}
+         */
         isNothingToSee(): boolean
         {
-            return (
-                this.$scope.gotUserFeatures && this.$scope.gotGroupFeatures &&
-                !this.doShowFeatures(this.$scope.user_features) && !this.doShowFeatures(this.$scope.group_features)
-            )
+            return this.hasFeaturesLoaded() && !this.hasAnyToggles();
         }
+
         separateToggles(toggles: Array<Toggle>): SeparatedToggles
         {
             var separatedToggles = {withScreenshot: [], withoutScreenshot: []};
@@ -207,10 +242,37 @@ module labsFrontendApp {
             return separatedToggles;
         }
 
-        doShowFeatures(toggles: SeparatedToggles) {
-            return !(typeof toggles === "undefined") && (toggles.withoutScreenshot.length > 0 || toggles.withScreenshot.length > 0);
+        /**
+         * @param toggles
+         * @returns {boolean}
+         */
+        hasToggles(toggles: SeparatedToggles):boolean
+        {
+            return !(typeof toggles === 'undefined') && toggles != null && (toggles.withoutScreenshot.length > 0 || toggles.withScreenshot.length > 0);
+        }
+
+        /**
+         * @returns {boolean}
+         */
+        hasAnyToggles():boolean
+        {
+            return this.hasAnyUserToggles() || this.hasAnyGroupToggles();
+        }
+
+        /**
+         * @returns {boolean}
+         */
+        hasAnyUserToggles():boolean
+        {
+            return this.hasToggles(this.$scope.user_features) || this.hasToggles(this.$scope.userTogglesWithoutRelease);
+        }
+
+        /**
+         * @returns {boolean}
+         */
+        hasAnyGroupToggles():boolean
+        {
+            return this.hasToggles(this.$scope.group_features) || this.hasToggles(this.$scope.groupTogglesWithoutRelease);
         }
     }
 }
-
-
