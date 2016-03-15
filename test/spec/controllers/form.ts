@@ -22,7 +22,7 @@ module labsFrontendApp
             releases: undefined,
             feature: undefined,
             message: undefined,
-            feature_sections: undefined,
+            featureSections: undefined,
             user_features: undefined,
             group_features: undefined,
             hideSuccessMessage: undefined,

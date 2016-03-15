@@ -32,7 +32,7 @@ module labsFrontendApp
             releases: undefined,
             feature: undefined,
             message: undefined,
-            feature_sections: undefined,
+            featureSections: undefined,
             user_features: undefined,
             group_features: undefined,
             hideSuccessMessage: undefined,
@@ -80,7 +80,7 @@ module labsFrontendApp
             expectedArray.push.apply(expectedArray, getGroupTogglesWithoutRelease.getToggles());
             expectedArray.push.apply(expectedArray, userToggleSpy.getToggles());
             expectedArray.push.apply(expectedArray, groupToggleSpy.getToggles());
-            expect(scope.feature_sections).toEqual(expectedArray);
+            expect(scope.featureSections).toEqual(expectedArray);
         });
 
         it('should grab user toggles without release', () =>

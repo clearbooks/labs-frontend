@@ -13,7 +13,7 @@
             <div class="labs-form-select-group">
                 <div class="labs-select" ng-controller="SelectCtrl">
                     <select ng-model="feature.chosen"
-                            ng-options="feature.name for feature in feature_sections track by feature.id"
+                            ng-options="feature.name for feature in featureSections track by feature.id"
                             ng-focus="hideSuccessMessage()"></select>
                 </div>
             </div>

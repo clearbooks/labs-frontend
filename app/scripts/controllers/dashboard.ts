@@ -11,7 +11,7 @@ module labsFrontendApp {
         releases: any;
         feature: any;
         message: any;
-        feature_sections: any;
+        featureSections: any;
         user_features: any;
         group_features: any;
         hideSuccessMessage: any;
@@ -53,7 +53,7 @@ module labsFrontendApp {
                      private getGroupTogglesWithoutRelease: GetGroupTogglesWithoutRelease
         )
         {
-            $scope.feature_sections = [ ];
+            $scope.featureSections = [ ];
             $scope.userTogglesWithoutRelease = null;
             $scope.groupTogglesWithoutRelease = null;
             $scope.user_features = null;
@@ -117,7 +117,7 @@ module labsFrontendApp {
 
         private addTogglesToFeatureSections(toggles)
         {
-            this.$scope.feature_sections.push.apply(this.$scope.feature_sections, toggles)
+            this.$scope.featureSections.push.apply(this.$scope.featureSections, toggles)
         }
 
         /**
