@@ -11,6 +11,7 @@ module labsFrontendApp {
         releases: any;
         feature: any;
         message: any;
+        feature_sections: any;
         user_features: any;
         group_features: any;
         hideSuccessMessage: any;
@@ -25,6 +26,12 @@ module labsFrontendApp {
     export interface SeparatedToggles {
         withScreenshot: Array<Toggle>;
         withoutScreenshot: Array<Toggle>;
+    }
+
+    export interface FeedbackScope
+    {
+        overPopBoxShow: boolean;
+        black_overlay: boolean;
     }
 
     export class DashboardCtrl
@@ -46,6 +53,7 @@ module labsFrontendApp {
                      private getGroupTogglesWithoutRelease: GetGroupTogglesWithoutRelease
         )
         {
+            $scope.feature_sections = [ ];
             $scope.userTogglesWithoutRelease = null;
             $scope.groupTogglesWithoutRelease = null;
             $scope.user_features = null;
@@ -92,6 +100,8 @@ module labsFrontendApp {
                 if ( userTogglesWithoutRelease.length > 0 ) {
                     this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_SIMPLE );
                 }
+
+                this.addTogglesToFeatureSections( userTogglesWithoutRelease );
             } );
 
             getGroupTogglesWithoutRelease.execute().then( ( groupTogglesWithoutRelease: Array<Toggle> ) => {
@@ -100,7 +110,14 @@ module labsFrontendApp {
                 if ( groupTogglesWithoutRelease.length > 0 ) {
                     this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_GROUP );
                 }
+
+                this.addTogglesToFeatureSections( groupTogglesWithoutRelease );
             } );
+        }
+
+        private addTogglesToFeatureSections(toggles)
+        {
+            this.$scope.feature_sections.push.apply(this.$scope.feature_sections, toggles)
         }
 
         /**
@@ -135,6 +152,8 @@ module labsFrontendApp {
                 if ( toggles.length > 0 ) {
                     this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_SIMPLE );
                 }
+
+                this.addTogglesToFeatureSections( toggles );
             } );
         }
 
@@ -148,6 +167,8 @@ module labsFrontendApp {
                 if ( toggles.length > 0 ) {
                     this.switchToFeatureTypeIfUndefined( this.FEATURE_TYPE_GROUP );
                 }
+
+                this.addTogglesToFeatureSections( toggles );
             } );
         }
 
@@ -269,6 +290,18 @@ module labsFrontendApp {
         hasAnyGroupToggles():boolean
         {
             return this.hasToggles(this.$scope.group_features) || this.hasToggles(this.$scope.groupTogglesWithoutRelease);
+        }
+
+        /**
+         * @param scope
+         * @param toggle
+         */
+        openFeedback( scope: FeedbackScope, toggle: Toggle ):void
+        {
+            scope.overPopBoxShow = !scope.black_overlay;
+            scope.black_overlay = !scope.black_overlay;
+            this.$scope.pickedFeature( toggle );
+            this.$scope.hideSuccessMessage();
         }
     }
 }

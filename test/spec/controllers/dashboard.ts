@@ -32,6 +32,7 @@ module labsFrontendApp
             releases: undefined,
             feature: undefined,
             message: undefined,
+            feature_sections: undefined,
             user_features: undefined,
             group_features: undefined,
             hideSuccessMessage: undefined,
@@ -71,6 +72,16 @@ module labsFrontendApp
             expect( userToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getDefaultStubReleases()[1].id );
             expect( groupToggleSpy.getReleaseId() ).toEqual( GetAllPublicReleasesStub.getDefaultStubReleases()[1].id );
         } );
+
+        it('should add features correctly to feature_sections', () => {
+            rootScope.$apply();
+            var expectedArray = [];
+            expectedArray.push.apply(expectedArray, getUserTogglesWithoutRelease.getToggles());
+            expectedArray.push.apply(expectedArray, getGroupTogglesWithoutRelease.getToggles());
+            expectedArray.push.apply(expectedArray, userToggleSpy.getToggles());
+            expectedArray.push.apply(expectedArray, groupToggleSpy.getToggles());
+            expect(scope.feature_sections).toEqual(expectedArray);
+        });
 
         it('should grab user toggles without release', () =>
         {
