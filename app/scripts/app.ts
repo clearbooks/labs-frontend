@@ -24,6 +24,7 @@
 /// <reference path="services/set-group-toggle-active.ts" />
 /// <reference path="services/get-user-toggles-without-release.ts" />
 /// <reference path="services/get-group-toggles-without-release.ts" />
+/// <reference path="services/user-groups.ts" />
 
 
 'use strict';
@@ -78,6 +79,7 @@ module labsFrontendApp
     .service( 'submitFeedback', HttpSubmitToggleFeedback)
     .service( 'getUserTogglesWithoutRelease', HttpGetUserTogglesWithoutRelease )
     .service( 'getGroupTogglesWithoutRelease', HttpGetGroupTogglesWithoutRelease )
+    .service( 'userGroupsService', UserGroups )
     .directive('nextRelease', labsFrontendApp.nextReleaseFactory)
     .directive('userToggleList', labsFrontendApp.userToggleListFactory)
     .directive('groupToggleList', labsFrontendApp.groupToggleListFactory)

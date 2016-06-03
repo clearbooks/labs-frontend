@@ -3,6 +3,7 @@
 /// <reference path="../services/get-is-auto-subscribed.ts" />
 /// <reference path="../services/toggle-auto-subscribe.ts" />
 /// <reference path="../services/get-group-toggles-for-release.ts" />
+/// <reference path="../services/user-groups.ts" />
 'use strict';
 
 module labsFrontendApp {
@@ -39,6 +40,8 @@ module labsFrontendApp {
         public FEATURE_TYPE_SIMPLE: number = 1;
         public FEATURE_TYPE_GROUP: number = 2;
 
+        private isAdmin: boolean = false;
+
         // @ngInject
         constructor( private $scope:IDashboardScope,
                      private cachedReleases:GetAllPublicReleases,
@@ -50,7 +53,8 @@ module labsFrontendApp {
                      private toggleAutoSubscribe: ToggleAutoSubscribe,
                      private getIsAutoSubscribed: GetIsAutoSubscribed,
                      private getUserTogglesWithoutRelease: GetUserTogglesWithoutRelease,
-                     private getGroupTogglesWithoutRelease: GetGroupTogglesWithoutRelease
+                     private getGroupTogglesWithoutRelease: GetGroupTogglesWithoutRelease,
+                     private userGroupsService: UserGroupsService
         )
         {
             $scope.featureSections = [ ];
@@ -112,6 +116,10 @@ module labsFrontendApp {
                 }
 
                 this.addTogglesToFeatureSections( groupTogglesWithoutRelease );
+            } );
+
+            userGroupsService.getCurrentGroupPromise().then( ( currentGroup: Group ) => {
+                this.isAdmin= currentGroup.isAdmin;
             } );
         }
 
@@ -197,6 +205,11 @@ module labsFrontendApp {
             } else {
                 this.$scope.toggleStatuses[toggleId].active = 0;
             }
+        }
+
+        isAdminOfCurrentGroup()
+        {
+            return this.isAdmin;
         }
 
         /**

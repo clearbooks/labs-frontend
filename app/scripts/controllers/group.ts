@@ -1,3 +1,6 @@
+/// <reference path="../services/user-groups.ts" />
+'use strict';
+
 module labsFrontendApp
 {
     export interface GroupScope
@@ -6,45 +9,34 @@ module labsFrontendApp
         currentGroup: Group;
     }
 
-    export interface JwtToken
-    {
-        groupId: number;
-        userId: number;
-        isAdmin: boolean
-    }
-
     export class GroupCtrl
     {
         /**
          * @ngInject
          * @param $scope
-         * @param getGroupsForUser
-         * @param jwtDecoder
+         * @param userGroupsService
          */
-        constructor( $scope: GroupScope, getGroupsForUser: GetGroupsForUser, jwtDecoder: DeferredJwtPayloadProvider<JwtToken> )
+        constructor( private $scope: GroupScope, private userGroupsService: UserGroupsService )
         {
             if(!$scope.currentGroup) {
                 $scope.currentGroup = {id: undefined, name: '', url: '', isAdmin: undefined};
             }
 
-            var groups = getGroupsForUser.execute();
-            var token = jwtDecoder.getJson();
-
-            groups.then( ( groups: Array<Group> ) => {
+            userGroupsService.getGroupsPromise().then( ( groups: Array<Group> ) => {
                 $scope.groups = groups;
+                userGroupsService.getCurrentGroupPromise().then( ( currentGroup: Group ) => {
+                    if ( $scope.currentGroup.id == undefined ) {
+                        $scope.currentGroup.id = currentGroup.id;
+                    }
+
+                    if ( $scope.currentGroup.isAdmin == undefined ) {
+                        $scope.currentGroup.isAdmin = currentGroup.isAdmin;
+                    }
+
+                    $scope.currentGroup.name = currentGroup.name;
+                    $scope.currentGroup.url = currentGroup.url;
+                } );
             } );
-
-            groups.then( (groups: Array<Group> ) => {
-                token.then( (json: JwtToken ) => {
-                    var curGroupId = $scope.currentGroup.id ? $scope.currentGroup.id : json.groupId;
-                    var curGroup = this.getCurrentGroupFromGroupList(groups, curGroupId);
-
-                    $scope.currentGroup.id = $scope.currentGroup.id ? $scope.currentGroup.id : json.groupId;
-                    $scope.currentGroup.isAdmin = this.getIsAdmin($scope.currentGroup.isAdmin, json.isAdmin);
-                    $scope.currentGroup.name = curGroup.name;
-                    $scope.currentGroup.url = curGroup.url;
-                })
-            })
         }
 
         /**
@@ -54,24 +46,6 @@ module labsFrontendApp
         redirect( url: string )
         {
             window.location.replace( url );
-        }
-
-        getCurrentGroupFromGroupList(groups: Array<Group>, currentGroupId: number): Group
-        {
-            for(var i = 0; i < groups.length; i++) {
-                if( groups[i].id == currentGroupId) {
-                    return groups[i];
-                }
-            }
-        }
-
-        getIsAdmin(curGroupAdmin: boolean, jsonAdmin: boolean) : boolean
-        {
-            if(curGroupAdmin != undefined) {
-                return curGroupAdmin;
-            } else {
-                return jsonAdmin
-            }
         }
     }
 }

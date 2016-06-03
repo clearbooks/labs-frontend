@@ -43,7 +43,12 @@ module labsFrontendApp
             selectedFeatureType: undefined,
             userTogglesWithoutRelease: undefined,
             groupTogglesWithoutRelease: undefined
-    };
+        };
+
+        var groupScope = {
+            groups: undefined,
+            currentGroup: undefined
+        };
 
         // Initialize the controller and a mock scope
         beforeEach( inject( ( $q: ng.IQService, $rootScope: ng.IRootScopeService ) => {
@@ -56,11 +61,16 @@ module labsFrontendApp
             getIsAutoSubscribedStub = new GetIsAutoSubscribedStub($q);
             getUserTogglesWithoutRelease = new GetTogglesWithoutReleaseStub( $q );
             getGroupTogglesWithoutRelease = new GetTogglesWithoutReleaseStub( $q );
+            var groupsService = new UserGroups(
+                $q,
+                new GetGroupsForUserStub( $q ),
+                new JwtTokenDecoderStub( $q, { groupId: 1337, isAdmin: true } )
+            );
             dashboardCtrl = new DashboardCtrl(
                 scope, new GetAllPublicReleasesStub( $q ), userToggleSpy, groupToggleSpy,
                 userSetToggleActiveSpy, groupSetToggleActiveSpy,
                 getAllToggleStatusStub, toggleAutoSubscribeSpy, getIsAutoSubscribedStub,
-                getUserTogglesWithoutRelease, getGroupTogglesWithoutRelease
+                getUserTogglesWithoutRelease, getGroupTogglesWithoutRelease, groupsService
             );
             rootScope = $rootScope;
         } ) );
