@@ -25,7 +25,8 @@ module labsFrontendApp
             return {
                 id: 1337,
                 name: 'Hyper Global Meganet',
-                url: 'https://example.com'
+                url: 'https://example.com',
+                isAdmin: true
             };
         }
     }
