@@ -1,17 +1,17 @@
-<div class="preview-toggle cf t-all full-feature" ng-repeat="div in toggleList.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
-    <div class={{div.id}} id="toggle_{{div.id}}">
+<div class="preview-toggle cf t-all full-feature" ng-repeat="toggleWithScreenshot in toggleList.withScreenshot | limitTo:8" ng-class="'d-all t-all d-pad'"  >
+    <div id="toggle_{{toggleWithScreenshot.id}}">
         <ng-include src="'views/feature-fullwidth.html'"></ng-include>
-        <button type="button" ng-disabled="ctrl.isToggleLocked( div.id ) || !ctrl.isAdminOfCurrentGroup()" ng-class="ctrl.isToggleActive( div.id ) ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive( div.id, !ctrl.isToggleActive( div.id ), div.type )">
-            {{ ctrl.getButtonContent(ctrl.isToggleActive( div.id )) }}
+        <button type="button" ng-disabled="ctrl.isToggleLocked( toggleWithScreenshot.id ) || !ctrl.isAdminOfCurrentGroup()" ng-class="ctrl.isToggleActive( toggleWithoutScreenshot.id ) ? 'active' : ''" class="button d5-d7 d-padin t6-t9 t-floatright d-overlap" ng-click="ctrl.setToggleActive( toggleWithScreenshot.id, !ctrl.isToggleActive( toggleWithScreenshot.id ), toggleWithScreenshot.type )">
+            {{ ctrl.getButtonContent(ctrl.isToggleActive( toggleWithScreenshot.id )) }}
         </button>
     </div>
 </div>
 
-<div class="preview-toggle cf t-all" ng-repeat="div in toggleList.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
-    <div class={{div.id}} id="toggle_{{div.id}}">
+<div class="preview-toggle cf t-all" ng-repeat="toggleWithoutScreenshot in toggleList.withoutScreenshot | limitTo:8" ng-class-odd="'d2-d7'" ng-class-even="'d8-d13'"  >
+    <div id="toggle_{{toggleWithoutScreenshot.id}}">
         <ng-include src="'views/feature.html'"></ng-include>
-        <button type="button" ng-disabled="ctrl.isToggleLocked( div.id ) || !ctrl.isAdminOfCurrentGroup()" ng-class="ctrl.isToggleActive( div.id ) ? 'active' : ''" class="button t6-t9 t-floatright d-pad d-overlap" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive( div.id, !ctrl.isToggleActive( div.id ), div.type )">
-            {{ ctrl.getButtonContent(ctrl.isToggleActive( div.id )) }}
+        <button type="button" ng-disabled="ctrl.isToggleLocked( toggleWithoutScreenshot.id ) || !ctrl.isAdminOfCurrentGroup()" ng-class="ctrl.isToggleActive( toggleWithoutScreenshot.id ) ? 'active' : ''" class="button t6-t9 t-floatright d-pad d-overlap" ng-class-odd="'d5-d7 d-padin'" ng-class-even="'d11-d13 d-padin'" ng-click="ctrl.setToggleActive( toggleWithoutScreenshot.id, !ctrl.isToggleActive( toggleWithoutScreenshot.id ), toggleWithoutScreenshot.type )">
+            {{ ctrl.getButtonContent(ctrl.isToggleActive( toggleWithoutScreenshot.id )) }}
         </button>
     </div>
 </div>
