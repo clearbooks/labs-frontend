@@ -1,7 +1,7 @@
-<h3>{{div.name}}</h3>
-<div class="feature-summary d2-d7 t-all vpushdown-1"><p>{{div.summary}}</p></div>
-<div class="d8-d13 t-all d-floatright image-holder vpushdown-1"><img ng-src="{{div.screenshot}}"></div>
+<h3>{{toggleWithScreenshot.name}}</h3>
+<div class="feature-summary d2-d7 t-all vpushdown-1"><p>{{toggleWithScreenshot.summary}}</p></div>
+<div class="d8-d13 t-all d-floatright image-holder vpushdown-1"><img ng-src="{{toggleWithScreenshot.screenshot}}"></div>
 <div class="t2-t5 d2-d4 d-pad">
-    <a ng-if="div.url" class="t-all d-all" href="{{div.url}}">Read more ..</a>
-    <a class="t-all d-all" href="" ng-click="ctrl.openFeedback( $parent.$parent.$parent, div );">Give feedback ..</a>
+    <a ng-if="toggleWithScreenshot.url" class="t-all d-all" href="{{toggleWithScreenshot.url}}">Read more ..</a>
+    <a class="t-all d-all" href="" ng-click="ctrl.openFeedback( $parent.$parent.$parent, toggleWithScreenshot );">Give feedback ..</a>
 </div>

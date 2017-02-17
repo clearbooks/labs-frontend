@@ -1,6 +1,6 @@
-<h3>{{div.name}}</h3>
-<div class="feature-summary vpushdown-1"><p>{{div.summary}}</p></div>
+<h3>{{toggleWithoutScreenshot.name}}</h3>
+<div class="feature-summary vpushdown-1"><p>{{toggleWithoutScreenshot.summary}}</p></div>
 <div class="t2-t5" ng-class-odd="'d2-d4 d-pad'" ng-class-even="'d8-d9 d-pad'">
-    <a ng-if="div.url" class="t-all d-all" href="{{div.url}}">Read more ..</a>
-    <a class="t-all d-all" href="" ng-click="ctrl.openFeedback( $parent.$parent.$parent, div );">Give feedback ..</a>
+    <a ng-if="toggleWithoutScreenshot.url" class="t-all d-all" href="{{toggleWithoutScreenshot.url}}">Read more ..</a>
+    <a class="t-all d-all" href="" ng-click="ctrl.openFeedback( $parent.$parent.$parent, toggleWithoutScreenshot );">Give feedback ..</a>
 </div>
