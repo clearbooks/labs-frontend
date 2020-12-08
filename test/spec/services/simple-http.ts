@@ -23,11 +23,6 @@ module labsFrontendApp
         var unauthorisedSpy: UnauthorisedRequestHandlerSpy;
         var apiUrl: string;
 
-        var expectedHeaders = {
-            "Authorization": "jwt!",
-            "Accept": "application/json, text/plain, */*",
-        };
-
         beforeEach( module( 'labsFrontendApp' ) );
         beforeEach( inject( ( $cookies: ng.cookies.ICookiesService ) =>
         {
@@ -42,6 +37,10 @@ module labsFrontendApp
 
         it( 'should call the API when get() is called with the JWT token in Authorization', () =>
         {
+            var expectedHeaders = {
+              "Authorization": "jwt!",
+              "Accept": "application/json, text/plain, */*",
+            };
             $httpBackend.expectGET( apiUrl + '?brollies=true', expectedHeaders ).respond( 200, '["cats"]' );
             service.get( apiUrl, {brollies: true}).should.eventually.deep.equal( ["cats"] );
             $httpBackend.flush();
@@ -56,7 +55,11 @@ module labsFrontendApp
 
         it( 'should encode POST parameters as www-form-data', () =>
         {
-            expectedHeaders["Content-Type"] = "application/x-www-form-urlencoded;charset=utf-8";
+            var expectedHeaders = {
+              "Authorization": "jwt!",
+              "Accept": "application/json, text/plain, */*",
+              "Content-Type": "application/x-www-form-urlencoded;charset=utf-8"
+            };
             $httpBackend.expectPOST( apiUrl, $.param( {brollies: true} ), expectedHeaders ).respond( 200, '["pat"]' );
             service.post( apiUrl, {brollies: true} ).should.eventually.deep.equal( ["pat"] );
             $httpBackend.flush();
