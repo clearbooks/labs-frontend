@@ -1,7 +1,8 @@
-sudo: false
+os: linux
+dist: focal
 language: node_js
 node_js:
-- '0.12'
+- 10
 before_script:
 - npm install -g bower grunt-cli
 - bower install
