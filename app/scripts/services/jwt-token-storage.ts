@@ -31,7 +31,7 @@ module labsFrontendApp
          */
         public put( token: string )
         {
-            this.$cookies.put( 'jwt', token );
+            this.$cookies.put( 'jwt', token, {secure: true} );
         }
 
         /**
