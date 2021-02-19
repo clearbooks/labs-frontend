@@ -8,7 +8,7 @@ module labsFrontendApp
     describe( 'CookieJwtTokenStorage', () =>
     {
         var storage: CookieJwtTokenStorage;
-        var cookie: ng.cookies.ICookiesService;
+        var cookie: InMemoryCookiesService;
 
         beforeEach( module( 'labsFrontendApp' ) );
         beforeEach( inject( () =>
@@ -22,6 +22,7 @@ module labsFrontendApp
         {
             storage.put( 'cats' );
             cookie.get('jwt').should.equal( 'cats' );
+            cookie.getOptions('jwt').secure.should.equal(true);
         } );
 
         it( 'should get the token from the cookie', () =>

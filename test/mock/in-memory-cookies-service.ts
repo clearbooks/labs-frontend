@@ -34,13 +34,18 @@ module labsFrontendApp
         putObject(key: string, value: any, options?: any): void
         {
             this[key] = value;
-            this.__options = options;
+            this.__options[key] = options;
         }
 
         remove(key: string, options?: any): void
         {
             delete this[key];
             delete this.__options[key];
+        }
+
+        getOptions(key: string): any
+        {
+            return this.__options[key];
         }
     }
 }
