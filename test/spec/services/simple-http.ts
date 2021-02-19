@@ -2,6 +2,7 @@
 /// <reference path="../../../app/scripts/services/unauthorised-request-handler.ts" />
 /// <reference path="../../../app/scripts/services/jwt-token-storage.ts" />
 /// <reference path="../../../typings/tsd.d.ts" />
+/// <reference path="../../mock/services/jwt-token-storage.ts"/>
 
 module labsFrontendApp
 {
@@ -24,12 +25,12 @@ module labsFrontendApp
         var apiUrl: string;
 
         beforeEach( module( 'labsFrontendApp' ) );
-        beforeEach( inject( ( $cookies: ng.cookies.ICookiesService ) =>
+        beforeEach( inject( () =>
         {
             apiUrl = 'http://localhost/';
             var $injector = angular.injector([ 'ngMock' ]);
             $httpBackend = $injector.get( '$httpBackend' );
-            var jwtStorage = new CookieJwtTokenStorage( $cookies );
+            var jwtStorage = new InMemoryJwtTokenStorage();
             unauthorisedSpy = new UnauthorisedRequestHandlerSpy();
             service = new SimpleHttp( $injector.get('$http'), jwtStorage, unauthorisedSpy );
             jwtStorage.put( 'jwt!' );
