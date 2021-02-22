@@ -1,5 +1,6 @@
 /// <reference path="../../../app/scripts/controllers/jwt-callback.ts" />
 /// <reference path="../../../app/scripts/services/jwt-token-storage.ts" />
+/// <reference path="../../mock/services/jwt-token-storage.ts"/>
 
 'use strict';
 module labsFrontendApp
@@ -14,11 +15,11 @@ module labsFrontendApp
         var scope: IJwtCallbackScope;
 
         // Initialize the controller and a mock scope
-        beforeEach( inject( ( $cookies: ng.cookies.ICookiesService, $location: ng.ILocationService, $q: ng.IQService, $rootScope: ng.IRootScopeService ) =>
+        beforeEach( inject( ( $location: ng.ILocationService, $q: ng.IQService, $rootScope: ng.IRootScopeService ) =>
         {
             location = $location;
             scope = { currentGroup: {id: undefined, name: "", url: "", isAdmin: undefined}, groups: [] };
-            jwtTokenStorage = new CookieJwtTokenStorage( $cookies );
+            jwtTokenStorage = new InMemoryJwtTokenStorage();
             decoder = new JwtTokenDecoderStub<JwtToken>( $q, {groupId: 123, userId: 12345, isAdmin: true} );
             rootScope = $rootScope;
         } ) );
