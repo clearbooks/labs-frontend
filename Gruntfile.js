@@ -193,7 +193,7 @@ module.exports = function (grunt) {
         src: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
         ignorePath: /(\.\.\/){1,2}bower_components\//
       }
-    }, 
+    },
     // Compiles TypeScript to JavaScript
     typescript: {
       base: {
@@ -229,7 +229,7 @@ module.exports = function (grunt) {
         }
       }
     },
-    
+
 
     // Compiles Sass to CSS and generates necessary files if requested
     compass: {
@@ -399,13 +399,6 @@ module.exports = function (grunt) {
       }
     },
 
-    // Replace Google CDN references
-    cdnify: {
-      dist: {
-        html: ['<%= yeoman.dist %>/*.html']
-      }
-    },
-
     // Copies remaining files to places other tasks can use
     copy: {
       dist: {
@@ -512,7 +505,6 @@ module.exports = function (grunt) {
     'ngtemplates',
     'concat',
     'copy:dist',
-    'cdnify',
     'cssmin',
     'uglify',
     'filerev',
