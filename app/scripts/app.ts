@@ -53,7 +53,7 @@ module labsFrontendApp
             });
     })
     .config( ( $provide: any ) => {
-        $provide.value('apiUrl', 'api/' );
+        $provide.value('apiUrl', window.config.apiHost + window.config.apiBasePath );
         $provide.value('jwtUrl', window.config.jwtServer );
         $provide.value('accountApiHost', window.config.accountApiHost );
         $provide.value('accountApiEndpoint', window.config.accountApiEndpoint );

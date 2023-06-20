@@ -4,6 +4,8 @@ module labsFrontendApp
     {
         config: {
             jwtServer: string;
+            apiHost: string;
+            apiBasePath: string;
             accountApiHost: string;
             accountApiEndpoint: string;
         };
