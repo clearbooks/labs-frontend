@@ -24,7 +24,7 @@
     }
 
     .feature-summary {
-        height: 220px; //this is based on a 400 character limit. If this changes please check image-holder height and preview toggle min-height.
+        min-height: 220px; //this is based on a 400 character limit. If this changes please check image-holder height and preview toggle min-height.
         background: $white;
 
         @media screen and (max-width: 768px) {
