@@ -50,7 +50,7 @@
 
         .image-holder {
             display: inline-block;
-            height: 300px; //image should be saved as w: 450px-500px  x 300-400px (no smaller than 400px * 300px). Needs to work with feature-summary height
+            min-height: 300px; //image should be saved as w: 450px-500px  x 300-400px (no smaller than 400px * 300px). Needs to work with feature-summary height
             text-align: center;
             overflow: hidden;
 
